@@ -1,0 +1,17 @@
+.terms-container{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+.terms-title{
+    text-align: center;
+}
+.terms-text{
+    padding: 50px 100px 50px 100px;
+}
+.terms-header{
+    font-weight: 600;
+    margin-bottom: 15px;
+   
+}

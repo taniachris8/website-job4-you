@@ -1,0 +1,91 @@
+.request-form-container {
+  margin-top: 0;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 212, 59);
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.request-form-hdr {
+  color: black;
+  margin-bottom: 0;
+}
+.request-form-prg {
+  font-size: 18px;
+}
+
+.contact-form-styles{
+  width: 700px;
+}
+.request-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.input-container {
+  position: relative;
+  flex: 1;
+}
+
+.input {
+  width: 100%;
+  padding: 10px !important;
+  border: 1px solid rgb(209, 209, 209);
+  transition: border 0.3s;
+  box-sizing: border-box;
+}
+.input:focus {
+  outline: none;
+}
+
+.input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12px;
+  justify-content: space-between !important; /* Isn't working */
+}
+
+.name-input {
+  width: calc(100% - 5px);
+  position: relative;
+  font-size: 16px;
+  font-family: "Assistant", sans-serif;
+  letter-spacing: 0.05em;
+  margin-left: 10px;
+}
+.phone-input {
+  position: relative;
+  font-size: 16px;
+  font-family: "Assistant", sans-serif;
+  letter-spacing: 0.05em;
+}
+.email-input {
+  font-size: 16px;
+  font-family: "Assistant", sans-serif;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+  padding-left: 0;
+  padding-right: 0;
+}
+.message-input {
+  margin-bottom: 12px;
+  padding-bottom: 80px;
+  font-size: 16px;
+  font-family: "Assistant", sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.success-alert-message {
+  font-size: 18px;
+  margin-top: 16px;
+}
+.error-alert-message {
+  font-size: 18px;
+  margin-top: 16px;
+}

@@ -1,0 +1,16 @@
+.dropdown-link{
+    text-decoration: none;
+    color: gray;
+}
+
+.dropdown-menu{
+position: absolute;
+top:24px;
+left:0;
+min-width: 200px;
+padding: 8px;
+}
+
+.dropdown-item{
+    padding: 10px;
+}

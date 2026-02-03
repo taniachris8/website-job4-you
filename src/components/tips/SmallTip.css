@@ -1,0 +1,32 @@
+.small-tip__wrapper{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    
+}
+.small-tip-image-wrapper{
+    width: 140px;
+    height: 100px;
+}
+.small-tip-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.small-tip-title{
+    font-size: 18px;
+}
+.small-tip__link{
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    color: black;
+    
+}
+.small-tip__info{
+    padding: 10px;
+}
+.small-tip__date{
+    font-size: 14px;
+    color: gray;
+}

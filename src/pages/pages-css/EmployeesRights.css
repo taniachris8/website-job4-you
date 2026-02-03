@@ -1,0 +1,20 @@
+.employees-rights-container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+  }
+  .employees-rights-title{
+      text-align: center;
+  }
+  .employees-rights-text{
+      padding: 50px 100px 50px 100px;
+  }
+  .employees-rights-header{
+      font-weight: 600;
+      margin-bottom: 15px;
+     
+  }
+  .list-of-details {
+    list-style-type: none;
+  }

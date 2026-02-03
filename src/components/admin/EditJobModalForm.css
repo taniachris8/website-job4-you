@@ -1,0 +1,7 @@
+.edit-form-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: top;
+    padding: 20px;
+}

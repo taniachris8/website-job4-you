@@ -1,0 +1,29 @@
+.company-section-container {
+    background: url("/public/images/happy2.jpg") center center/ 100% auto no-repeat;
+    height: 60vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.425);
+    margin-bottom: 0;
+    padding-top: 20px;
+  }
+  
+  .company-section-title {
+    color: white;
+    font-size: 80px;
+    margin-top: 250px;
+    margin-bottom: 0;
+    padding-bottom: 0px;
+    text-align: center;
+  }
+  .company-secion-prg {
+    margin-top: 8px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: white;
+    font-size: 22px;
+  }
+  

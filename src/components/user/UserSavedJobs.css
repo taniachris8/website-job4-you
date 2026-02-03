@@ -1,0 +1,42 @@
+.user-saved-jobs-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.user-saved-jobs-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 100px;
+}
+.saved-jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.saved-jobs-title {
+  font-size: 36px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+}
+.saved-jobs-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  max-width: 30rem;
+  width: 100%;
+  box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+  -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+  filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+  border-radius: 0px;
+  overflow: hidden;
+  text-decoration: none;
+  margin: 20px;
+}
+.discover-jobs-arrow {
+  margin-right: 10px;
+}
+.no-saved-jobs-message {
+  padding-right: 30px;
+}

@@ -1,0 +1,24 @@
+.user-cv-container{
+    display: flex;
+    flex-direction: column;
+    padding: 50px 100px 50px 100px;
+}
+.user-cv-title{
+    font-size: 36px;
+    margin-bottom: 16px;
+}
+.user-cv-prg{
+    margin-bottom: 0;
+}
+.how-it-works-title{
+    font-size: 32px;
+}
+.cv-how-it-works{
+    margin-top: 20px;
+}
+.how-it-works-list{
+    list-style-type: none;
+}
+.how-it-works-list-wrapper{
+    padding: 10px;
+}

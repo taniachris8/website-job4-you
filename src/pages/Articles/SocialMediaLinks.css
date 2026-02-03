@@ -1,0 +1,33 @@
+.article-social-media {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    right: 530px;
+  }
+  .article-social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: rgb(236, 236, 236);
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    cursor: pointer;
+  }
+  .fa-facebook {
+    color: rgb(24, 119, 242);
+  }
+  .fa-linkedin {
+    color: rgb(0, 119, 181);
+  }
+  .fa-instagram {
+    color: rgb(146, 45, 160);
+  }
+  .fa-whatsapp {
+    color: rgb(37, 211, 102);
+  }
+  .fa-print {
+    color: gray;
+  }

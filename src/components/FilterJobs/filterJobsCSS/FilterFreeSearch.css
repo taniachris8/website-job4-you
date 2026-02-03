@@ -1,0 +1,18 @@
+.hero-input{
+    width: 480px;
+    height: 47px;
+    padding: 10px;
+  }
+
+.jobs-input {
+    width: 1000px; 
+    height: 47px;
+    padding: 10px;
+    border: rgb(202, 202, 202) solid 1px;
+    border-radius: 5px;
+}
+.input-wrapper{
+  width: 660px;
+  display: flex;
+  flex-direction: row;
+}

@@ -1,0 +1,11 @@
+.add-job-btns{
+    display: flex;
+    flex-direction: row;
+}
+.add-new-job-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: top;
+    padding: 20px;
+}

@@ -1,0 +1,33 @@
+
+.login-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: top;
+    padding: 20px;
+}
+
+  .signup-link{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0;
+  }
+  .signup-prg{
+    padding-left: 10px;
+  }
+  .forgot-password-link{
+    margin-right: 10px;
+  }
+  .admin-login-btn {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+  }
+  
+  .admin-login-btn:hover {
+    color: darkblue;
+  }

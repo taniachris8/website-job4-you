@@ -1,0 +1,11 @@
+.user-dash-container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 100px 50px 100px;
+}
+
+.tab-container{
+    width: 100%;
+}

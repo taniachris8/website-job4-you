@@ -1,0 +1,14 @@
+.users-settings-container{
+    display: flex;
+    flex-direction: column;
+    padding: 50px 100px 50px 100px;
+    /* min-height: 100vh; */
+}
+.settings-title{
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+.reset-password-wrapper{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

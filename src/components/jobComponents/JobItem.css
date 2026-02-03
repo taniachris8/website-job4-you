@@ -1,0 +1,101 @@
+.job-item-link{
+  text-decoration: none;
+}
+.jobs__item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  text-decoration: none;
+}
+.jobs__item__link {
+  text-decoration: none;
+}
+.admin-btns{
+  position: absolute;
+  left:20px;
+  display: flex;
+  flex-direction: row;
+}
+.delete-btn{
+  color: rgb(139, 0, 0);
+  cursor: pointer;
+}
+.edit-btn{
+  padding-left: 10px;
+  color: rgb(253, 206, 44);
+  cursor: pointer;
+}
+.jobs-item-title {
+  color: black;
+  font-size: 22px;
+  margin-top: 0;
+}
+.jobs__item__location {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: rgb(76, 76, 76);
+}
+.jobs-item-city {
+  padding-right: 10px;
+  margin: 0;
+}
+.fa-location-dot {
+  padding-right: 0;
+}
+.job-item-details{
+  padding: 20px 10px;
+}
+.job-item-detail{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.job-item-descr-prg {
+  color: rgb(134, 134, 134);
+ margin: 0;
+  font-size: 16px;
+  padding-right: 10px;
+}
+.jobs-item-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.contact-button,
+.info-button {
+  width: 200px;
+  box-sizing: border-box;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s, border 0.3s, color 0.3s;
+}
+.contact-button {
+  background-color: rgb(24, 49, 83);
+  border: none;
+  color: white;
+  margin-left: 10px;
+  padding: 10px;
+}
+.contact-button:hover {
+  background-color: transparent;
+  color: rgb(24, 49, 83);
+  border: 1px solid rgb(24, 49, 83);
+}
+.info-button {
+  border: 2px solid rgb(255, 212, 59);
+  background-color: white;
+  color: black;
+  padding: 8px;
+}
+.info-button:hover {
+  background: rgb(255, 212, 59);
+  border: none;
+  color: white;
+}
+@media screen and (max-width: 1620px) {
+  .jobs__item {
+    max-width: 20rem;
+  }
+}

@@ -1,0 +1,60 @@
+.tip__wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  max-width: 400px;
+  width: 100%;
+  /* box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+  -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+  filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017)); */
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  /* margin: 20px;
+  margin-bottom: 70px; */
+}
+.tip__link {
+  text-decoration: none;
+}
+.tip-image-wrapper {
+  display: flex;
+  width: auto;
+  height: 200px;
+}
+.tip-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.tip-title {
+  color: black;
+  font-size: 22px;
+  margin-top: 16px;
+}
+.tip__date {
+  color: gray;
+}
+.job-article-preview {
+  color: black;
+}
+.tip-button {
+  width: 200px;
+  border: none;
+  background-color: rgb(24, 49, 83);
+  color: white;
+  font-size: 18px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, border 0.3s, color 0.3s;
+}
+.tip-button:hover {
+  background-color: transparent;
+  color: rgb(24, 49, 83);
+  border: 1px solid rgb(24, 49, 83);
+}
+
+@media screen and (max-width: 1620px) {
+  .tip__wrapper {
+    max-width: 20rem;
+  }
+}

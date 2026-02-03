@@ -1,0 +1,8 @@
+.filter-checks-container {
+    max-height: 200px; 
+    overflow-y: auto;
+  }
+  
+  .form-check {
+    margin-bottom: 10px;
+  }
