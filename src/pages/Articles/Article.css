@@ -24,6 +24,7 @@
   display: flex;
   flex-direction: column;
   width: 682px;
+  position: relative;
 }
 
 .article-date {

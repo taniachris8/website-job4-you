@@ -52,7 +52,7 @@ export function LoginPage() {
 
   return (
     <>
-      <div className="login-container">
+      <section className="login-container">
         <div className="form-container">
           <div className="login-form">
             <h1 className="login-title">התחברות</h1>
@@ -118,7 +118,7 @@ export function LoginPage() {
             להירשם
           </Button>
         </div>
-      </div>
+      </section>
     </>
   );
 }

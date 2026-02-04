@@ -20,7 +20,7 @@ export function HeroSection() {
 
   return (
     <>
-      <div className="hero-container">
+      <section className="hero-container">
         <h1 className="hero-cnt-title">JOB4YOU השמה ויעוץ כח אדם</h1>
         <p className="hero-cnt-prg">הדרך המהירה והמקצועית למעסיק הנכון</p>
         <div className="hero-input-container">
@@ -33,7 +33,7 @@ export function HeroSection() {
             </button>
           </CustomTooltip>
         </div>
-      </div>
+      </section>
     </>
   );
 }

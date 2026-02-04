@@ -8,7 +8,7 @@ interface ServiceCardProps {
 
 export function ServiceCard({ image, title, description }: ServiceCardProps) {
   return (
-    <div className="service-card-cntr">
+    <article className="service-card-cntr">
       <div className="service-card-img-cntr">
         <img alt="Service-card" src={image} className="service-card-img" />
       </div>
@@ -16,6 +16,6 @@ export function ServiceCard({ image, title, description }: ServiceCardProps) {
         <h3 className="service-card-title">{title}</h3>
         <p className="service-card-description">{description}</p>
       </div>
-    </div>
+    </article>
   );
 }

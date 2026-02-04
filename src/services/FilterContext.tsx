@@ -31,7 +31,6 @@ export const FilterProvider = ({ children }: { children: ReactNode }) => {
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
 
   useEffect(() => {
-    // Fetch jobs when the component mounts
     const fetchJobs = async () => {
       try {
         const response = await ApiAllJobs.getAllJobs();

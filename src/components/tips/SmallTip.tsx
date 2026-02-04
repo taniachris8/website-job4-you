@@ -10,19 +10,21 @@ interface SmallTipProps {
 
 export function SmallTip({ path, image, title, date }: SmallTipProps) {
   return (
-    <>
-      <div className="small-tip__wrapper">
-        <Link className="small-tip__link" to={path}>
-          <div className="small-tip-image-wrapper">
-            <img alt="SmallTip" src={image} className="small-tip-image" />
-          </div>
+    <article className="small-tip__wrapper">
+      <Link className="small-tip__link" to={path}>
+        <figure className="small-tip-image-wrapper">
+          <img alt="SmallTip" src={image} className="small-tip-image" />
+        </figure>
 
-          <div className="small-tip__info">
-            <h1 className="small-tip-title">{title}</h1>
-            <p className="small-tip__date">{date}</p>
-          </div>
-        </Link>
-      </div>
-    </>
+        <div className="small-tip__info">
+          <header>
+            <h2 className="small-tip-title">{title}</h2>
+            <time className="small-tip__date" dateTime={date}>
+              {date}
+            </time>
+          </header>
+        </div>
+      </Link>
+    </article>
   );
 }

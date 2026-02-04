@@ -4,20 +4,19 @@ import { SocialMediaLinks } from "./SocialMediaLinks";
 
 export function Article3Page() {
   return (
-    <>
-      <div className="article-container">
-        <div className="article-wrapper">
-          <div className="article-image-wrapper">
+    <main className="article-container">
+      <article className="article-wrapper">
+          <figure className="article-image-wrapper">
             <img
               alt="Article"
               src="images/happy2.jpg"
               className="article-image"
             />
-          </div>
+          </figure>
           <div className="article-text">
-            <p className="article-date">01.08.2024</p>
+            <time className="article-date" dateTime="2026-02-10">10.02.2026</time>
             <h1 className="article-title">השאלות הכי קשות בראיון עבודה</h1>
-            <div className="article-paragraphs">
+            <section className="article-paragraphs">
               <SocialMediaLinks />
               <p>
                 השאלות הכי קשות שיכולות לעלות בראיון עבודה חיפוש עבודה יכול
@@ -25,7 +24,8 @@ export function Article3Page() {
                 ולא מכינים את עצמנו לסוג של שאלות שאף פעם לא נשאלנו.
               </p>
               <p>כדאי לקחת בחשבון סוגים שונים של שאלות. לפניכם מספר דוגמאות:</p>
-              <li className="list-of-tips">
+            <ol className="list-of-tips">
+              <li>
                 <p>
                   1. דבר על עצמך.... זו אחת השאלות הכי קשות. חשוב לקחת את השאלה
                   הזו בחשבון ופשוט להכין את עצמך לשאלה כזו. גמגומים לא באים
@@ -70,18 +70,19 @@ export function Article3Page() {
                   היית ניגש דבר ראשון?
                 </p>
               </li>
-              <p>
-                אז קודם כל, מדובר בסוג השאלות שמעבר ליצירתיות נדרש כאן ידע כללי
-                נרחב. אנשים שקוראים עיתונים ומעורים במצב הפוליטי והכלכלי במקומות
-                שונים בעולם. לאנשים שהם פחות כאלה, אפשר לצאת מזה ע"י "בריחה"
-                למדינה שאתם הכי מכירים ומעבר לזה אפשר לאלתר ולקוות שאף אחד לא
-                יסתור אותך...
-              </p>
-            </div>
-          </div>
+            </ol>
+            <p>
+              אז קודם כל, מדובר בסוג השאלות שמעבר ליצירתיות נדרש כאן ידע כללי
+              נרחב. אנשים שקוראים עיתונים ומעורים במצב הפוליטי והכלכלי במקומות
+              שונים בעולם. לאנשים שהם פחות כאלה, אפשר לצאת מזה ע"י "בריחה"
+              למדינה שאתם הכי מכירים ומעבר לזה אפשר לאלתר ולקוות שאף אחד לא
+              יסתור אותך...
+            </p>
+          </section>
         </div>
-        <div className="more-articles-container">
-          <h1>מאמרים נוספים שיכולים לעניין אותך</h1>
+      </article>
+      <aside className="more-articles-container" aria-labelledby="more-articles-heading">
+        <h2 id="more-articles-heading">מאמרים נוספים שיכולים לעניין אותך</h2>
           <div className="more-arts-wrapper">
             <div className="more-article-wr">
               <Tip
@@ -111,8 +112,7 @@ export function Article3Page() {
               />
             </div>
           </div>
-        </div>
-      </div>
-    </>
+      </aside>
+    </main>
   );
-}
+} 

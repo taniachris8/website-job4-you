@@ -3,7 +3,7 @@ import "./pages-css/TermsOfUse.css";
 export function TermsOfUsePage() {
   return (
     <>
-      <div className="terms-container">
+      <section className="terms-container">
         <h1 className="terms-title">תנאי שימוש</h1>
         <div className="terms-text">
           <h3 className="terms-header">
@@ -242,7 +242,7 @@ export function TermsOfUsePage() {
             מי מטעמה בהקשר לאתר.
           </p>
         </div>
-      </div>
+      </section>
     </>
   );
 }

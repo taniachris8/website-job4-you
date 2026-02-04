@@ -4,22 +4,21 @@ import { SocialMediaLinks } from "./SocialMediaLinks";
 
 export function Article2Page() {
   return (
-    <>
-      <div className="article-container">
-        <div className="article-wrapper">
-          <div className="article-image-wrapper">
+    <main className="article-container">
+      <article className="article-wrapper">
+          <figure className="article-image-wrapper">
             <img
               alt="Article"
               src="images/image5.jpg"
               className="article-image"
             />
-          </div>
+          </figure>
           <div className="article-text">
-            <p className="article-date">01.08.2024</p>
+            <time className="article-date" dateTime="2026-01-28">28.01.2026</time>
             <h1 className="article-title">
               כלים לניהול פרוייקט החזרה לשוק העבודה
             </h1>
-            <div className="article-paragraphs">
+            <section className="article-paragraphs">
               <SocialMediaLinks />
               <p>
                 אחד הטורים האחרונים עסק בחשיבות של ניהול תהליך חיפוש עבודה
@@ -52,7 +51,8 @@ export function Article2Page() {
                 לכן רצוי לבנות כמה כלים ממש פשוטים (רצוי ממוחשבים) לייעול
                 התהליך:{" "}
               </p>
-              <li className="list-of-tips">
+            <ol className="list-of-tips">
+              <li>
                 <p>
                   1. ניהול קובץ הצעות עבודה אם מסמך 'קורות החיים' מספיק טוב, גם
                   בתקופת מיתון השוק מתחיל להגיב, הטלפון מתחיל לצלצל. לעיתים
@@ -160,12 +160,13 @@ export function Article2Page() {
                   פעולות בשבוע, צריכה להידלק נורה אדומה).
                 </p>
               </li>
-              <p>
-                הכלים הללו והתיעוד המפורט מספקים אינפורמציה יקרה מפז גם לגבי
-                איכות התהליך והמיצוב בשוק. הם מניבים מידע באשר לאיכות מסמכי
-                קורות החיים, תדירות הראיונות ואיכותם, התדמית המקצועית הנתפסת,
-                ערך השוק והפוטנציאל התעסוקתי בשווקי העבודה השונים.
-              </p>
+            </ol>
+            <p>
+              הכלים הללו והתיעוד המפורט מספקים אינפורמציה יקרה מפז גם לגבי
+              איכות התהליך והמיצוב בשוק. הם מניבים מידע באשר לאיכות מסמכי
+              קורות החיים, תדירות הראיונות ואיכותם, התדמית המקצועית הנתפסת,
+              ערך השוק והפוטנציאל התעסוקתי בשווקי העבודה השונים.
+            </p>
               <p>
                 הם מאפשרים לזהות טוב יותר את הכשלים, להשתפר תוך כדי, ובסופו של
                 דבר לקצר את תהליך מציאת העבודה. התיעוד הזה חשוב גם לטווח הארוך,
@@ -178,11 +179,11 @@ export function Article2Page() {
                 או שהוא המוצר הכי חם בשוק שיימצא עבודה תוך דקה, או שכנראה הוא לא
                 עושה מספיק כדי למצוא עבודה. חד משמעי.
               </p>
-            </div>
-          </div>
+            </section>
         </div>
-        <div className="more-articles-container">
-          <h1>מאמרים נוספים שיכולים לעניין אותך</h1>
+      </article>
+      <aside className="more-articles-container" aria-labelledby="more-articles-heading">
+        <h2 id="more-articles-heading">מאמרים נוספים שיכולים לעניין אותך</h2>
           <div className="more-arts-wrapper">
             <div className="more-article-wr">
               <Tip
@@ -210,8 +211,7 @@ export function Article2Page() {
               />
             </div>
           </div>
-        </div>
-      </div>
-    </>
+      </aside>
+    </main>
   );
-}
+} 

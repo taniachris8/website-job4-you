@@ -4,30 +4,32 @@ import { SocialMediaLinks } from "./SocialMediaLinks";
 
 export function Article1Page() {
   return (
-    <>
-      <div className="article-container">
-        <div className="article-wrapper">
-          <div className="article-image-wrapper">
-            <img
-              alt="Article"
-              src="images/image4.jpg"
-              className="article-image"
-            />
-          </div>
-          <div className="article-text">
-            <p className="article-date">01.08.2024</p>
-            <h1 className="article-title">טיפים לראיון עבודה</h1>
-            <div className="article-paragraphs">
-              <SocialMediaLinks />
-              <p>
-                לעיתים, ראיון החלומות שלך עומד בפתח, ואתה רק מחכה כדי להיגאל
-                מהמרוץ אחר מודעות הדרושים...
-              </p>
-              <p>
-                כל מה שעליך לעשות הוא לשים לב לכמה נקודות עיקריות שיעזרו לך
-                לעבור ראיון עבודה בשלום:
-              </p>
-              <li className="list-of-tips">
+    <main className="article-container">
+      <article className="article-wrapper">
+        <figure className="article-image-wrapper">
+          <img
+            alt="Article"
+            src="images/image4.jpg"
+            className="article-image"
+          />
+        </figure>
+        <div className="article-text">
+          <time className="article-date" dateTime="2026-02-01">
+            01.02.2026
+          </time>
+          <h1 className="article-title">טיפים לראיון עבודה</h1>
+          <section className="article-paragraphs">
+            <SocialMediaLinks />
+            <p>
+              לעיתים, ראיון החלומות שלך עומד בפתח, ואתה רק מחכה כדי להיגאל
+              מהמרוץ אחר מודעות הדרושים...
+            </p>
+            <p>
+              כל מה שעליך לעשות הוא לשים לב לכמה נקודות עיקריות שיעזרו לך לעבור
+              ראיון עבודה בשלום:
+            </p>
+            <ol className="list-of-tips">
+              <li>
                 <p>
                   1. התאמן והתכונן כראוי רצוי לעבור הכנה לראיון עבודה לפני
                   שמתחילים "תקופת חיפושים" אינטנסיבית.
@@ -47,7 +49,7 @@ export function Article1Page() {
                   מספר עותקים של קורות החיים שלך, עט ופנקס לרשימת הערות.
                 </p>
               </li>
-              <li className="list-of-tips">
+              <li>
                 <p>
                   2. הגע בזמן הכוונה היא להגיע כחמש או עשר דקות לפני מועד
                   הראיון. למה?
@@ -58,7 +60,7 @@ export function Article1Page() {
                   דקות לפני המועד שנקבע מעידה על רצינות ודייקנות.
                 </p>
               </li>
-              <li className="list-of-tips">
+              <li>
                 <p>
                   3. השאר רגוע בזמן הראיון, נסה להישאר כמה שיותר נינוח ורגוע, גם
                   אתה לא מרגיש כך באמת – נסה לפחות להעמיד פנים שאתה רגוע.
@@ -69,7 +71,7 @@ export function Article1Page() {
                   למחשבה זה בהחלט לגיטימי.
                 </p>
               </li>
-              <li className="list-of-tips">
+              <li>
                 <p>
                   4. הראה מה אתה שווה ומה אתה יודע כשאתה מדבר על הישגיך במשרות
                   הקודמות בהן הועסקת, נסה לקשרן באופן ישיר למה שהחברה מחפשת
@@ -79,37 +81,39 @@ export function Article1Page() {
                   נסה להפגין מידע אודות החברה, מה שתמיד ירשים את המראיין שלך.
                 </p>
               </li>
-            </div>
-          </div>
+            </ol>
+          </section>
         </div>
-        <div className="more-articles-container">
-          <h1>מאמרים נוספים שיכולים לעניין אותך</h1>
-          <div className="more-arts-wrapper">
-            <div className="more-article-wr">
-              <Tip
-                path="/article_2"
-                image="images/image5.jpg"
-                title="כלים לניהול פרוייקט החזרה לשוק העבודה"
-                date="01.08.2024"
-                articlePreview="
+      </article>
+      <aside
+        className="more-articles-container"
+        aria-labelledby="more-articles-heading">
+        <h2 id="more-articles-heading">מאמרים נוספים שיכולים לעניין אותך</h2>
+        <div className="more-arts-wrapper">
+          <div className="more-article-wr">
+            <Tip
+              path="/article_2"
+              image="images/image5.jpg"
+              title="כלים לניהול פרוייקט החזרה לשוק העבודה"
+              date="01.08.2024"
+              articlePreview="
             אחד הטורים האחרונים עסק בחשיבות של ניהול תהליך חיפוש עבודה
             כפרוייקט לכל דבר, עם דגש על אינטנסיביות החיפוש, תוך שימוש בכלי
             ניהול ובקרת פרוייקט כתנאי להצלחה..."
-              />
-            </div>
-            <div className="more-article-wr">
-              <Tip
-                path="/article_3"
-                image="images/happy2.jpg"
-                title="השאלות הכי קשות בראיון עבודה"
-                date="01.08.2024"
-                articlePreview="
+            />
+          </div>
+          <div className="more-article-wr">
+            <Tip
+              path="/article_3"
+              image="images/happy2.jpg"
+              title="השאלות הכי קשות בראיון עבודה"
+              date="01.08.2024"
+              articlePreview="
             השאלות הכי קשות שיכולות לעלות בראיון עבודה חיפוש עבודה יכול להיות עסק לא קל. לפעמים מגיעים לראיון עבודה שאנחנו ממש מצפים לו ולא מכינים את עצמנו לסוג של שאלות שאף פעם לא נשאלנו..."
-              />
-            </div>
+            />
           </div>
         </div>
-      </div>
-    </>
+      </aside>
+    </main>
   );
 }

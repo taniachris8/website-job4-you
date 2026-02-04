@@ -11,7 +11,7 @@ export function AboutUs() {
   };
 
   return (
-    <div className="about__us-container">
+    <section className="about__us-container">
       <div className="about__us-right__block">
         <div className="about__us-right-img-cntnr">
           <img
@@ -69,6 +69,6 @@ export function AboutUs() {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = (userData: Partial<User>) => {
-    const updatedUser = { ...user, ...userData }; // Keep the existing id and other fields
+    const updatedUser = { ...user, ...userData }; 
     setUser(updatedUser as User);
     Cookies.set("user", JSON.stringify(updatedUser), { expires: 7 });
   };

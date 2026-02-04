@@ -12,7 +12,7 @@ export function PasswordRecoveryPage() {
 
   return (
     <>
-      <div className="reset-password-container">
+      <section className="reset-password-container">
         <div className="recovery-password-wrapper">
           <h1 className="reset-password-title">Reset your password</h1>
           <div className="reset-password-input-wrapper">
@@ -32,7 +32,7 @@ export function PasswordRecoveryPage() {
             Back to Login
           </Link>
         </div>
-      </div>
+      </section>
     </>
   );
 }

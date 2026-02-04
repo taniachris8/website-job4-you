@@ -61,11 +61,12 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="navbar">
+      <nav className="navbar" aria-label="Main navigation">
         <div className="navbar-container">
           <div className="menu-icon" onClick={handleClick}>
             <i className={click ? "fas fa-times" : "fas fa-bars"} />
           </div>
+
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <Link to="/" className="navbar-logo">
               <div className="logo-container">
@@ -114,6 +115,7 @@ export function Navbar() {
               </Link>
             </li>
           </ul>
+
           <div className="nav-icons">
             <i
               className="fa-solid fa-envelope style-icon-envelope"

@@ -3,7 +3,7 @@ import "./pages-css/EmployeesRights.css";
 export function EmployeesRightsPage() {
   return (
     <>
-      <div className="employees-rights-container">
+      <section className="employees-rights-container">
         <h1 className="employees-rights-title">זכויות עובדים</h1>
         <div className="employees-rights-text">
           <p>
@@ -200,7 +200,7 @@ export function EmployeesRightsPage() {
             </p>
           </li>
         </div>
-      </div>
+      </section>
     </>
   );
 }
