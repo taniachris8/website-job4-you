@@ -33,26 +33,17 @@ export const Login = ({
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // const response = await axios.get("http://localhost:8080/users");
-      const response = await ApiUserService.getAllUsers();
-      const users = response.data;
-      const user = users.find(
-        (user) => user.email === email && user.password === password,
-      );
-
-      if (user) {
-        login(user); // Call the login function from AuthContext
-        console.log("Login successful");
-        navigate("/"); // Redirect to admin dashboard
-        setEmail("");
-        setPassword("");
-        onHide(); // Close the modal on successful login
-      } else {
-        setError("Invalid email or password");
-      }
+      const response = await ApiUserService.loginUser({ email, password });
+      const { user, accessToken } = response.data;
+      login(user, accessToken);
+      console.log("Login successful");
+      navigate("/");
+      setEmail("");
+      setPassword("");
+      onHide();
     } catch (error) {
       console.error("Error:", error);
-      setError("An error occurred. Please try again.");
+      setError("Invalid email or password");
     }
   };
 

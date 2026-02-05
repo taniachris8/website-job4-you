@@ -32,8 +32,9 @@ export function UserSettingsPage() {
 
   const handleSaveClick = async (field: keyof typeof updatedUser) => {
     try {
-      if (!user?._id) return;
-      const response = await userApiService.updateUser(user._id, updatedUser);
+      const userId = user?.id ?? user?._id;
+      if (!userId) return;
+      const response = await userApiService.updateUser(userId, updatedUser);
       if (response.status === 200) {
         login({ ...user, [field]: (updatedUser)[field] }); // Update the specific field in AuthContext
         setIsEditing({ ...isEditing, [field]: false });
@@ -52,8 +53,9 @@ export function UserSettingsPage() {
 
   const handleDeleteAccount = async () => {
     try {
-      if (!user?._id) return;
-      const response = await userApiService.deleteUser(user._id);
+      const userId = user?.id ?? user?._id;
+      if (!userId) return;
+      const response = await userApiService.deleteUser(userId);
 
       if (response.status === 200) {
         logout();

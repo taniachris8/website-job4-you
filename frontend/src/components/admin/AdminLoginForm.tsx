@@ -27,26 +27,19 @@ export const AdminLoginForm = ({
   const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await ApiUser.getAllUsers();
-      console.log(response.data); // Log the fetched users
-      const admin = response.data.find(
-        (user) =>
-          user.email === email &&
-          user.password === password &&
-          user.role === "admin",
-      );
-
-      if (admin) {
-        login(admin); // Set the authenticated user
-        console.log("Admin login successful");
-        navigate("/jobs"); // Redirect to admin dashboard
-        handleCloseAdminLoginForm(); // Close the modal on successful login
-      } else {
-        setError("Invalid email or password");
+      const response = await ApiUser.loginUser({ email, password });
+      const { user, accessToken } = response.data;
+      if (user.role !== "admin") {
+        setError("You are not authorized as admin");
+        return;
       }
+      login(user, accessToken);
+      console.log("Admin login successful");
+      navigate("/jobs");
+      handleCloseAdminLoginForm();
     } catch (error) {
       console.error("Error:", error);
-      setError("An error occurred. Please try again.");
+      setError("Invalid email or password");
     }
   };
 

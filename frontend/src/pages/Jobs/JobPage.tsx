@@ -51,8 +51,9 @@ export function JobPage() {
 
   // Fetch user saved jobs only if a user is logged in
   useEffect(() => {
-    if (user && user._id) {
-      Api.getUserById(user._id)
+    const userId = user?.id ?? user?._id;
+    if (user && userId) {
+      Api.getUserById(userId)
         .then((response) => {
           const savedJobs = Array.isArray(response.data?.savedJobs)
             ? response.data.savedJobs
@@ -86,8 +87,9 @@ export function JobPage() {
 
     // Update the user's saved jobs
     console.log("user", user);
-    if (user._id) {
-      Api.updateUser(user._id, { ...user, savedJobs: updatedSavedJobs })
+    const userId = user?.id ?? user?._id;
+    if (userId) {
+      Api.updateUser(userId, { savedJobs: updatedSavedJobs })
         .then((response) => {
           console.log("User updated:", response.data);
           setIsSaved(!isSaved);

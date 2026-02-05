@@ -4,6 +4,7 @@ import { randomBytes } from "crypto";
 import { prisma } from "../lib/prisma";
 import { AppError } from "../lib/errors";
 import { validate } from "../lib/validate";
+import { requireAuth, requireRole } from "../middleware/auth";
 
 const router = Router();
 
@@ -96,7 +97,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", requireAuth, requireRole("ADMIN"), async (req, res, next) => {
   try {
     const payload = validate(createJobSchema, req.body);
     const jobId = payload.id ?? (await generateUniqueJobId());
@@ -126,7 +127,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", requireAuth, requireRole("ADMIN"), async (req, res, next) => {
   try {
     const payload = validate(updateJobSchema, req.body);
     if (Object.keys(payload).length === 0) {
@@ -149,7 +150,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", requireAuth, requireRole("ADMIN"), async (req, res, next) => {
   try {
     const existing = await prisma.job.findUnique({ where: { id: req.params.id } });
     if (!existing) {

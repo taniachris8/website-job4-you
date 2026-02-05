@@ -44,6 +44,6 @@ export interface FilterContextType {
 export interface AuthContextType {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
-  login: (userData: Partial<User>) => void;
+  login: (userData: Partial<User>, accessToken?: string) => void;
   logout: () => void;
 }

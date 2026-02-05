@@ -5,6 +5,7 @@ import { randomBytes } from "crypto";
 import { prisma } from "../lib/prisma";
 import { AppError } from "../lib/errors";
 import { validate } from "../lib/validate";
+import { requireAuth, requireRole } from "../middleware/auth";
 
 const router = Router();
 
@@ -105,7 +106,7 @@ const createUser = async (payload: z.infer<typeof createUserSchema>) => {
   return toUserResponse(created);
 };
 
-router.get("/", async (_req, res, next) => {
+router.get("/", requireAuth, requireRole("ADMIN"), async (_req, res, next) => {
   try {
     const users = await prisma.user.findMany({
       include: { savedJobs: { select: { jobId: true } } },
@@ -118,7 +119,7 @@ router.get("/", async (_req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", requireAuth, requireRole("ADMIN"), async (req, res, next) => {
   try {
     const payload = validate(createUserSchema, req.body);
     const user = await createUser(payload);
@@ -138,10 +139,14 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", requireAuth, async (req, res, next) => {
   try {
+    const userId = req.params.id;
+    if (req.user?.role !== "ADMIN" && req.user?.userId !== userId) {
+      throw new AppError(403, "FORBIDDEN", "Forbidden");
+    }
     const user = await prisma.user.findUnique({
-      where: { id: req.params.id },
+      where: { id: userId },
       include: { savedJobs: { select: { jobId: true } } }
     });
 
@@ -155,7 +160,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", requireAuth, async (req, res, next) => {
   try {
     const payload = validate(updateUserSchema, req.body);
     if (Object.keys(payload).length === 0) {
@@ -163,6 +168,9 @@ router.put("/:id", async (req, res, next) => {
     }
 
     const userId = req.params.id;
+    if (req.user?.role !== "ADMIN" && req.user?.userId !== userId) {
+      throw new AppError(403, "FORBIDDEN", "Forbidden");
+    }
 
     const existingUser = await prisma.user.findUnique({ where: { id: userId } });
     if (!existingUser) {
@@ -216,9 +224,12 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", requireAuth, async (req, res, next) => {
   try {
     const userId = req.params.id;
+    if (req.user?.role !== "ADMIN" && req.user?.userId !== userId) {
+      throw new AppError(403, "FORBIDDEN", "Forbidden");
+    }
     const existing = await prisma.user.findUnique({ where: { id: userId } });
     if (!existing) {
       throw new AppError(404, "NOT_FOUND", "User not found");

@@ -69,11 +69,11 @@ export const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "/user-settings",
+        path: "/users-settings",
         element: <UserSettingsPage />,
       },
       {
-        path: "/user-savedJobs",
+        path: "/users-savedJobs",
         element: <UserSavedJobsPage />,
       },
       {

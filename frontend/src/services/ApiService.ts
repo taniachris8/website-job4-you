@@ -9,12 +9,28 @@ export class ApiService {
     this.baseURL = baseURL;
   }
 
-  registerUser = (user: User): Promise<AxiosResponse<User>> => {
-    return api.post(`${this.baseURL}/users/register`, user, {
+  registerUser = (
+    user: User,
+  ): Promise<AxiosResponse<{ user: User; accessToken: string }>> => {
+    return api.post(`${this.baseURL}/auth/register`, user, {
       headers: {
         "Content-Type": "application/json",
       },
     });
+  };
+
+  loginUser = (
+    credentials: { email: string; password: string },
+  ): Promise<AxiosResponse<{ user: User; accessToken: string }>> => {
+    return api.post(`${this.baseURL}/auth/login`, credentials, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
+  getMe = (): Promise<AxiosResponse<User>> => {
+    return api.get(`${this.baseURL}/auth/me`);
   };
 
   getAllUsers = (): Promise<AxiosResponse<User[]>> => {

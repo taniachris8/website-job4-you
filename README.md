@@ -96,3 +96,58 @@ docker compose exec backend npm run prisma:seed
 API base URL in the frontend:
 - Vite reads `VITE_API_URL`. Default is `http://localhost:8080`.
 - Update via `docker-compose.yml` or your shell env if needed.
+
+## Development compose
+
+Use the dedicated `docker-compose.dev.yml` file for development with hot reloading and bind mounts (it reuses the same `.env` defaults):
+
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+- Backend runs `npm run dev` with `./backend` mounted into `/app`.
+- Frontend runs `npm run dev` with Vite’s dev server and watched source files mounted.
+- Anonymous volumes (`backend_node_modules`, `frontend_node_modules`) keep the container-installed dependencies available alongside the host mounts.
+
+Before your first development run (or after clearing the volumes) install dependencies inside the containers:
+
+```bash
+docker compose -f docker-compose.dev.yml run --rm backend npm install
+docker compose -f docker-compose.dev.yml run --rm frontend npm install
+```
+
+If those volumes become stale, reset them:
+
+```bash
+docker compose -f docker-compose.dev.yml down
+docker volume rm website-job4-you_frontend_node_modules website-job4-you_backend_node_modules
+```
+
+Then rerun the dev compose command above.
+
+If you later need a clean production image without mounts, use the base compose file explicitly:
+
+```bash
+docker compose -f docker-compose.yml up --build
+```
+
+## Auth Flow
+
+Endpoints:
+- `POST /auth/register`
+- `POST /auth/login`
+- `POST /auth/refresh`
+- `POST /auth/logout`
+- `GET /auth/me`
+
+Flow:
+- Register/login returns `{ user, accessToken }` and sets an httpOnly `refreshToken` cookie.
+- Access token is sent in `Authorization: Bearer <token>`.
+- Refresh rotates the refresh token and returns a new access token.
+
+Cookie settings (local defaults):
+- `COOKIE_SECURE=false`
+- `COOKIE_SAMESITE=lax`
+- `FRONTEND_ORIGIN=http://localhost:5173`
+
+Examples are in `backend/requests.http`.

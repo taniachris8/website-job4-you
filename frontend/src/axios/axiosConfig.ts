@@ -137,6 +137,7 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 // Helper: Get CSRF Token
@@ -152,17 +153,23 @@ const isTokenExpired = (token?: string) => {
 };
 
 // Helper: Save tokens to cookies
-const saveTokens = (accessToken: string, refreshToken: string) => {
+const isCookieSecure = () =>
+  import.meta.env.VITE_COOKIE_SECURE === "true" ||
+  window.location.protocol === "https:";
+
+const saveTokens = (accessToken: string, refreshToken?: string) => {
   Cookies.set(ACCESS_TOKEN_COOKIE, accessToken, {
-    secure: true,
+    secure: isCookieSecure(),
     sameSite: "Strict",
   });
-  Cookies.set(REFRESH_TOKEN_COOKIE, refreshToken, {
-    secure: true,
-    sameSite: "Strict",
-  });
+  if (refreshToken) {
+    Cookies.set(REFRESH_TOKEN_COOKIE, refreshToken, {
+      secure: isCookieSecure(),
+      sameSite: "Strict",
+    });
+  }
   Cookies.set(TOKEN_TYPE_COOKIE, "Bearer", {
-    secure: true,
+    secure: isCookieSecure(),
     sameSite: "Strict",
   });
 };
@@ -173,28 +180,37 @@ const removeTokens = () => {
   Cookies.remove(REFRESH_TOKEN_COOKIE);
   Cookies.remove(TOKEN_TYPE_COOKIE);
   Cookies.remove(CSRF_TOKEN_COOKIE);
-  window.location.href = process.env.REACT_APP_SIGNED_OUT_URL || "/login"; // Redirect to login
 };
 
 // Function to refresh access token
-const refreshAccessToken = async () => {
+const refreshAccessToken = async (shouldRedirect = false) => {
   const refreshToken = Cookies.get(REFRESH_TOKEN_COOKIE);
   if (!refreshToken) {
-    removeTokens();
+    if (shouldRedirect) {
+      removeTokens();
+      const signedOutUrl = import.meta.env.VITE_SIGNED_OUT_URL || "/login";
+      window.location.href = signedOutUrl;
+    }
     return null;
   }
 
   try {
-    const response = await axios.post(`${API_URL}/auth/refresh`, {
-      refreshToken,
+    const response = await axios.post(`${API_URL}/auth/refresh`, null, {
+      withCredentials: true,
     });
 
-    const { accessToken, refreshToken: newRefreshToken } = response.data;
-    saveTokens(accessToken, newRefreshToken);
-    return accessToken;
+    const { accessToken } = response.data;
+    if (accessToken) {
+      saveTokens(accessToken);
+    }
+    return accessToken ?? null;
   } catch (error) {
     console.error("Failed to refresh token:", error);
-    removeTokens();
+    if (shouldRedirect) {
+      removeTokens();
+      const signedOutUrl = import.meta.env.VITE_SIGNED_OUT_URL || "/login";
+      window.location.href = signedOutUrl;
+    }
     return null;
   }
 };
@@ -202,25 +218,29 @@ const refreshAccessToken = async () => {
 // Axios Request Interceptor
 api.interceptors.request.use(
   async (config) => {
-    console.log("config", config);
-    if (!config.url || !config.url.endsWith("/auth/refresh")) {
-      let accessToken = Cookies.get(ACCESS_TOKEN_COOKIE);
+    const url = config.url ?? "";
+    const skipAuth =
+      url.endsWith("/auth/refresh") ||
+      url.endsWith("/auth/login") ||
+      url.endsWith("/auth/register");
 
-      // Refresh token if expired
-      if (isTokenExpired(accessToken)) {
+    if (!skipAuth) {
+      let accessToken = Cookies.get(ACCESS_TOKEN_COOKIE);
+      const hasRefreshToken = Boolean(Cookies.get(REFRESH_TOKEN_COOKIE));
+
+      // Refresh token if expired or missing
+      if ((!accessToken || isTokenExpired(accessToken)) && hasRefreshToken) {
         accessToken = await refreshAccessToken();
       }
 
-      // Add Authorization header
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
       }
+    }
 
-      // Add CSRF token if available
-      const csrfToken = getCsrfToken();
-      if (csrfToken) {
-        config.headers["X-CSRF-Token"] = csrfToken;
-      }
+    const csrfToken = getCsrfToken();
+    if (csrfToken) {
+      config.headers["X-CSRF-Token"] = csrfToken;
     }
 
     return config;

@@ -21,7 +21,13 @@ services:
     environment:
       PORT: 8080
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${POSTGRES_PORT}/${POSTGRES_DB}?schema=public
-      CORS_ORIGINS: http://localhost:5173,http://localhost:3000
+      FRONTEND_ORIGIN: http://localhost:5173
+      JWT_ACCESS_SECRET: dev-access-secret-change
+      JWT_REFRESH_SECRET: dev-refresh-secret-change
+      ACCESS_TOKEN_TTL: 15m
+      REFRESH_TOKEN_TTL_DAYS: 30
+      COOKIE_SECURE: "false"
+      COOKIE_SAMESITE: lax
     depends_on:
       db:
         condition: service_healthy

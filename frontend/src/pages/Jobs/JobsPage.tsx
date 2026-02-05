@@ -132,30 +132,30 @@ export function JobsPage() {
               </div>
               <div className="job-items-wrapper">
                 {currentJobs.length > 0 ? (
-                  currentJobs.map((job) => (
-                    <div className="job-item" key={job._id}>
-                      <JobItem
-                        jobTitle={job.jobTitle}
-                        area={job.area}
-                        domain={job.domain}
-                        profession={job.profession}
-                        scope={job.scope}
-                        id={job._id}
-                        jobNumber={job.jobNumber}
-                        jobDescription={job.jobDescription}
-                        jobRequirements={job.jobRequirements}
-                        onDelete={() =>
-                          handleDeleteJob(String(job._id ?? job.id ?? ""))
-                        }
-                        onEdit={(updatedJob) =>
-                          handleEditJob(
-                            String(job._id ?? job.id ?? ""),
-                            updatedJob,
-                          )
-                        }
-                      />
-                    </div>
-                  ))
+                  currentJobs.map((job) => {
+                    const jobId = job.id ?? job._id;
+                    return (
+                      <div className="job-item" key={jobId ?? job.jobNumber}>
+                        <JobItem
+                          jobTitle={job.jobTitle}
+                          area={job.area}
+                          domain={job.domain}
+                          profession={job.profession}
+                          scope={job.scope}
+                          id={jobId}
+                          jobNumber={job.jobNumber}
+                          jobDescription={job.jobDescription}
+                          jobRequirements={job.jobRequirements}
+                          onDelete={() =>
+                            handleDeleteJob(String(jobId ?? job.id ?? ""))
+                          }
+                          onEdit={(updatedJob) =>
+                            handleEditJob(String(jobId ?? job.id ?? ""), updatedJob)
+                          }
+                        />
+                      </div>
+                    );
+                  })
                 ) : (
                   <div>No jobs found</div>
                 )}
