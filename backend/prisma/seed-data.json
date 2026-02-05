@@ -1,0 +1,57 @@
+{
+  "users": [
+    {
+      "id": "u001",
+      "name": "Dana",
+      "familyName": "Levi",
+      "email": "dana@example.com",
+      "password": "password123",
+      "role": "user",
+      "savedJobs": ["4a58"]
+    },
+    {
+      "id": "u002",
+      "name": "Avi",
+      "familyName": "Cohen",
+      "email": "avi@example.com",
+      "password": "admin12345",
+      "role": "admin",
+      "savedJobs": ["4a58", "8994"]
+    }
+  ],
+  "jobs": [
+    {
+      "id": "4a58",
+      "jobTitle": "Frontend Developer",
+      "area": "Tel Aviv",
+      "domain": "Software",
+      "profession": "Frontend",
+      "scope": "Full-time",
+      "jobNumber": "J-1001",
+      "jobDescription": "Build and maintain React UI components. Collaborate with designers and backend engineers.",
+      "jobRequirements": "2+ years with React. Strong HTML/CSS. Familiarity with REST APIs."
+    },
+    {
+      "id": "8994",
+      "jobTitle": "Backend Engineer",
+      "area": "Haifa",
+      "domain": "Software",
+      "profession": "Backend",
+      "scope": "Full-time",
+      "jobNumber": "J-1002",
+      "jobDescription": "Design and implement Node.js services and APIs. Work with PostgreSQL.",
+      "jobRequirements": "3+ years with Node.js. Experience with SQL and REST."
+    },
+    {
+      "id": "1f2a",
+      "jobTitle": "QA Specialist",
+      "area": "Jerusalem",
+      "domain": "Quality",
+      "profession": "QA",
+      "scope": "Part-time",
+      "jobNumber": "J-1003",
+      "jobDescription": "Create and execute test plans for web applications.",
+      "jobRequirements": "Attention to detail. Experience with manual testing tools."
+    }
+  ]
+}

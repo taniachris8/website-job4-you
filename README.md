@@ -71,3 +71,28 @@ export default defineConfig([
   },
 ])
 ```
+
+## Docker Compose (Monorepo)
+
+Run everything (Postgres + backend + frontend):
+
+```bash
+docker compose up --build
+```
+
+Services:
+- Postgres on `localhost:5432`
+- Backend on `http://localhost:8080`
+- Frontend on `http://localhost:5173`
+
+Database migrations and seed:
+- The backend container runs `prisma migrate deploy` and `prisma db seed` on startup.
+- Re-run seed manually if needed:
+
+```bash
+docker compose exec backend npm run prisma:seed
+```
+
+API base URL in the frontend:
+- Vite reads `VITE_API_URL`. Default is `http://localhost:8080`.
+- Update via `docker-compose.yml` or your shell env if needed.

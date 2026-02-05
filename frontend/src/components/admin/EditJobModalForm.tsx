@@ -1,7 +1,6 @@
 import { Button } from "../buttons/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import "react-quill/dist/quill.snow.css";
 import "./EditJobModalForm.css";
 import { domainOptions } from "../options/DomainOptions";
 import { professionOptions } from "../options/ProfessionOptions";
