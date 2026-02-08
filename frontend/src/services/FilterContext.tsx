@@ -1,13 +1,28 @@
-import { useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import { ApiService } from "./ApiService";
 import { API_URL } from "../consts/general";
-import type { SelectedFilters, Job } from "../types";
-import { FilterContext, defaultSelectedFilters } from "./filterContextSetup";
+import type { FilterContextType, SelectedFilters, Job } from "../types";
 
-const ApiAllJobs = new ApiService(API_URL);
+const defaultSelectedFilters: SelectedFilters = {
+  area: [],
+  domain: [],
+  profession: [],
+  scope: [],
+};
+
+export const FilterContext = createContext<FilterContextType>({
+  searchTerm: "",
+  setSearchTerm: () => {},
+  selectedFilters: defaultSelectedFilters,
+  setSelectedFilters: () => {},
+  filteredJobs: [],
+  applyFilters: () => {},
+  setFilteredJobs: () => {},
+});
 
 export const FilterProvider = ({ children }: { children: ReactNode }) => {
+  const ApiAllJobs = new ApiService(API_URL);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>(
     defaultSelectedFilters,
@@ -30,9 +45,8 @@ export const FilterProvider = ({ children }: { children: ReactNode }) => {
     fetchJobs();
   }, []);
 
-  // Derived state: update filtered results whenever search/filters change
-  // This is the correct pattern for deriving state from other state values
-  useEffect(() => {
+  const applyFilters = () => {
+    console.log("apply filters");
     let filtered = jobs;
 
     if (searchTerm) {
@@ -65,12 +79,12 @@ export const FilterProvider = ({ children }: { children: ReactNode }) => {
       );
     }
 
-    // Update derived state (filtered results) based on source data and filter criteria
-    // This is the recommended pattern for deriving state from other state
-    // Suppress React's overly cautious warning about setState in effects for derived state
-    // See: https://react.dev/learn/you-might-not-need-an-effect#deriving-state-from-props
     setFilteredJobs(filtered);
-  }, [jobs, searchTerm, selectedFilters]);
+  };
+
+  useEffect(() => {
+    applyFilters();
+  }, [searchTerm, selectedFilters, jobs]);
 
   return (
     <FilterContext.Provider
@@ -80,7 +94,7 @@ export const FilterProvider = ({ children }: { children: ReactNode }) => {
         selectedFilters,
         setSelectedFilters,
         filteredJobs,
-        applyFilters: () => {}, // No-op: filtering happens automatically via effect
+        applyFilters,
         setFilteredJobs,
       }}>
       {children}

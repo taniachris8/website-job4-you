@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./UserSavedJobs.css";
-import { useAuth } from "../../services/useAuthHook";
+import { useAuth } from "../../services/AuthContext";
 import { JobItem } from "../jobComponents/JobItem";
 import { Button } from "../buttons/Button";
 import { useNavigate } from "react-router-dom";

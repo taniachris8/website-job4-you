@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Table from "react-bootstrap/Table";
-import { useAuth } from "../../services/useAuthHook";
+import { useAuth } from "../../services/AuthContext";
 import "./UserSettings.css";
 import { Button } from "../buttons/Button";
 import { useNavigate } from "react-router-dom";

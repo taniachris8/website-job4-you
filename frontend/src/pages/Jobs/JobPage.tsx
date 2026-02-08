@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./JobPage.css";
 import { ApplyForm } from "../../components/ApplyForm";
-import { useAuth } from "../../services/useAuthHook";
+import { useAuth } from "../../services/AuthContext";
 import { Button } from "../../components/buttons/Button";
 import { useNavigate } from "react-router-dom";
 import { ApiService } from "../../services/ApiService";

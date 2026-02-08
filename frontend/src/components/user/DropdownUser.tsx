@@ -3,7 +3,7 @@ import "./DropdownUser.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import { Button } from "../buttons/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../services/useAuthHook";
+import { useAuth } from "../../services/AuthContext";
 
 interface DropdownUserProps {
   showDropdownUser?: boolean;

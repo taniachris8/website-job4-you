@@ -3,7 +3,7 @@ import "./Jobs.css";
 import { FilterSidebar } from "../../components/FilterJobs/FilterSidebar";
 import { JobItem } from "../../components/jobComponents/JobItem";
 import { AddNewJob } from "../../components/admin/AddNewJob";
-import { useAuth } from "../../services/useAuthHook";
+import { useAuth } from "../../services/AuthContext";
 import { CustomPagination } from "../../components/CustomPagination";
 import { FilterContext } from "../../services/FilterContext";
 import { useLocation } from "react-router-dom";
@@ -149,7 +149,10 @@ export function JobsPage() {
                             handleDeleteJob(String(jobId ?? job.id ?? ""))
                           }
                           onEdit={(updatedJob) =>
-                            handleEditJob(String(jobId ?? job.id ?? ""), updatedJob)
+                            handleEditJob(
+                              String(jobId ?? job.id ?? ""),
+                              updatedJob,
+                            )
                           }
                         />
                       </div>

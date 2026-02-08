@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import "./components-css/Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ApplyForm } from "./ApplyForm";
-import { useAuth } from "../services/useAuthHook";
+import { useAuth } from "../services/AuthContext";
 import { DropdownUser } from "./user/DropdownUser";
 import { UsefulToolsDropdown } from "./useful-tools/UsefulToolsDropdown";
 
