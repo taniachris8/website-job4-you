@@ -1,0 +1,31 @@
+@baseUrl = http://localhost:8080
+
+### Register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Test",
+  "familyName": "User",
+  "email": "testuser@example.com",
+  "password": "password123"
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "dana@example.com",
+  "password": "password123"
+}
+
+### Refresh (uses httpOnly cookie)
+POST {{baseUrl}}/auth/refresh
+
+### Me (replace token)
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{accessToken}}
+
+### Logout
+POST {{baseUrl}}/auth/logout

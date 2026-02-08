@@ -1,0 +1,332 @@
+{
+  "users": [
+    {
+      "name": "Admin",
+      "familyName": "1",
+      "password": "hjijsigbh45df",
+      "email": "admin@gmail.com",
+      "id": "1",
+      "role": "admin"
+    },
+    {
+      "name": "Tatiana",
+      "familyName": "Oranski",
+      "password": "sdsklktrle4568!?d",
+      "email": "dove6464dove@gmail.com",
+      "id": "8994",
+      "savedJobs": [
+        "1ec1"
+      ],
+      "role": "user"
+    },
+    {
+      "id": "edbb",
+      "name": "Pavel",
+      "familyName": "Coucou",
+      "email": "pavel@gmail.com",
+      "password": "fhsjhfjkskjfkj?156",
+      "role": "user"
+    },
+    {
+      "id": "1877",
+      "name": "Antony",
+      "familyName": "White",
+      "email": "antony@gmail.com",
+      "password": "sdjkdsjf48dxf!!",
+      "role": "user",
+      "savedJobs": [
+        "c64e",
+        "fc82",
+        "9bf6"
+      ]
+    },
+    {
+      "name": "Chris",
+      "familyName": "Red",
+      "password": "dfdrfrr1212",
+      "email": "chris@gmail.com",
+      "id": "4f0b",
+      "role": "user"
+    },
+    {
+      "id": "2fd9",
+      "name": "Alessandro Domenico ",
+      "familyName": "Giovanni",
+      "email": "alex@gmail.com",
+      "password": "ewedw58!jsnk!",
+      "role": "user"
+    },
+    {
+      "id": "51df",
+      "name": "Agatha",
+      "familyName": "Pumpkin",
+      "email": "agatha@gmail.com",
+      "password": "sdchjadagdh454a",
+      "role": "user",
+      "savedJobs": [
+        "1ec1",
+        "61ac",
+        "ce78",
+        "2e76",
+        "2bec",
+        "4a58",
+        "fc82"
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "jobTitle": "עובד/ת אחזקה ואינסטלציה",
+      "area": "צפון",
+      "domain": "אבטחה, שמירה וביטחון",
+      "profession": "בודק/ת בטחוני/ת",
+      "scope": "חלקית",
+      "jobNumber": "56",
+      "jobDescription": "תיאור המשרה:\nלאתר קבוע בחברה מובילה דרוש/ה איש/ת אחזקה ואינסטלציה\nהתפקיד כולל תיקונים שוטפים באתר, חלק מצוות האחזקה בבניין המשרדים של החברה\nאינסטלציה, צבע, מסגרות, פרזול וכו...",
+      "jobRequirements": "דרישות המשרה:\nניסיון באחזקה כללית-חובה\nידע בצבע, מנעולים, אינסטלציה וכו’...\nמשרה מלאה א-ה\nתנאים טובים",
+      "id": "4a58"
+    },
+    {
+      "jobTitle": "עובד/ת אחזקה ואינסטלציה",
+      "area": "חיפה והסביבה",
+      "domain": "אומנות, בידור ומדיה",
+      "profession": "מוקדן/ית ביטחון / חדר בקרה",
+      "scope": "מלאה",
+      "jobNumber": "56",
+      "jobDescription": "תיאור המשרה:\nלאתר קבוע בחברה מובילה דרוש/ה איש/ת אחזקה ואינסטלציה\nהתפקיד כולל תיקונים שוטפים באתר, חלק מצוות האחזקה בבניין המשרדים של החברה\nאינסטלציה, צבע, מסגרות, פרזול וכו...",
+      "jobRequirements": "דרישות המשרה:\nניסיון באחזקה כללית-חובה\nידע בצבע, מנעולים, אינסטלציה וכו’...\nמשרה מלאה א-ה\nתנאים טובים",
+      "id": "4a59"
+    },
+    {
+      "jobTitle": "עובד/ת אחזקה ואינסטלציה",
+      "area": "דרום",
+      "domain": "אדמיניסטרציה",
+      "profession": "ERP / CRM בודק/ת",
+      "scope": "זמנית",
+      "jobNumber": "56",
+      "jobDescription": "תיאור המשרה:\nלאתר קבוע בחברה מובילה דרוש/ה איש/ת אחזקה ואינסטלציה\nהתפקיד כולל תיקונים שוטפים באתר, חלק מצוות האחזקה בבניין המשרדים של החברה\nאינסטלציה, צבע, מסגרות, פרזול וכו...",
+      "jobRequirements": "דרישות המשרה:\nניסיון באחזקה כללית-חובה\nידע בצבע, מנעולים, אינסטלציה וכו’...\nמשרה מלאה א-ה\nתנאים טובים",
+      "id": "4a60"
+    },
+    {
+      "id": "c02c",
+      "jobTitle": "Test title",
+      "domain": "profession1",
+      "profession": "Test Profession",
+      "area": "center",
+      "scope": "part-time",
+      "jobNumber": "Test Number",
+      "jobDescription": "Test Description",
+      "jobRequirements": "Test Requiements"
+    },
+    {
+      "jobTitle": "Manager Test",
+      "area": "north",
+      "domain": "profession3",
+      "profession": "manager of cats",
+      "scope": "part-time",
+      "jobNumber": "60",
+      "jobDescription": "take care of cats",
+      "jobRequirements": "be on time",
+      "id": "031c"
+    },
+    {
+      "id": "a4fc",
+      "jobTitle": "Doctor Test",
+      "domain": "field2",
+      "profession": "profession2",
+      "area": "south",
+      "scope": "part-time",
+      "jobNumber": "61",
+      "jobDescription": "Doctor Description Test",
+      "jobRequirements": "Doctor Requirements Test "
+    },
+    {
+      "id": "d9c7",
+      "jobTitle": "Front end developer",
+      "domain": "field3",
+      "profession": "profession3",
+      "area": "center",
+      "scope": "part-time",
+      "jobNumber": "62",
+      "jobDescription": "<ol><li><span style=\"background-color: rgb(248, 220, 191); color: rgb(0, 0, 0);\">לחברה מובילה דרוש/ה איש/ת אחזקה לתפקיד בתחום האחזקה</span></li><li><span style=\"background-color: rgb(248, 220, 191); color: rgb(0, 0, 0);\"><span class=\"ql-cursor\">�</span>ביצוע עבודות כלליות בתחום האחזקה כגון: צבע, אינסטלציה, ריצוף, פרזול קל, מסגרות קלה ועוד.</span></li></ol>",
+      "jobRequirements": "<ol><li><span style=\"background-color: rgb(248, 220, 191); color: rgb(0, 0, 0);\">ניסיון באחזקה/טכני-חובה</span></li><li><span style=\"background-color: rgb(248, 220, 191); color: rgb(0, 0, 0);\"><span class=\"ql-cursor\">�</span>משרה מלאה א-ה</span></li></ol>"
+    },
+    {
+      "id": "2762",
+      "jobTitle": "Florist Test",
+      "domain": "field3",
+      "profession": "profession2",
+      "area": "north",
+      "scope": "internship",
+      "jobNumber": "63",
+      "jobDescription": "First line\nSecond line \nThird Line",
+      "jobRequirements": "First Line \nSecond Line\nThird Line"
+    },
+    {
+      "id": "6159",
+      "jobTitle": "Test",
+      "domain": "field1",
+      "profession": "profession1",
+      "area": "center",
+      "scope": "full-time",
+      "jobNumber": "64",
+      "jobDescription": "test\ntest\ntest",
+      "jobRequirements": "test\ntest\ntest"
+    },
+    {
+      "id": "f19b",
+      "jobTitle": "Test",
+      "domain": "field1",
+      "profession": "profession1",
+      "area": "center",
+      "scope": "full-time",
+      "jobNumber": "65",
+      "jobDescription": "test\ntest\ntest",
+      "jobRequirements": "test\ntest\ntest"
+    },
+    {
+      "id": "0850",
+      "jobTitle": "Test",
+      "domain": "field2",
+      "profession": "profession2",
+      "area": "north",
+      "scope": "full-time",
+      "jobNumber": "66",
+      "jobDescription": "test\ntets\ntets\n",
+      "jobRequirements": "test\ntest\ntest"
+    },
+    {
+      "id": "5a18",
+      "jobTitle": "Chef",
+      "domain": "אבטחת איכות QA",
+      "profession": "מהנדס/ת בדיקות",
+      "area": "עבודה בחול",
+      "scope": "מלאה (5 ימים)",
+      "jobNumber": "21",
+      "jobDescription": "First line\nSecond line\nThird line",
+      "jobRequirements": "First line\nSecond line\nThird line"
+    },
+    {
+      "jobTitle": "Cat",
+      "area": "דרום",
+      "domain": "חשבונאות",
+      "profession": "ERP / CRM בודק/ת",
+      "scope": "חלקית",
+      "jobNumber": "4556",
+      "jobDescription": "First line\nSecond Line\nThisjfkd",
+      "jobRequirements": "dfvgfdgvfg\ndghfb\nhjh",
+      "id": "6158"
+    },
+    {
+      "id": "2bec",
+      "jobTitle": "Test 001",
+      "domain": "אבטחה, שמירה וביטחון",
+      "profession": "מאבטח/ת / שומר/ת / סייר/ת",
+      "area": "ירושלים והסביבה",
+      "scope": "חלקית",
+      "jobNumber": "9000",
+      "jobDescription": "First Line\nSecond Line\nThird line\n",
+      "jobRequirements": "First Line\nSecond Line\nThird line"
+    },
+    {
+      "id": "98c3",
+      "jobTitle": "Test 002",
+      "domain": "אופנה וטקסטיל",
+      "profession": "בודק/ת בדיקות ידניות",
+      "area": "תל אביב והסביבה",
+      "scope": "משמרות",
+      "jobNumber": "9001",
+      "jobDescription": "First Line\nSecond Line\nThird line",
+      "jobRequirements": "First Line\nSecond Line\nThird line"
+    },
+    {
+      "id": "9bf6",
+      "jobTitle": "Test 003",
+      "domain": "אומנות, בידור ומדיה",
+      "profession": "מוקדן/ית ביטחון / חדר בקרה",
+      "area": "ירושלים והסביבה",
+      "scope": "חלקית",
+      "jobNumber": "9002",
+      "jobDescription": "First Line\nSecond Line\nThird line",
+      "jobRequirements": "First Line\nSecond Line\nThird line"
+    },
+    {
+      "id": "fc82",
+      "jobTitle": "Test 004",
+      "domain": "אדמיניסטרציה",
+      "profession": "ERP / CRM בודק/ת",
+      "area": "צפון",
+      "scope": "חלקית",
+      "jobNumber": "9004",
+      "jobDescription": "First Line\nSecond Line\nThird line",
+      "jobRequirements": "First Line\nSecond Line\nThird line"
+    },
+    {
+      "id": "963f",
+      "jobTitle": "Test 005",
+      "domain": "אופטיקה",
+      "profession": "מוקדן/ית ביטחון / חדר בקרה",
+      "area": "דרום",
+      "scope": "מלאה",
+      "jobNumber": "9005",
+      "jobDescription": "First Line\nSecond Line\nThird line",
+      "jobRequirements": "First Line\nSecond Line\nThird line"
+    },
+    {
+      "id": "c64e",
+      "jobTitle": "Test 006",
+      "domain": "אבטחת מידע וסייבר",
+      "profession": "מאבטח/ת / שומר/ת / סייר/ת",
+      "area": "צפון",
+      "scope": "מלאה",
+      "jobNumber": "9006",
+      "jobDescription": "First Line\nSecond Line\nThird Line",
+      "jobRequirements": "First Line\nSecond Line\nThird Line"
+    },
+    {
+      "id": "2e76",
+      "jobTitle": "Test 007",
+      "domain": "אינטרנט ודיגיטל",
+      "profession": "מנהל/ת אבטחת מידע / סייבר",
+      "area": "חיפה והסביבה",
+      "scope": "חלקית",
+      "jobNumber": "9007",
+      "jobDescription": "First Line\nSecond Line\nThird Line",
+      "jobRequirements": "First Line\nSecond Line\nThird Line"
+    },
+    {
+      "id": "ce78",
+      "jobTitle": "Cook",
+      "domain": "אופנה וטקסטיל",
+      "profession": "בודק/ת בטחוני/ת",
+      "area": "צפון",
+      "scope": "חלקית",
+      "jobNumber": "1001",
+      "jobDescription": "First Line\nSecond Line\nThird Line\nFourth Line\nFifth Line",
+      "jobRequirements": "First Line\nSecond Line\nThird Line\nFourth Line\nFifth Line"
+    },
+    {
+      "id": "61ac",
+      "jobTitle": "Barista",
+      "domain": "אחזקה ואנשי מקצוע",
+      "profession": "מוקדן/ית ביטחון / חדר בקרה",
+      "area": "השפלה",
+      "scope": "זמנית",
+      "jobNumber": "1002",
+      "jobDescription": "First Line\nSecond Line\nThird Line\nFourth Line\nFifth Line",
+      "jobRequirements": "First Line\nSecond Line\nThird Line\nFourth Line\nFifth Line"
+    },
+    {
+      "id": "1ec1",
+      "jobTitle": "Florist",
+      "domain": "אופנה וטקסטיל",
+      "profession": "מנהל/ת אבטחת מידע / סייבר",
+      "area": "גולן",
+      "scope": "מלאה",
+      "jobNumber": "1003",
+      "jobDescription": "First Line\nSecond Line\nThird Line\nFourth Line\nFifth Line",
+      "jobRequirements": "First Line\nSecond Line\nThird Line\nFourth Line\nFifth Line"
+    }
+  ]
+}
