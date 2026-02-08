@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Table from "react-bootstrap/Table";
-import { useAuth } from "../../services/AuthContext";
+import { useAuth } from "../../services/useAuthHook";
 import "./UserSettings.css";
 import { Button } from "../buttons/Button";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +35,7 @@ export function UserSettingsPage() {
       if (!user?._id) return;
       const response = await userApiService.updateUser(user._id, updatedUser);
       if (response.status === 200) {
-        login({ ...user, [field]: (updatedUser)[field] }); // Update the specific field in AuthContext
+        login({ ...user, [field]: updatedUser[field] }); // Update the specific field in AuthContext
         setIsEditing({ ...isEditing, [field]: false });
       } else {
         console.error("Failed to update user");

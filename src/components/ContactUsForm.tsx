@@ -8,6 +8,7 @@ export function ContactUsForm() {
   const [showAlert, setShowAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [userName, setUserName] = useState("");
+  const [userPhone, setUserPhone] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [message, setMessage] = useState("");
   const [formErrors] = useState({
@@ -17,6 +18,7 @@ export function ContactUsForm() {
   });
   const [showFieldError, setShowFieldError] = useState(false);
   const [inputNameFocused, setInputNameFocused] = useState(false);
+  const [inputPhoneFocused, setInputPhoneFocused] = useState(false);
   const [inputEmailFocused, setInputEmailFocused] = useState(false);
   const [inputMessageFocused, setInputMessageFocused] = useState(false);
 
@@ -84,29 +86,31 @@ export function ContactUsForm() {
               id="phone"
               name="user_phone"
               placeholder="טלפון"
-              value={userEmail}
+              value={userPhone}
               onChange={(e) => {
                 handleInputChange(e);
-                setUserEmail(e.target.value);
+                setUserPhone(e.target.value);
               }}
               onFocus={() => {
-                setInputEmailFocused(true);
+                setInputPhoneFocused(true);
                 setShowFieldError(false);
               }}
-              onBlur={() => setInputEmailFocused(false)}
+              onBlur={() => setInputPhoneFocused(false)}
               className={`input phone-input ${
-                (formErrors.userEmail && !userEmail) ||
-                (formErrors.userEmail &&
+                (formErrors.userName && !userPhone) ||
+                (formErrors.userName &&
                   !inputNameFocused &&
+                  !inputPhoneFocused &&
                   !inputEmailFocused &&
                   !inputMessageFocused)
                   ? "error"
                   : ""
               }`}
             />
-            {formErrors.userEmail &&
-              !userName &&
+            {formErrors.userName &&
+              !userPhone &&
               !inputNameFocused &&
+              !inputPhoneFocused &&
               !inputEmailFocused &&
               !inputMessageFocused && (
                 <p className="error-message">אנא הזן את מספר הטלפון שלך</p>
@@ -125,13 +129,15 @@ export function ContactUsForm() {
               setUserEmail(e.target.value);
             }}
             onFocus={() => {
-              setInputMessageFocused(true);
+              setInputEmailFocused(true);
+              setShowFieldError(false);
             }}
-            onBlur={() => setInputMessageFocused(false)}
+            onBlur={() => setInputEmailFocused(false)}
             className={`input email-input ${
-              (formErrors.message && !message) ||
-              (formErrors.message &&
+              (formErrors.userEmail && !userEmail) ||
+              (formErrors.userEmail &&
                 !inputNameFocused &&
+                !inputPhoneFocused &&
                 !inputEmailFocused &&
                 !inputMessageFocused)
                 ? "error"
@@ -139,9 +145,10 @@ export function ContactUsForm() {
             }
             `}
           />
-          {formErrors.message &&
-            !message &&
+          {formErrors.userEmail &&
+            !userEmail &&
             !inputNameFocused &&
+            !inputPhoneFocused &&
             !inputEmailFocused &&
             !inputMessageFocused && (
               <p className="error-message">

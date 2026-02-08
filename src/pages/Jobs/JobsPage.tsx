@@ -3,7 +3,7 @@ import "./Jobs.css";
 import { FilterSidebar } from "../../components/FilterJobs/FilterSidebar";
 import { JobItem } from "../../components/jobComponents/JobItem";
 import { AddNewJob } from "../../components/admin/AddNewJob";
-import { useAuth } from "../../services/AuthContext";
+import { useAuth } from "../../services/useAuthHook";
 import { CustomPagination } from "../../components/CustomPagination";
 import { FilterContext } from "../../services/FilterContext";
 import { useLocation } from "react-router-dom";
@@ -18,8 +18,8 @@ export function JobsPage() {
   const [showAddNewJob, setShowAddNewJob] = useState(false);
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null)
- 
+  const [error, setError] = useState<string | null>(null);
+
   const {
     searchTerm,
     selectedFilters,
@@ -38,47 +38,47 @@ export function JobsPage() {
   const handleCloseAddJobModal = () => setShowAddNewJob(false);
   const handleShowAddJobModal = () => setShowAddNewJob(true);
 
-    const fetchJobs = async () => {
-      try {
-        const response = await ApiJobService.getAllJobs();
-        const allJobs: Job[] = response.data;
-        const reversedJobs = allJobs.slice().reverse();
-        setJobs(allJobs);
-        setFilteredJobs(reversedJobs);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching jobs:", error);
-        setLoading(false);
-        setError("Error fetching jobs");
-      }
-    };
+  const fetchJobs = async () => {
+    try {
+      const response = await ApiJobService.getAllJobs();
+      const allJobs: Job[] = response.data;
+      const reversedJobs = allJobs.slice().reverse();
+      setJobs(allJobs);
+      setFilteredJobs(reversedJobs);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+      setLoading(false);
+      setError("Error fetching jobs");
+    }
+  };
 
-    const handleDeleteJob = (_id: string | number) => {
-      ApiJobService.deleteJob(_id)
-        .then((response) => {
-          console.log("Job deleted:", response);
-          alert("Job has been successfully deleted");
-          fetchJobs();
-        })
-        .catch((error) => {
-          console.error("Error deleting job:", error);
-        });
-    };
+  const handleDeleteJob = (_id: string | number) => {
+    ApiJobService.deleteJob(_id)
+      .then((response) => {
+        console.log("Job deleted:", response);
+        alert("Job has been successfully deleted");
+        fetchJobs();
+      })
+      .catch((error) => {
+        console.error("Error deleting job:", error);
+      });
+  };
 
-    const handleEditJob = (_id: string | number, updatedJob: Partial<Job>) => {
-      ApiJobService.updateJob(_id, updatedJob)
-        .then((response) => {
-          console.log("Job updated:", response);
-          fetchJobs();
-        })
-        .catch((error) => {
-          console.error("Error updating job:", error);
-        });
-    };
+  const handleEditJob = (_id: string | number, updatedJob: Partial<Job>) => {
+    ApiJobService.updateJob(_id, updatedJob)
+      .then((response) => {
+        console.log("Job updated:", response);
+        fetchJobs();
+      })
+      .catch((error) => {
+        console.error("Error updating job:", error);
+      });
+  };
 
-    const handlePageChange = (pageNumber: number) => {
-      setCurrentPage(pageNumber);
-    };
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     fetchJobs();
@@ -104,7 +104,6 @@ export function JobsPage() {
         }));
       } catch (error) {
         console.error("Failed to parse filter from URL:", error);
-
       }
     }
 

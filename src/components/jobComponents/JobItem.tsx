@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./JobItem.css";
 import { ApplyForm } from "../ApplyForm";
 import { EditJobModalForm } from "../admin/EditJobModalForm";
-import { useAuth } from "../../services/AuthContext";
+import { useAuth } from "../../services/useAuthHook";
 import { Button } from "../buttons/Button";
 import type { Job } from "../../types";
 

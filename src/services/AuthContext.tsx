@@ -1,31 +1,17 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import type { ReactNode } from "react";
 import Cookies from "js-cookie";
-import type { User, AuthContextType } from "../types";
-
-const defaultAuth: AuthContextType = {
-  user: null,
-  setUser: () => {},
-  login: () => {},
-  logout: () => {},
-};
-
-const AuthContext = createContext<AuthContextType>(defaultAuth);
-
-export const useAuth = () => useContext(AuthContext);
+import type { User } from "../types";
+import { AuthContext } from "./authContextSetup";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
+  const [user, setUser] = useState<User | null>(() => {
     const storedUser = Cookies.get("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   const login = (userData: Partial<User>) => {
-    const updatedUser = { ...user, ...userData }; 
+    const updatedUser = { ...user, ...userData };
     setUser(updatedUser as User);
     Cookies.set("user", JSON.stringify(updatedUser), { expires: 7 });
   };

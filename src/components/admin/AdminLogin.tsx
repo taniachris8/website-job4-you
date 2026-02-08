@@ -1,4 +1,4 @@
-import { useAuth } from "../../services/AuthContext";
+import { useAuth } from "../../services/useAuthHook";
 
 export const Admin = () => {
   const { user } = useAuth();

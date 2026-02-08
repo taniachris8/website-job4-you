@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import "./pages-css/LoginPage.css";
 import { Button } from "../components/buttons/Button";
-import { useAuth } from "../services/AuthContext";
+import { useAuth } from "../services/useAuthHook";
 import { AdminLoginForm } from "../components/admin/AdminLoginForm";
 // import { ApiService } from "../services/ApiService";
 import { API_URL } from "../consts/general";
