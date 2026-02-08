@@ -45,7 +45,10 @@
   font-size: 18px;
   padding: 10px;
   cursor: pointer;
-  transition: background-color 0.3s, border 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    border 0.3s,
+    color 0.3s;
 }
 .tip-button:hover {
   background-color: transparent;
@@ -56,5 +59,59 @@
 @media screen and (max-width: 1620px) {
   .tip__wrapper {
     max-width: 20rem;
+  }
+}
+
+/* Tablet responsive: 768px and below */
+@media screen and (max-width: 768px) {
+  .tip__wrapper {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .tip-image-wrapper {
+    height: 150px;
+  }
+
+  .tip-title {
+    font-size: 18px;
+    margin-top: 12px;
+  }
+
+  .tip-button {
+    width: 100%;
+    font-size: 16px;
+    padding: 8px;
+  }
+}
+
+/* Mobile responsive: 480px and below */
+@media screen and (max-width: 480px) {
+  .tip__wrapper {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .tip-image-wrapper {
+    height: 120px;
+  }
+
+  .tip-title {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .tip__date {
+    font-size: 12px;
+  }
+
+  .job-article-preview {
+    font-size: 13px;
+  }
+
+  .tip-button {
+    width: 100%;
+    font-size: 14px;
+    padding: 6px;
   }
 }

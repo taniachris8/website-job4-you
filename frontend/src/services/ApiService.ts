@@ -19,9 +19,10 @@ export class ApiService {
     });
   };
 
-  loginUser = (
-    credentials: { email: string; password: string },
-  ): Promise<AxiosResponse<{ user: User; accessToken: string }>> => {
+  loginUser = (credentials: {
+    email: string;
+    password: string;
+  }): Promise<AxiosResponse<{ user: User; accessToken: string }>> => {
     return api.post(`${this.baseURL}/auth/login`, credentials, {
       headers: {
         "Content-Type": "application/json",

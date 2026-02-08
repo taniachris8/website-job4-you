@@ -36,7 +36,7 @@ export function UserSettingsPage() {
       if (!userId) return;
       const response = await userApiService.updateUser(userId, updatedUser);
       if (response.status === 200) {
-        login({ ...user, [field]: (updatedUser)[field] }); // Update the specific field in AuthContext
+        login({ ...user, [field]: updatedUser[field] }); // Update the specific field in AuthContext
         setIsEditing({ ...isEditing, [field]: false });
       } else {
         console.error("Failed to update user");
