@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Alert from "react-bootstrap/Alert";
 import { Link, useNavigate } from "react-router-dom";
 
 import { ApplyForm } from "../../apply-form/ApplyForm";
@@ -30,6 +31,7 @@ export function JobItem({
   onEdit,
 }: JobItemProps) {
   const [showApplyForm, setShowApplyForm] = useState(false);
+  const [showApplySuccess, setShowApplySuccess] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
   const [editedJob, setEditedJob] = useState<Partial<Job>>({
     jobTitle,
@@ -47,7 +49,10 @@ export function JobItem({
   const navigate = useNavigate();
 
   const handleCloseModal = () => setShowApplyForm(false);
-  const handleShowModal = () => setShowApplyForm(true);
+  const handleShowModal = () => {
+    setShowApplySuccess(false);
+    setShowApplyForm(true);
+  };
 
   const handleInfoClick = () => {
     navigate(`/jobs/${id ?? _id}`);
@@ -134,6 +139,15 @@ export function JobItem({
         </div>
       </Link>
       <div className="jobs-item-buttons">
+        {showApplySuccess ? (
+          <Alert
+            variant="success"
+            dismissible
+            onClose={() => setShowApplySuccess(false)}
+            className="job-item-submit-alert">
+            הפנייה נשלחה בהצלחה. נחזור אליך בהקדם.
+          </Alert>
+        ) : null}
         {user?.role === "admin" ? (
           <>
             <Button variant="secondary" onClick={handleInfoClick}>
@@ -154,7 +168,7 @@ export function JobItem({
         <ApplyForm
           showApplyForm={showApplyForm}
           onHide={handleCloseModal}
-          handleCloseModal={handleCloseModal}
+          onSuccess={() => setShowApplySuccess(true)}
         />
       </div>
       {showEditForm && (

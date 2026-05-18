@@ -1,3 +1,5 @@
+name: website-job4-you-prod
+
 services:
   db:
     image: postgres:16
@@ -37,13 +39,13 @@ services:
   frontend:
     build:
       context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:8080
     restart: unless-stopped
-    environment:
-      VITE_API_URL: http://localhost:8080
     depends_on:
       - backend
     ports:
-      - "5173:5173"
+      - "5173:80"
 
 volumes:
   db_data:

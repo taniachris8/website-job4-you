@@ -83,7 +83,8 @@ docker compose up --build
 Services:
 - Postgres on `localhost:5432`
 - Backend on `http://localhost:8080`
-- Frontend on `http://localhost:5173`
+- Frontend on `http://localhost:5173` served from a static production image
+- Mailpit UI on `http://localhost:8025` when using development compose
 
 Database migrations and seed:
 - The backend container runs `prisma migrate deploy` and `prisma db seed` on startup.
@@ -95,7 +96,8 @@ docker compose exec backend npm run prisma:seed
 
 API base URL in the frontend:
 - Vite reads `VITE_API_URL`. Default is `http://localhost:8080`.
-- Update via `docker-compose.yml` or your shell env if needed.
+- In production compose, `VITE_API_URL` is baked into the frontend image at build time through `docker-compose.yml`.
+- Rebuild the frontend image after changing the production API URL.
 
 ## Development compose
 
@@ -107,6 +109,7 @@ docker compose -f docker-compose.dev.yml up --build
 
 - Backend runs `npm run dev` with `./backend` mounted into `/app`.
 - Frontend runs `npm run dev` with Vite’s dev server and watched source files mounted.
+- Mailpit receives outgoing form emails on SMTP `mailpit:1025` and exposes them at `http://localhost:8025`.
 - Anonymous volumes (`backend_node_modules`, `frontend_node_modules`) keep the container-installed dependencies available alongside the host mounts.
 
 Before your first development run (or after clearing the volumes) install dependencies inside the containers:
@@ -130,6 +133,47 @@ If you later need a clean production image without mounts, use the base compose 
 ```bash
 docker compose -f docker-compose.yml up --build
 ```
+
+The base compose file now builds the frontend and serves the generated `dist/` output from nginx on `http://localhost:5173`.
+
+## Form Email Delivery
+
+The website forms submit to backend endpoints:
+- `POST /api/forms/contact`
+- `POST /api/forms/apply`
+- `POST /api/forms/request-cv`
+
+Backend-only SMTP environment variables:
+- `MAIL_HOST`
+- `MAIL_PORT`
+- `MAIL_USER`
+- `MAIL_PASS`
+- `MAIL_FROM`
+- `MAIL_TO`
+
+Local development defaults use Mailpit:
+
+```env
+MAIL_HOST=mailpit
+MAIL_PORT=1025
+MAIL_USER=
+MAIL_PASS=
+MAIL_FROM="Job4You <no-reply@job4you.co.il>"
+MAIL_TO=limor@job4you.co.il
+```
+
+Brevo SMTP example for real/public usage:
+
+```env
+MAIL_HOST=smtp-relay.brevo.com
+MAIL_PORT=587
+MAIL_USER=<brevo smtp login>
+MAIL_PASS=<brevo smtp key>
+MAIL_FROM="Job4You <no-reply@job4you.co.il>"
+MAIL_TO=limor@job4you.co.il
+```
+
+Before using Brevo in production, authenticate the sender email/domain in Brevo so outbound messages are accepted and delivered correctly.
 
 ## Auth Flow
 

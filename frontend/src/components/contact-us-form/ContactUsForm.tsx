@@ -4,6 +4,10 @@ import Alert from "react-bootstrap/Alert";
 import { Button } from "../button/Button";
 import Form from "react-bootstrap/Form";
 import {
+  getFormSubmissionErrorMessage,
+  submitContactForm,
+} from "../../api/formsApi";
+import {
   type ContactFormErrors,
   type ContactFormField,
   type ContactFormValues,
@@ -17,6 +21,8 @@ import "./ContactUsForm.css";
 export function ContactUsForm() {
   const [showAlert, setShowAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [submitErrorMessage, setSubmitErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   const [formValues, setFormValues] = useState<ContactFormValues>({
     userName: "",
@@ -27,9 +33,6 @@ export function ContactUsForm() {
   });
   const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
   const form = useRef<HTMLFormElement | null>(null);
-
-  void form;
-  void showErrorAlert;
 
   const handleFieldChange =
     (field: ContactFormField) =>
@@ -97,11 +100,12 @@ export function ContactUsForm() {
     });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setHasAttemptedSubmit(true);
     setShowAlert(false);
     setShowErrorAlert(false);
+    setSubmitErrorMessage("");
 
     const trimmedValues = trimContactFormValues(formValues);
     const validationErrors = validateContactForm(trimmedValues);
@@ -114,8 +118,24 @@ export function ContactUsForm() {
 
     setFormValues(trimmedValues);
     setFormErrors({});
-    setHasAttemptedSubmit(false);
-    setShowAlert(true);
+
+    try {
+      setIsSubmitting(true);
+      await submitContactForm(trimmedValues);
+      setFormValues({
+        userName: "",
+        userPhone: "",
+        userEmail: "",
+        message: "",
+        privacyConsent: false,
+      });
+      setHasAttemptedSubmit(false);
+      setShowAlert(true);
+    } catch (error) {
+      setSubmitErrorMessage(getFormSubmissionErrorMessage(error));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -214,8 +234,8 @@ export function ContactUsForm() {
             ) : null}
           </Form.Group>
           <div className="contact-form-actions">
-            <Button variant="primary" type="submit" value="Send">
-              צור קשר
+            <Button variant="primary" type="submit" value="Send" disabled={isSubmitting}>
+              {isSubmitting ? "שולח..." : "צור קשר"}
             </Button>
           </div>
         </Form>
@@ -238,6 +258,14 @@ export function ContactUsForm() {
           <p className="alert-message-prg">
             יש לתקן את השדות המסומנים לפני שליחת הטופס.
           </p>
+        </Alert>
+        <Alert
+          variant="danger"
+          show={Boolean(submitErrorMessage)}
+          onClose={() => setSubmitErrorMessage("")}
+          dismissible
+          className="error-alert-message">
+          <p className="alert-message-prg">{submitErrorMessage}</p>
         </Alert>
       </div>
     </div>
