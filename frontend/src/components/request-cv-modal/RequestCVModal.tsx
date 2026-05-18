@@ -1,7 +1,12 @@
 import { useRef, useState } from "react";
+import Alert from "react-bootstrap/Alert";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "../button/Button";
+import {
+  getFormSubmissionErrorMessage,
+  submitRequestCvForm,
+} from "../../api/formsApi";
 import {
   type ContactFormErrors,
   type ContactFormField,
@@ -15,14 +20,18 @@ import "./RequestCVModal.css";
 
 interface RequestCVModalProps {
   onHide: () => void;
+  onSuccess?: () => void;
   showRequestCVModal?: boolean;
 }
 
 export function RequestCVModal({
   onHide,
+  onSuccess,
   showRequestCVModal,
 }: RequestCVModalProps) {
   const [cvFile, setCvFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitErrorMessage, setSubmitErrorMessage] = useState("");
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   const [formValues, setFormValues] = useState<ContactFormValues>({
     userName: "",
@@ -33,9 +42,7 @@ export function RequestCVModal({
   });
   const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
   const form = useRef<HTMLFormElement | null>(null);
-
-  void cvFile;
-  void form;
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] ?? null;
@@ -108,9 +115,10 @@ export function RequestCVModal({
     });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setHasAttemptedSubmit(true);
+    setSubmitErrorMessage("");
 
     const trimmedValues = trimContactFormValues(formValues);
     const validationErrors = validateContactForm(trimmedValues);
@@ -122,8 +130,30 @@ export function RequestCVModal({
 
     setFormValues(trimmedValues);
     setFormErrors({});
-    setHasAttemptedSubmit(false);
-    onHide();
+
+    try {
+      setIsSubmitting(true);
+      await submitRequestCvForm(trimmedValues, cvFile);
+      setFormValues({
+        userName: "",
+        userEmail: "",
+        userPhone: "",
+        message: "",
+        privacyConsent: false,
+      });
+      setCvFile(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+      setFormErrors({});
+      setHasAttemptedSubmit(false);
+      onHide();
+      onSuccess?.();
+    } catch (error) {
+      setSubmitErrorMessage(getFormSubmissionErrorMessage(error));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -143,6 +173,15 @@ export function RequestCVModal({
       </Modal.Header>
       <Modal.Body className="request-cv-body">
         <Form ref={form} noValidate onSubmit={handleSubmit} className="request-cv-layout">
+          {submitErrorMessage ? (
+            <Alert
+              variant="danger"
+              dismissible
+              onClose={() => setSubmitErrorMessage("")}
+              className="request-cv-submit-alert">
+              {submitErrorMessage}
+            </Alert>
+          ) : null}
           <Form.Group className="request-cv-field" controlId="requestCvName">
             <Form.Label>השם</Form.Label>
             <Form.Control
@@ -197,6 +236,7 @@ export function RequestCVModal({
           <Form.Group className="request-cv-upload" controlId="formCv">
             <Form.Label>קורות חיים ישנים (אם זמינים)</Form.Label>
             <Form.Control
+              ref={fileInputRef}
               type="file"
               className="request-cv-file-input"
               onChange={handleFileChange}
@@ -237,8 +277,8 @@ export function RequestCVModal({
                 </p>
               ) : null}
             </Form.Group>
-            <Button variant="primary" type="submit">
-              שליחה
+            <Button variant="primary" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "שולח..." : "שליחה"}
             </Button>
           </div>
         </Form>

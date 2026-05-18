@@ -8,6 +8,8 @@ export type ErrorCode =
   | "BAD_REQUEST"
   | "UNAUTHORIZED"
   | "FORBIDDEN"
+  | "PAYLOAD_TOO_LARGE"
+  | "TOO_MANY_REQUESTS"
   | "INTERNAL";
 
 export class AppError extends Error {

@@ -1,6 +1,7 @@
 import { useCallback, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Alert from "react-bootstrap/Alert";
 
 import { ApiService } from "../../services/ApiService";
 import { API_URL } from "../../consts/general";
@@ -26,13 +27,17 @@ export function JobPage() {
   const [error, setError] = useState<string | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [showApplyForm, setShowApplyForm] = useState(false);
+  const [showApplySuccess, setShowApplySuccess] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
   const handleCloseModal = () => setShowApplyForm(false);
-  const handleShowModal = () => setShowApplyForm(true);
+  const handleShowModal = () => {
+    setShowApplySuccess(false);
+    setShowApplyForm(true);
+  };
 
   const loadJob = useCallback(() => {
     if (!id) {
@@ -215,6 +220,15 @@ export function JobPage() {
                 </div>
 
                 <div className="job-page-btns">
+                  {showApplySuccess ? (
+                    <Alert
+                      variant="success"
+                      dismissible
+                      onClose={() => setShowApplySuccess(false)}
+                      className="job-page-submit-alert">
+                      הפנייה נשלחה בהצלחה. נחזור אליך בהקדם.
+                    </Alert>
+                  ) : null}
                   {saveError ? (
                     <ErrorMessage message={saveError} compact />
                   ) : null}
@@ -241,7 +255,7 @@ export function JobPage() {
             <ApplyForm
               showApplyForm={showApplyForm}
               onHide={handleCloseModal}
-              handleCloseModal={handleCloseModal}
+              onSuccess={() => setShowApplySuccess(true)}
             />
           </div>
         ) : (

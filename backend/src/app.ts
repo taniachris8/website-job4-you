@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authRouter from "./routes/auth";
 import usersRouter from "./routes/users";
 import jobsRouter from "./routes/jobs";
+import formsRouter from "./routes/forms";
 import { AppError, errorHandler } from "./lib/errors";
 
 dotenv.config();
@@ -42,6 +43,7 @@ app.get("/health", (_req, res) => {
 app.use("/users", usersRouter);
 app.use("/jobs", jobsRouter);
 app.use("/auth", authRouter);
+app.use("/api/forms", formsRouter);
 
 app.use((_req, _res, next) => {
   next(new AppError(404, "NOT_FOUND", "Route not found"));

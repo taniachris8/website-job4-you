@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Alert from "react-bootstrap/Alert";
 
 import { useAppSelector } from "../../store/hooks";
 import { useTheme } from "../../contexts/ThemeContext";
@@ -13,6 +14,7 @@ import "./Navbar.css";
 export function Navbar() {
   const [click, setClick] = useState(false);
   const [showApplyForm, setShowApplyForm] = useState(false);
+  const [showApplySuccess, setShowApplySuccess] = useState(false);
   const [showDropdownUser, setShowDropdownUser] = useState(false);
   const [showUsefulToolsDropdown, setShowUsefulToolsDropdown] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,7 +26,10 @@ export function Navbar() {
   const isHomePage = location.pathname === "/";
 
   const handleCloseModal = () => setShowApplyForm(false);
-  const handleShowModal = () => setShowApplyForm(true);
+  const handleShowModal = () => {
+    setShowApplySuccess(false);
+    setShowApplyForm(true);
+  };
   const handleClick = () => setClick((prev) => !prev);
   const closeMobileMenu = () => setClick(false);
 
@@ -176,7 +181,7 @@ export function Navbar() {
                 <ApplyForm
                   showApplyForm={showApplyForm}
                   onHide={handleCloseModal}
-                  handleCloseModal={handleCloseModal}
+                  onSuccess={() => setShowApplySuccess(true)}
                 />
               </>
             )}
@@ -201,6 +206,17 @@ export function Navbar() {
           </div>
         </div>
       </nav>
+      {showApplySuccess ? (
+        <div className="navbar-form-alert-shell">
+          <Alert
+            variant="success"
+            dismissible
+            onClose={() => setShowApplySuccess(false)}
+            className="navbar-form-alert">
+            הפנייה נשלחה בהצלחה. נחזור אליך בהקדם.
+          </Alert>
+        </div>
+      ) : null}
     </>
   );
 }

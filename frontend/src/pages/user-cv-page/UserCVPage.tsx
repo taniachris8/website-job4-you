@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Alert from "react-bootstrap/Alert";
 
 import { Button } from "../../components/button/Button";
 import { RequestCVModal } from "../../components/request-cv-modal/RequestCVModal";
@@ -7,9 +8,13 @@ import "./UserCv.css";
 
 export function UserCVPage() {
   const [showRequestCVModal, setShowRequestCVModal] = useState(false);
+  const [showRequestSuccess, setShowRequestSuccess] = useState(false);
 
   const handleCloseModal = () => setShowRequestCVModal(false);
-  const handleShowModal = () => setShowRequestCVModal(true);
+  const handleShowModal = () => {
+    setShowRequestSuccess(false);
+    setShowRequestCVModal(true);
+  };
 
   return (
     <>
@@ -35,6 +40,15 @@ export function UserCVPage() {
                 </p>
               </div>
               <div className="user-cv-actions">
+                {showRequestSuccess ? (
+                  <Alert
+                    variant="success"
+                    dismissible
+                    onClose={() => setShowRequestSuccess(false)}
+                    className="user-cv-submit-alert">
+                    הבקשה נשלחה בהצלחה. נחזור אליך בהקדם.
+                  </Alert>
+                ) : null}
                 <Button variant="primary" onClick={handleShowModal}>
                   Request a CV
                 </Button>
@@ -95,6 +109,7 @@ export function UserCVPage() {
         <RequestCVModal
           showRequestCVModal={showRequestCVModal}
           onHide={handleCloseModal}
+          onSuccess={() => setShowRequestSuccess(true)}
         />
       </section>
     </>

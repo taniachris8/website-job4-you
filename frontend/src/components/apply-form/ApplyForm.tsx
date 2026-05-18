@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import Alert from "react-bootstrap/Alert";
 
 import {
   type ContactFormErrors,
@@ -8,6 +9,10 @@ import {
   validateContactField,
   validateContactForm,
 } from "../../utils/contactFormValidation";
+import {
+  getFormSubmissionErrorMessage,
+  submitApplyForm,
+} from "../../api/formsApi";
 
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -17,14 +22,16 @@ import "./ApplyForm.css";
 
 export function ApplyForm({
   onHide,
+  onSuccess,
   showApplyForm,
-  handleCloseModal,
 }: {
   onHide: () => void;
+  onSuccess?: () => void;
   showApplyForm?: boolean;
-  handleCloseModal?: () => void;
 }) {
   const [cvFile, setCvFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitErrorMessage, setSubmitErrorMessage] = useState("");
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   const [formValues, setFormValues] = useState<ContactFormValues>({
     userName: "",
@@ -35,10 +42,7 @@ export function ApplyForm({
   });
   const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
   const form = useRef<HTMLFormElement | null>(null);
-
-  void cvFile;
-  void handleCloseModal;
-  void form;
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -111,9 +115,10 @@ export function ApplyForm({
     });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setHasAttemptedSubmit(true);
+    setSubmitErrorMessage("");
 
     const trimmedValues = trimContactFormValues(formValues);
     const validationErrors = validateContactForm(trimmedValues);
@@ -125,8 +130,30 @@ export function ApplyForm({
 
     setFormValues(trimmedValues);
     setFormErrors({});
-    setHasAttemptedSubmit(false);
-    onHide();
+
+    try {
+      setIsSubmitting(true);
+      await submitApplyForm(trimmedValues, cvFile);
+      setFormValues({
+        userName: "",
+        userEmail: "",
+        userPhone: "",
+        message: "",
+        privacyConsent: false,
+      });
+      setCvFile(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+      setFormErrors({});
+      setHasAttemptedSubmit(false);
+      onHide();
+      onSuccess?.();
+    } catch (error) {
+      setSubmitErrorMessage(getFormSubmissionErrorMessage(error));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -146,6 +173,15 @@ export function ApplyForm({
       </Modal.Header>
       <Modal.Body className="apply-form-body">
         <Form ref={form} noValidate onSubmit={handleSubmit} className="apply-form-layout">
+          {submitErrorMessage ? (
+            <Alert
+              variant="danger"
+              dismissible
+              onClose={() => setSubmitErrorMessage("")}
+              className="apply-form-submit-alert">
+              {submitErrorMessage}
+            </Alert>
+          ) : null}
           <div className="apply-form-grid">
             <Form.Group className="apply-form-field" controlId="applyFormName">
               <Form.Label>השם</Form.Label>
@@ -200,6 +236,7 @@ export function ApplyForm({
           <Form.Group className="apply-form-upload" controlId="formCv">
             <Form.Label>קורות חיים</Form.Label>
             <Form.Control
+              ref={fileInputRef}
               type="file"
               className="apply-form-file-input"
               onChange={handleFileChange}
@@ -240,8 +277,8 @@ export function ApplyForm({
                 </p>
               ) : null}
             </Form.Group>
-            <Button variant="primary" type="submit">
-              שליחה
+            <Button variant="primary" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "שולח..." : "שליחה"}
             </Button>
           </div>
         </Form>

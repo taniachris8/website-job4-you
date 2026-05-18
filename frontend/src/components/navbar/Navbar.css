@@ -25,6 +25,18 @@
     backdrop-filter 0.25s ease;
 }
 
+.navbar-form-alert-shell {
+  width: min(100%, 1240px);
+  margin: 12px auto 0;
+  padding: 0 32px;
+}
+
+.navbar-form-alert {
+  margin: 0;
+  border-radius: 18px !important;
+  box-shadow: 0 12px 24px rgba(26, 40, 122, 0.1);
+}
+
 .navbar-overlay {
   position: absolute !important;
   background: transparent;

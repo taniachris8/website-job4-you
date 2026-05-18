@@ -1,4 +1,4 @@
-version: "3.9"
+name: website-job4-you-dev
 
 services:
   db:
@@ -17,10 +17,16 @@ services:
       timeout: 5s
       retries: 5
 
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
   backend:
     build:
       context: ./backend
-    command: ["sh", "-c", "npm run prisma:generate && npx prisma migrate deploy && npm run prisma:seed && npm run dev"]
+    command: ["sh", "-c", "npm install && npm run prisma:generate && npx prisma migrate deploy && npm run prisma:seed && npm run dev"]
     environment:
       NODE_ENV: development
       PORT: 8080
@@ -32,6 +38,12 @@ services:
       COOKIE_SECURE: ${COOKIE_SECURE:-false}
       COOKIE_SAMESITE: ${COOKIE_SAMESITE:-lax}
       FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:5173}
+      MAIL_HOST: ${MAIL_HOST:-mailpit}
+      MAIL_PORT: ${MAIL_PORT:-1025}
+      MAIL_USER: ${MAIL_USER:-}
+      MAIL_PASS: ${MAIL_PASS:-}
+      MAIL_FROM: ${MAIL_FROM:-Job4You <no-reply@job4you.co.il>}
+      MAIL_TO: ${MAIL_TO:-limor@job4you.co.il}
     volumes:
       - ./backend:/app
       - backend_node_modules:/app/node_modules
@@ -40,6 +52,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      mailpit:
+        condition: service_started
 
   frontend:
     build:

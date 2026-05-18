@@ -149,6 +149,11 @@
   gap: 12px;
 }
 
+.job-page-submit-alert {
+  margin: 0;
+  border-radius: 18px !important;
+}
+
 .job-page-btns .button.primary {
   width: 100%;
   margin-left: 0;
