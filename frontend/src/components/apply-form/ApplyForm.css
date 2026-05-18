@@ -1,0 +1,260 @@
+.apply-form-modal .modal-content {
+  border: 1px solid rgba(7, 24, 42, 0.1);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(94, 231, 255, 0.12), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(95, 90, 245, 0.08), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  box-shadow: 0 28px 56px rgba(26, 40, 122, 0.16);
+  overflow: hidden;
+}
+
+.apply-form-modal .modal-header,
+.apply-form-modal .modal-body {
+  border: none;
+}
+
+.apply-form-header {
+  padding: 28px 28px 0 !important;
+}
+
+.apply-form-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding-left: 28px;
+}
+
+.apply-form-badge {
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(94, 231, 255, 0.18);
+  color: #5f5af5;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.apply-form-header .modal-title {
+  color: #07182a;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.apply-form-intro {
+  margin: 0;
+  color: #51647c;
+  font-size: 0.96rem;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+.apply-form-body {
+  padding: 24px 28px 28px !important;
+}
+
+.apply-form-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.apply-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.apply-form-field,
+.apply-form-upload,
+.apply-form-consent {
+  margin: 0 !important;
+}
+
+.apply-form-field .form-label,
+.apply-form-upload .form-label {
+  margin-bottom: 8px;
+  color: #07182a;
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+.apply-form-field .form-control,
+.apply-form-upload .form-control {
+  min-height: 52px;
+  border: 1px solid rgba(7, 24, 42, 0.12) !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: #07182a !important;
+  box-shadow: 0 10px 22px rgba(26, 40, 122, 0.06);
+}
+
+.apply-form-field textarea.form-control {
+  min-height: 140px;
+  padding-top: 14px;
+  resize: vertical;
+}
+
+.apply-form-field .form-control::placeholder,
+.apply-form-upload .form-control::placeholder {
+  color: #73839a;
+  opacity: 1;
+}
+
+.apply-form-field .form-control:focus,
+.apply-form-upload .form-control:focus {
+  border-color: rgba(32, 198, 220, 0.48) !important;
+  box-shadow:
+    0 0 0 4px rgba(94, 231, 255, 0.18),
+    0 12px 24px rgba(26, 40, 122, 0.1) !important;
+}
+
+.apply-form-file-input {
+  padding: 12px 14px !important;
+}
+
+[data-theme="dark"] .apply-form-file-input {
+  overflow: hidden;
+  border-color: var(--app-border-strong) !important;
+  background:
+    linear-gradient(180deg, rgba(14, 28, 45, 0.9), rgba(8, 18, 31, 0.82)),
+    rgba(12, 20, 34, 0.72) !important;
+  color: var(--app-text) !important;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+[data-theme="dark"] .apply-form-file-input:hover {
+  border-color: rgba(94, 231, 255, 0.34) !important;
+  background:
+    linear-gradient(180deg, rgba(18, 36, 58, 0.96), rgba(10, 22, 37, 0.9)),
+    rgba(12, 20, 34, 0.78) !important;
+}
+
+[data-theme="dark"] .apply-form-file-input:focus {
+  border-color: rgba(94, 231, 255, 0.48) !important;
+  box-shadow:
+    0 0 0 4px rgba(94, 231, 255, 0.16),
+    0 16px 34px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .apply-form-file-input::file-selector-button {
+  margin-block: -12px;
+  margin-inline-start: -14px;
+  margin-inline-end: 14px;
+  padding: 12px 16px;
+  border: 0;
+  border-inline-end: 1px solid rgba(166, 213, 255, 0.14);
+  background:
+    radial-gradient(circle at 24% 20%, rgba(94, 231, 255, 0.16), transparent 36%),
+    linear-gradient(180deg, rgba(25, 42, 66, 0.86), rgba(10, 21, 35, 0.72));
+  color: var(--app-text);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+[data-theme="dark"] .apply-form-file-input:hover::file-selector-button {
+  border-inline-end-color: rgba(94, 231, 255, 0.28);
+  background:
+    radial-gradient(circle at 24% 20%, rgba(94, 231, 255, 0.22), transparent 38%),
+    linear-gradient(180deg, rgba(31, 50, 76, 0.94), rgba(12, 24, 39, 0.8));
+  color: var(--app-accent-bright);
+}
+
+[data-theme="dark"] .apply-form-file-input::-webkit-file-upload-button {
+  margin-block: -12px;
+  margin-inline-start: -14px;
+  margin-inline-end: 14px;
+  padding: 12px 16px;
+  border: 0;
+  border-inline-end: 1px solid rgba(166, 213, 255, 0.14);
+  background:
+    radial-gradient(circle at 24% 20%, rgba(94, 231, 255, 0.16), transparent 36%),
+    linear-gradient(180deg, rgba(25, 42, 66, 0.86), rgba(10, 21, 35, 0.72));
+  color: var(--app-text);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.apply-form-field .invalid-feedback,
+.apply-form-consent-error {
+  margin-top: 8px;
+  color: #b42318;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.apply-form-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 4px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(94, 231, 255, 0.16);
+}
+
+.apply-form-consent {
+  padding: 14px 16px;
+  border: 1px solid rgba(94, 231, 255, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.apply-form-consent .form-check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+
+.apply-form-consent .form-check-input {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.apply-form-consent .form-check-label {
+  color: #07182a;
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.apply-form-footer .button.primary {
+  width: 100%;
+  margin-left: 0;
+}
+
+@media (max-width: 640px) {
+  .apply-form-header {
+    padding: 22px 20px 0 !important;
+  }
+
+  .apply-form-header-content {
+    padding-left: 18px;
+  }
+
+  .apply-form-body {
+    padding: 20px !important;
+  }
+
+  .apply-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .apply-form-modal .modal-content {
+    border-radius: 22px;
+  }
+}

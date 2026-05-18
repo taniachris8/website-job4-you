@@ -1,0 +1,267 @@
+.request-cv-modal .modal-content {
+  border: 1px solid rgba(7, 24, 42, 0.1);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(94, 231, 255, 0.12), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(95, 90, 245, 0.08), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  box-shadow: 0 24px 52px rgba(26, 40, 122, 0.14);
+  overflow: hidden;
+}
+
+.request-cv-modal .modal-header,
+.request-cv-modal .modal-body {
+  border: none;
+}
+
+.request-cv-header {
+  padding: 24px 24px 0 !important;
+}
+
+.request-cv-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding-left: 24px;
+}
+
+.request-cv-badge {
+  margin: 0;
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(94, 231, 255, 0.18);
+  color: #5f5af5;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.request-cv-header .modal-title {
+  color: #07182a;
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.request-cv-intro {
+  margin: 0;
+  color: #51647c;
+  font-size: 0.93rem;
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+.request-cv-body {
+  padding: 22px 24px 24px !important;
+}
+
+.request-cv-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.request-cv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.request-cv-field,
+.request-cv-upload,
+.request-cv-consent {
+  margin: 0 !important;
+}
+
+.request-cv-field .form-label,
+.request-cv-upload .form-label {
+  margin-bottom: 7px;
+  color: #07182a;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.request-cv-field .form-control,
+.request-cv-upload .form-control {
+  min-height: 50px;
+  border: 1px solid rgba(7, 24, 42, 0.12) !important;
+  border-radius: 15px !important;
+  background: rgba(248, 251, 253, 0.96) !important;
+  color: #07182a !important;
+  box-shadow: 0 10px 22px rgba(26, 40, 122, 0.05);
+}
+
+.request-cv-field textarea.form-control {
+  min-height: 132px;
+  padding-top: 14px;
+  resize: vertical;
+}
+
+.request-cv-field .form-control::placeholder,
+.request-cv-upload .form-control::placeholder {
+  color: #73839a;
+  opacity: 1;
+}
+
+.request-cv-field .form-control:focus,
+.request-cv-upload .form-control:focus {
+  border-color: rgba(32, 198, 220, 0.48) !important;
+  box-shadow:
+    0 0 0 4px rgba(94, 231, 255, 0.18),
+    0 12px 24px rgba(26, 40, 122, 0.1) !important;
+}
+
+.request-cv-file-input {
+  padding: 11px 13px !important;
+}
+
+[data-theme="dark"] .request-cv-file-input {
+  overflow: hidden;
+  border-color: var(--app-border-strong) !important;
+  background:
+    linear-gradient(180deg, rgba(14, 28, 45, 0.9), rgba(8, 18, 31, 0.82)),
+    rgba(12, 20, 34, 0.72) !important;
+  color: var(--app-text) !important;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+[data-theme="dark"] .request-cv-file-input:hover {
+  border-color: rgba(94, 231, 255, 0.34) !important;
+  background:
+    linear-gradient(180deg, rgba(18, 36, 58, 0.96), rgba(10, 22, 37, 0.9)),
+    rgba(12, 20, 34, 0.78) !important;
+}
+
+[data-theme="dark"] .request-cv-file-input:focus {
+  border-color: rgba(94, 231, 255, 0.48) !important;
+  box-shadow:
+    0 0 0 4px rgba(94, 231, 255, 0.16),
+    0 16px 34px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .request-cv-file-input::file-selector-button {
+  margin-block: -11px;
+  margin-inline-start: -13px;
+  margin-inline-end: 13px;
+  padding: 11px 16px;
+  border: 0;
+  border-inline-end: 1px solid rgba(166, 213, 255, 0.14);
+  background:
+    radial-gradient(circle at 24% 20%, rgba(94, 231, 255, 0.16), transparent 36%),
+    linear-gradient(180deg, rgba(25, 42, 66, 0.86), rgba(10, 21, 35, 0.72));
+  color: var(--app-text);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+[data-theme="dark"] .request-cv-file-input:hover::file-selector-button {
+  border-inline-end-color: rgba(94, 231, 255, 0.28);
+  background:
+    radial-gradient(circle at 24% 20%, rgba(94, 231, 255, 0.22), transparent 38%),
+    linear-gradient(180deg, rgba(31, 50, 76, 0.94), rgba(12, 24, 39, 0.8));
+  color: var(--app-accent-bright);
+}
+
+[data-theme="dark"] .request-cv-file-input::-webkit-file-upload-button {
+  margin-block: -11px;
+  margin-inline-start: -13px;
+  margin-inline-end: 13px;
+  padding: 11px 16px;
+  border: 0;
+  border-inline-end: 1px solid rgba(166, 213, 255, 0.14);
+  background:
+    radial-gradient(circle at 24% 20%, rgba(94, 231, 255, 0.16), transparent 36%),
+    linear-gradient(180deg, rgba(25, 42, 66, 0.86), rgba(10, 21, 35, 0.72));
+  color: var(--app-text);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.request-cv-field .invalid-feedback,
+.request-cv-consent-error {
+  margin-top: 7px;
+  color: #b42318;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.request-cv-footer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 14px;
+  margin-top: 4px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(94, 231, 255, 0.16);
+}
+
+.request-cv-consent {
+  padding: 12px 14px;
+  border: 1px solid rgba(94, 231, 255, 0.16);
+  border-radius: 16px;
+  background: rgba(247, 250, 252, 0.92);
+}
+
+.request-cv-consent .form-check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+
+.request-cv-consent .form-check-input {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.request-cv-consent .form-check-label {
+  color: #07182a;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.request-cv-footer .button.primary {
+  width: 170px;
+  margin-left: 0;
+}
+
+@media (max-width: 640px) {
+  .request-cv-header {
+    padding: 20px 18px 0 !important;
+  }
+
+  .request-cv-header-content {
+    padding-left: 18px;
+  }
+
+  .request-cv-body {
+    padding: 18px !important;
+  }
+
+  .request-cv-grid,
+  .request-cv-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .request-cv-footer .button.primary {
+    width: 100%;
+  }
+
+  .request-cv-modal .modal-content {
+    border-radius: 20px;
+  }
+}

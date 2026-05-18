@@ -1,0 +1,87 @@
+.company-section-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: clamp(360px, 52vh, 520px);
+  width: 100%;
+  padding: 96px 24px 56px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(7, 18, 30, 0.14), rgba(7, 18, 30, 0.5)),
+    url("/public/images/about-us-background.png") center center / cover no-repeat;
+  text-align: center;
+}
+
+.company-section-container::before {
+  content: "";
+  position: absolute;
+  inset: auto auto 10% 8%;
+  width: min(32vw, 320px);
+  height: min(32vw, 320px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(216, 236, 255, 0.22), transparent 70%);
+  filter: blur(16px);
+  pointer-events: none;
+}
+
+.company-section-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(216, 236, 255, 0.18), transparent 30%),
+    radial-gradient(circle at 82% 22%, rgba(31, 106, 165, 0.26), transparent 36%),
+    linear-gradient(180deg, rgba(7, 18, 30, 0.18), rgba(7, 18, 30, 0.04) 36%, rgba(7, 18, 30, 0.34));
+  pointer-events: none;
+}
+
+.company-section-title,
+.company-section-prg {
+  position: relative;
+  z-index: 1;
+}
+
+.company-section-title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.company-section-prg {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .company-section-container {
+    min-height: 320px;
+    padding: 84px 16px 44px;
+    background-position: center top;
+  }
+}
+
+@media (max-width: 480px) {
+  .company-section-container {
+    min-height: 280px;
+    padding: 72px 12px 36px;
+  }
+
+  .company-section-container::before {
+    width: 180px;
+    height: 180px;
+    inset: auto auto 10% -24px;
+  }
+
+  .company-section-prg {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+}

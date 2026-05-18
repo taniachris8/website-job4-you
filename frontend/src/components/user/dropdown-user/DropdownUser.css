@@ -1,0 +1,209 @@
+.dropdown-user-root {
+  position: static !important;
+}
+
+.dropdown-menu-user {
+  position: absolute !important;
+  top: calc(100% + 10px) !important;
+  right: 0 !important;
+  left: auto !important;
+  transform: none !important;
+  min-width: 260px;
+  margin-top: 0 !important;
+  padding: 12px !important;
+  border: 1px solid rgba(7, 24, 42, 0.1) !important;
+  border-radius: 22px !important;
+  background:
+    radial-gradient(circle at top left, rgba(94, 231, 255, 0.12), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 251, 255, 0.96)) !important;
+  box-shadow: 0 22px 40px rgba(26, 40, 122, 0.16) !important;
+}
+
+.dropdown-user-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 8px 14px;
+  border-bottom: 1px solid rgba(94, 231, 255, 0.16);
+}
+
+.dropdown-user-label {
+  color: #51647c;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dropdown-user-name {
+  color: #07182a;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.dropdown-user-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 0 4px;
+}
+
+.dropdown-menu-link {
+  display: flex !important;
+  align-items: center;
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px !important;
+  border-radius: 14px !important;
+  color: #07182a !important;
+  font-size: 0.96rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none !important;
+  background: transparent !important;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.dropdown-menu-link:hover,
+.dropdown-menu-link:focus-visible,
+.dropdown-menu-link.active,
+.dropdown-menu-link:active {
+  color: #061526 !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.08)),
+    linear-gradient(135deg, rgba(94, 231, 255, 0.42), rgba(95, 90, 245, 0.18)) !important;
+}
+
+.dropdown-menu-link:focus-visible {
+  outline: 3px solid rgba(94, 231, 255, 0.42);
+  outline-offset: 2px;
+}
+
+.dropdown-user-actions {
+  padding: 10px 8px 4px;
+  border-top: 1px solid rgba(94, 231, 255, 0.16);
+}
+
+.dropdown-user-actions .button.logout {
+  width: 100%;
+  margin: 0;
+  padding: 11px 14px;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(22, 35, 76, 0.92), rgba(30, 33, 101, 0.86)),
+    rgba(28, 34, 84, 0.9);
+  color: #f7fbff;
+  font-size: 0.94rem;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dropdown-user-actions .button.logout:hover,
+.dropdown-user-actions .button.logout:focus-visible {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.04)),
+    linear-gradient(135deg, #5ee7ff 0%, #20c6dc 48%, #5f5af5 100%);
+  border: none;
+  color: #061526;
+  box-shadow:
+    0 20px 34px rgba(32, 198, 220, 0.22),
+    0 10px 26px rgba(80, 76, 233, 0.16);
+}
+
+.dropdown-user-actions .button.logout:focus-visible {
+  outline: 3px solid rgba(94, 231, 255, 0.42);
+  outline-offset: 2px;
+}
+
+.dropdown-user-empty {
+  padding: 8px;
+  color: #51647c;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+[data-theme="dark"] .dropdown-menu-user {
+  border-color: rgba(166, 213, 255, 0.14) !important;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(94, 231, 255, 0.14), transparent 34%),
+    radial-gradient(circle at 90% 100%, rgba(141, 139, 255, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(12, 20, 34, 0.94), rgba(7, 17, 29, 0.9)) !important;
+  box-shadow:
+    0 22px 44px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  color: var(--app-text);
+  backdrop-filter: blur(16px) saturate(118%);
+  -webkit-backdrop-filter: blur(16px) saturate(118%);
+}
+
+[data-theme="dark"] .dropdown-menu-user .dropdown-user-summary,
+[data-theme="dark"] .dropdown-menu-user .dropdown-user-actions {
+  border-color: rgba(166, 213, 255, 0.14);
+}
+
+[data-theme="dark"] .dropdown-menu-user .dropdown-user-label {
+  color: var(--app-muted);
+}
+
+[data-theme="dark"] .dropdown-menu-user .dropdown-user-name {
+  color: var(--app-text);
+}
+
+[data-theme="dark"] .dropdown-menu-user .dropdown-menu-link {
+  color: rgba(229, 241, 255, 0.92) !important;
+  background: transparent !important;
+}
+
+[data-theme="dark"] .dropdown-menu-user .dropdown-menu-link:hover,
+[data-theme="dark"] .dropdown-menu-user .dropdown-menu-link:focus-visible,
+[data-theme="dark"] .dropdown-menu-user .dropdown-menu-link.active,
+[data-theme="dark"] .dropdown-menu-user .dropdown-menu-link:active {
+  color: var(--app-accent-bright) !important;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(94, 231, 255, 0.16), transparent 38%),
+    linear-gradient(180deg, rgba(25, 42, 66, 0.68), rgba(10, 21, 35, 0.54)) !important;
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .dropdown-menu-user .dropdown-menu-link:focus-visible {
+  outline-color: rgba(94, 231, 255, 0.34);
+}
+
+[data-theme="dark"] .dropdown-user-actions .button.logout {
+  border: 1px solid rgba(255, 138, 138, 0.22);
+  background:
+    linear-gradient(180deg, rgba(127, 29, 29, 0.32), rgba(69, 10, 10, 0.18)),
+    rgba(12, 20, 34, 0.68);
+  color: #ffd7d7;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .dropdown-user-actions .button.logout:hover,
+[data-theme="dark"] .dropdown-user-actions .button.logout:focus-visible {
+  border-color: rgba(255, 138, 138, 0.36);
+  background:
+    radial-gradient(circle at 24% 18%, rgba(255, 138, 138, 0.18), transparent 38%),
+    linear-gradient(180deg, rgba(153, 27, 27, 0.42), rgba(88, 19, 19, 0.28)),
+    rgba(12, 20, 34, 0.78);
+  color: #fff1f1;
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.3),
+    0 0 22px rgba(255, 138, 138, 0.1);
+}
+
+[data-theme="dark"] .dropdown-user-actions .button.logout:focus-visible {
+  outline-color: rgba(255, 138, 138, 0.32);
+}
+
+[data-theme="dark"] .dropdown-menu-user .dropdown-user-empty {
+  color: var(--app-muted);
+}

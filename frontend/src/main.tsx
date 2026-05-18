@@ -3,15 +3,16 @@ import { createRoot } from 'react-dom/client'
 import { router } from "./router.tsx";
 import { RouterProvider } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { AuthProvider } from "./services/AuthContext";
-import { FilterProvider } from "./services/FilterContext";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AuthProvider>
-      <FilterProvider>
+    <ThemeProvider>
+      <Provider store={store}>
         <RouterProvider router={router} />
-      </FilterProvider>
-    </AuthProvider>
+      </Provider>
+    </ThemeProvider>
   </StrictMode>,
 );

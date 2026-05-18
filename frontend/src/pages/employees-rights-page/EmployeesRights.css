@@ -1,0 +1,260 @@
+.employees-rights-container {
+  --rights-text: #07182a;
+  --rights-muted: #51647c;
+  --rights-accent: #20c6dc;
+  --rights-accent-strong: #5f5af5;
+  --rights-accent-soft: rgba(94, 231, 255, 0.18);
+  --rights-border: rgba(7, 24, 42, 0.1);
+  --rights-surface: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  min-height: calc(100vh - 160px);
+  padding: 44px 24px 72px;
+  background:
+    radial-gradient(circle at top right, rgba(94, 231, 255, 0.14), transparent 28%),
+    radial-gradient(circle at bottom left, rgba(95, 90, 245, 0.08), transparent 24%);
+}
+
+.employees-rights-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  width: min(100%, 1120px);
+  margin: 0 auto;
+}
+
+.employees-rights-header-card,
+.employees-rights-content-card,
+.employees-rights-section,
+.employees-rights-note {
+  border: 1px solid var(--rights-border);
+  background: var(--rights-surface);
+  box-shadow: 0 20px 40px rgba(26, 40, 122, 0.1);
+}
+
+.employees-rights-header-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 34px 32px;
+  border-radius: 32px;
+}
+
+.employees-rights-eyebrow {
+  width: fit-content;
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--rights-accent-soft);
+  color: var(--rights-accent);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.employees-rights-title {
+  margin: 0;
+  color: var(--rights-text);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.employees-rights-intro {
+  margin: 0;
+  color: var(--rights-muted);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+.employees-rights-content-card {
+  padding: 34px 40px;
+  border-radius: 30px;
+}
+
+.employees-rights-text {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.employees-rights-text > p {
+  margin: 0;
+  color: var(--rights-muted);
+  font-size: 1.03rem;
+  font-weight: 500;
+  line-height: 1.95;
+}
+
+.employees-rights-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px 24px 22px;
+  border-radius: 24px;
+}
+
+.employees-rights-section-title {
+  margin: 0;
+  color: var(--rights-text);
+  font-size: 1.28rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.employees-rights-note {
+  padding: 20px 22px;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 249, 252, 0.94)),
+    linear-gradient(135deg, rgba(94, 231, 255, 0.14), rgba(95, 90, 245, 0.08) 55%, transparent);
+}
+
+.employees-rights-note p {
+  margin: 0;
+  color: var(--rights-text);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+.list-of-details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-of-details li {
+  margin: 0;
+  padding: 16px 18px;
+  border: 1px solid rgba(94, 231, 255, 0.16);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--rights-muted);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.9;
+}
+
+[data-theme="dark"] .employees-rights-container {
+  --rights-text: var(--app-text);
+  --rights-muted: var(--app-muted);
+  --rights-accent: var(--app-accent-bright);
+  --rights-accent-strong: var(--app-accent-strong);
+  --rights-accent-soft: rgba(94, 231, 255, 0.14);
+  --rights-border: rgba(166, 213, 255, 0.14);
+  --rights-surface:
+    radial-gradient(circle at 8% 0%, rgba(94, 231, 255, 0.11), transparent 32%),
+    radial-gradient(circle at 92% 100%, rgba(141, 139, 255, 0.11), transparent 34%),
+    linear-gradient(180deg, rgba(18, 32, 51, 0.86), rgba(8, 15, 28, 0.76));
+  background:
+    radial-gradient(circle at top right, rgba(94, 231, 255, 0.14), transparent 28%),
+    radial-gradient(circle at bottom left, rgba(141, 139, 255, 0.12), transparent 26%),
+    linear-gradient(180deg, #07111d, #0b1625);
+}
+
+[data-theme="dark"] .employees-rights-header-card,
+[data-theme="dark"] .employees-rights-content-card,
+[data-theme="dark"] .employees-rights-section,
+[data-theme="dark"] .employees-rights-note {
+  border-color: var(--rights-border);
+  background: var(--rights-surface);
+  box-shadow:
+    0 22px 44px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(118%);
+  -webkit-backdrop-filter: blur(16px) saturate(118%);
+}
+
+[data-theme="dark"] .employees-rights-eyebrow {
+  border: 1px solid rgba(166, 213, 255, 0.14);
+  background: rgba(94, 231, 255, 0.12);
+  color: var(--rights-accent);
+}
+
+[data-theme="dark"] .employees-rights-text > p,
+[data-theme="dark"] .employees-rights-intro {
+  color: var(--rights-muted);
+}
+
+[data-theme="dark"] .employees-rights-note {
+  background:
+    radial-gradient(circle at 14% 0%, rgba(94, 231, 255, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(18, 32, 51, 0.82), rgba(8, 15, 28, 0.72));
+}
+
+[data-theme="dark"] .employees-rights-note p {
+  color: var(--rights-text);
+}
+
+[data-theme="dark"] .list-of-details li {
+  border-color: rgba(166, 213, 255, 0.14);
+  background:
+    linear-gradient(180deg, rgba(25, 42, 66, 0.62), rgba(10, 21, 35, 0.5)),
+    rgba(12, 20, 34, 0.58);
+  color: var(--rights-muted);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 768px) {
+  .employees-rights-container {
+    padding: 32px 14px 56px;
+  }
+
+  .employees-rights-header-card {
+    padding: 26px 22px;
+    border-radius: 26px;
+  }
+
+  .employees-rights-content-card {
+    padding: 24px 22px;
+    border-radius: 24px;
+  }
+
+  .employees-rights-section {
+    padding: 20px 18px;
+    border-radius: 20px;
+  }
+
+  .employees-rights-note {
+    padding: 18px 18px;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .employees-rights-container {
+    padding: 24px 12px 44px;
+  }
+
+  .employees-rights-header-card,
+  .employees-rights-content-card,
+  .employees-rights-section,
+  .employees-rights-note {
+    border-radius: 20px;
+  }
+
+  .employees-rights-header-card {
+    padding: 22px 16px;
+  }
+
+  .employees-rights-content-card {
+    padding: 20px 16px;
+  }
+
+  .employees-rights-section {
+    padding: 18px 14px;
+  }
+
+  .employees-rights-text > p,
+  .list-of-details li,
+  .employees-rights-note p {
+    font-size: 0.97rem;
+    line-height: 1.85;
+  }
+}
