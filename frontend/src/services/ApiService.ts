@@ -2,6 +2,12 @@ import api from "../axios/axiosConfig";
 import type { AxiosResponse } from "axios";
 import type { User, Job } from "../types";
 
+interface AuthResponse {
+  user: User;
+  accessToken: string;
+  refreshToken?: string;
+}
+
 export class ApiService {
   baseURL: string;
 
@@ -11,7 +17,7 @@ export class ApiService {
 
   registerUser = (
     user: User,
-  ): Promise<AxiosResponse<{ user: User; accessToken: string }>> => {
+  ): Promise<AxiosResponse<AuthResponse>> => {
     return api.post(`${this.baseURL}/auth/register`, user, {
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +28,7 @@ export class ApiService {
   loginUser = (credentials: {
     email: string;
     password: string;
-  }): Promise<AxiosResponse<{ user: User; accessToken: string }>> => {
+  }): Promise<AxiosResponse<AuthResponse>> => {
     return api.post(`${this.baseURL}/auth/login`, credentials, {
       headers: {
         "Content-Type": "application/json",

@@ -1,0 +1,111 @@
+.filter-checks-container {
+  --filter-check-text: #07182a;
+  --filter-check-accent: #20c6dc;
+  --filter-check-accent-strong: #5f5af5;
+  --filter-check-focus: rgba(94, 231, 255, 0.18);
+  width: 100%;
+  max-height: 220px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px 2px 0;
+  box-sizing: border-box;
+  scrollbar-color: rgba(95, 90, 245, 0.38) transparent;
+}
+
+.filter-checks-container form {
+  width: 100%;
+  min-width: 0;
+}
+
+.filter-checks-container .form-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.filter-checks-container .form-check-reverse {
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.filter-checks-container .form-check:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.08)),
+    linear-gradient(135deg, rgba(94, 231, 255, 0.32), rgba(95, 90, 245, 0.12));
+}
+
+.filter-checks-container .form-check-input {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0;
+  border-color: rgba(7, 24, 42, 0.22);
+  box-shadow: none;
+}
+
+.filter-checks-container .form-check-reverse .form-check-input {
+  margin-left: 0;
+  margin-right: 0;
+  flex-shrink: 0;
+}
+
+.filter-checks-container .form-check-input:checked {
+  background-color: var(--filter-check-accent-strong);
+  border-color: var(--filter-check-accent-strong);
+}
+
+.filter-checks-container .form-check-input:focus {
+  border-color: var(--filter-check-accent);
+  box-shadow: 0 0 0 4px var(--filter-check-focus);
+}
+
+.filter-checks-container .form-check-label {
+  flex: 1;
+  min-width: 0;
+  color: var(--filter-check-text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+[data-theme="dark"] .filter-checks-container {
+  --filter-check-text: var(--app-text);
+  --filter-check-accent: var(--app-accent-bright);
+  --filter-check-accent-strong: var(--app-accent-strong);
+  --filter-check-focus: rgba(94, 231, 255, 0.16);
+  scrollbar-color: rgba(94, 231, 255, 0.34) transparent;
+}
+
+[data-theme="dark"] .filter-checks-container .form-check {
+  color: var(--filter-check-text);
+}
+
+[data-theme="dark"] .filter-checks-container .form-check:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    linear-gradient(135deg, rgba(94, 231, 255, 0.12), rgba(141, 139, 255, 0.1));
+}
+
+[data-theme="dark"] .filter-checks-container .form-check-input {
+  border-color: rgba(166, 213, 255, 0.28);
+  background-color: rgba(5, 12, 23, 0.58);
+}
+
+[data-theme="dark"] .filter-checks-container .form-check-input:checked {
+  background-color: var(--filter-check-accent-strong);
+  border-color: var(--filter-check-accent);
+}
+
+[data-theme="dark"] .filter-checks-container .form-check-input:focus {
+  border-color: var(--filter-check-accent);
+  box-shadow: 0 0 0 4px var(--filter-check-focus);
+}

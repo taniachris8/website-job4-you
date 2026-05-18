@@ -1,0 +1,93 @@
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px;
+  border: 1px solid rgba(7, 24, 42, 0.1);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(94, 231, 255, 0.12), transparent 34%),
+    linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  box-shadow: 0 18px 36px rgba(26, 40, 122, 0.1);
+}
+
+.clear-filters-btn {
+  align-self: flex-start;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #5f5af5;
+  text-align: start;
+  font-size: 0.94rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.clear-filters-btn:focus-visible {
+  outline: 3px solid rgba(94, 231, 255, 0.42);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.filters-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.filter {
+  margin: 0;
+}
+
+.recommended-articles-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(94, 231, 255, 0.16);
+}
+
+.recommended-art {
+  margin: 0;
+  color: #07182a;
+  font-size: 1.08rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.tip-filter-wrapper {
+  margin: 0;
+}
+
+[data-theme="dark"] .sidebar-container {
+  border-color: rgba(166, 213, 255, 0.14);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(94, 231, 255, 0.12), transparent 34%),
+    radial-gradient(circle at 88% 100%, rgba(141, 139, 255, 0.1), transparent 36%),
+    linear-gradient(180deg, rgba(18, 32, 51, 0.84), rgba(8, 15, 28, 0.74));
+  box-shadow:
+    0 22px 44px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(118%);
+  -webkit-backdrop-filter: blur(16px) saturate(118%);
+}
+
+[data-theme="dark"] .clear-filters-btn {
+  color: var(--app-accent-bright);
+}
+
+[data-theme="dark"] .clear-filters-btn:hover,
+[data-theme="dark"] .clear-filters-btn:focus {
+  color: #f8fcff;
+}
+
+[data-theme="dark"] .recommended-articles-wrapper {
+  border-top-color: rgba(166, 213, 255, 0.14);
+}
+
+[data-theme="dark"] .recommended-art {
+  color: var(--app-text);
+}

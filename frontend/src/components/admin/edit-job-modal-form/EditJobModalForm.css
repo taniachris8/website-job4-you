@@ -1,0 +1,337 @@
+.edit-job-modal .modal-content {
+  border: 1px solid rgba(18, 32, 51, 0.1);
+  border-radius: 30px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+  box-shadow: 0 28px 56px rgba(15, 23, 42, 0.16);
+  overflow: hidden;
+}
+
+.edit-job-modal .modal-header,
+.edit-job-modal .modal-body {
+  border: none;
+}
+
+.edit-job-header {
+  padding: 28px 28px 0 !important;
+}
+
+.edit-job-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding-left: 28px;
+}
+
+.edit-job-badge {
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(31, 106, 165, 0.08);
+  color: #1f6aa5;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.edit-job-header .modal-title {
+  color: #122033;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.edit-job-intro {
+  margin: 0;
+  color: #5f6f86;
+  font-size: 0.96rem;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+.edit-job-body {
+  padding: 24px 28px 28px !important;
+  max-height: min(78vh, 900px);
+  overflow-y: auto;
+}
+
+.edit-job-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.edit-job-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid rgba(18, 32, 51, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.edit-job-section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.edit-job-section-title {
+  margin: 0;
+  color: #122033;
+  font-size: 1.06rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.edit-job-section-text {
+  margin: 0;
+  color: #5f6f86;
+  font-size: 0.91rem;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.edit-job-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.edit-job-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.edit-job-field {
+  margin: 0 !important;
+}
+
+.edit-job-field-full {
+  grid-column: 1 / -1;
+}
+
+.edit-job-field .form-label {
+  margin-bottom: 8px;
+  color: #122033;
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+.edit-job-field .form-control,
+.edit-job-field .form-select {
+  min-height: 52px;
+  border: 1px solid rgba(18, 32, 51, 0.12) !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: #122033 !important;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.04);
+}
+
+.edit-job-field textarea.form-control {
+  min-height: 132px;
+  padding-top: 14px;
+  resize: vertical;
+}
+
+.edit-job-field .form-control::placeholder,
+.edit-job-field .form-select {
+  color: #73839a;
+}
+
+.edit-job-field .form-control:focus,
+.edit-job-field .form-select:focus {
+  border-color: rgba(31, 106, 165, 0.42) !important;
+  box-shadow:
+    0 0 0 4px rgba(31, 106, 165, 0.12),
+    0 12px 24px rgba(15, 23, 42, 0.06) !important;
+}
+
+.edit-job-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.edit-job-actions .button {
+  margin-left: 0;
+}
+
+.edit-job-actions .button.secondary {
+  width: 140px;
+}
+
+.edit-job-actions .button.primary {
+  width: 190px;
+}
+
+[data-theme="dark"] .edit-job-modal .modal-content {
+  border-color: rgba(166, 213, 255, 0.14);
+  background:
+    radial-gradient(circle at 10% 0%, rgba(94, 231, 255, 0.14), transparent 34%),
+    radial-gradient(circle at 92% 100%, rgba(141, 139, 255, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(12, 20, 34, 0.94), rgba(7, 17, 29, 0.9));
+  color: var(--app-text);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px) saturate(118%);
+  -webkit-backdrop-filter: blur(18px) saturate(118%);
+}
+
+[data-theme="dark"] .edit-job-modal .modal-header,
+[data-theme="dark"] .edit-job-modal .modal-body {
+  background: transparent;
+  color: var(--app-text);
+}
+
+[data-theme="dark"] .edit-job-modal .btn-close {
+  border: 0;
+  background-color: transparent;
+  filter: invert(1) grayscale(1) brightness(1.35);
+  opacity: 0.68;
+  box-shadow: none;
+  transition:
+    opacity 0.2s ease,
+    filter 0.2s ease,
+    transform 0.2s ease;
+}
+
+[data-theme="dark"] .edit-job-modal .btn-close:hover,
+[data-theme="dark"] .edit-job-modal .btn-close:focus {
+  background-color: transparent;
+  filter: invert(1) grayscale(1) brightness(1.65);
+  opacity: 1;
+  transform: scale(1.06);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .edit-job-modal .btn-close:focus-visible {
+  outline: 3px solid rgba(94, 231, 255, 0.28);
+  outline-offset: 3px;
+}
+
+[data-theme="dark"] .edit-job-badge {
+  border: 1px solid rgba(166, 213, 255, 0.14);
+  background: rgba(94, 231, 255, 0.12);
+  color: var(--app-accent-bright);
+}
+
+[data-theme="dark"] .edit-job-header .modal-title,
+[data-theme="dark"] .edit-job-section-title,
+[data-theme="dark"] .edit-job-field .form-label {
+  color: var(--app-text);
+}
+
+[data-theme="dark"] .edit-job-intro,
+[data-theme="dark"] .edit-job-section-text {
+  color: var(--app-muted);
+}
+
+[data-theme="dark"] .edit-job-section {
+  border-color: rgba(166, 213, 255, 0.14);
+  background:
+    linear-gradient(180deg, rgba(25, 42, 66, 0.62), rgba(10, 21, 35, 0.5)),
+    rgba(12, 20, 34, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .edit-job-field .form-control,
+[data-theme="dark"] .edit-job-field .form-select {
+  border-color: var(--app-border-strong) !important;
+  background:
+    linear-gradient(180deg, rgba(14, 28, 45, 0.9), rgba(8, 18, 31, 0.82)),
+    rgba(12, 20, 34, 0.72) !important;
+  color: var(--app-text) !important;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .edit-job-field .form-select {
+  color-scheme: dark;
+}
+
+[data-theme="dark"] .edit-job-field .form-select option {
+  background: #0b1625;
+  color: var(--app-text);
+}
+
+[data-theme="dark"] .edit-job-field .form-control::placeholder {
+  color: var(--app-placeholder);
+  opacity: 1;
+}
+
+[data-theme="dark"] .edit-job-field .form-control:hover,
+[data-theme="dark"] .edit-job-field .form-select:hover {
+  border-color: rgba(94, 231, 255, 0.34) !important;
+  background:
+    linear-gradient(180deg, rgba(18, 36, 58, 0.96), rgba(10, 22, 37, 0.9)),
+    rgba(12, 20, 34, 0.78) !important;
+}
+
+[data-theme="dark"] .edit-job-field .form-control:focus,
+[data-theme="dark"] .edit-job-field .form-select:focus {
+  border-color: rgba(94, 231, 255, 0.48) !important;
+  background:
+    linear-gradient(180deg, rgba(18, 36, 58, 0.98), rgba(10, 22, 37, 0.94)),
+    rgba(12, 20, 34, 0.82) !important;
+  box-shadow:
+    0 0 0 4px rgba(94, 231, 255, 0.16),
+    0 16px 34px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .edit-job-actions .button.secondary {
+  border-color: rgba(166, 213, 255, 0.2);
+  background:
+    linear-gradient(180deg, rgba(25, 42, 66, 0.78), rgba(10, 21, 35, 0.64)),
+    rgba(12, 20, 34, 0.68);
+  color: var(--app-text);
+}
+
+[data-theme="dark"] .edit-job-actions .button.secondary:hover {
+  border-color: rgba(94, 231, 255, 0.34);
+  background:
+    radial-gradient(circle at 28% 16%, rgba(94, 231, 255, 0.16), transparent 38%),
+    linear-gradient(180deg, rgba(31, 50, 76, 0.86), rgba(12, 24, 39, 0.72));
+  box-shadow: 0 20px 38px rgba(0, 0, 0, 0.32);
+}
+
+@media (max-width: 640px) {
+  .edit-job-header {
+    padding: 22px 20px 0 !important;
+  }
+
+  .edit-job-header-content {
+    padding-left: 18px;
+  }
+
+  .edit-job-body {
+    padding: 20px !important;
+  }
+
+  .edit-job-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-job-section {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .edit-job-actions {
+    flex-direction: column-reverse;
+  }
+
+  .edit-job-actions .button.secondary,
+  .edit-job-actions .button.primary {
+    width: 100%;
+  }
+
+  .edit-job-modal .modal-content {
+    border-radius: 22px;
+  }
+}

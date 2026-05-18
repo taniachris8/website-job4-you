@@ -1,0 +1,264 @@
+.job-item-link {
+  display: block;
+  text-decoration: none;
+}
+
+.jobs__item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.jobs__item__link {
+  text-decoration: none;
+}
+
+.admin-btns {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+
+.job-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 250, 255, 0.78)),
+    rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 12px 24px rgba(26, 40, 122, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.job-action-btn i {
+  font-size: 0.98rem;
+  line-height: 1;
+}
+
+.delete-btn {
+  color: #9f1239;
+}
+
+.edit-btn {
+  color: #3158d4;
+}
+
+.job-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 30px rgba(26, 40, 122, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.edit-btn:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.08)),
+    linear-gradient(135deg, #8cf2ff 0%, #34d8eb 46%, #756fff 100%);
+  border-color: rgba(255, 255, 255, 0.46);
+  color: #061526;
+}
+
+.delete-btn:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 228, 230, 0.98), rgba(254, 205, 211, 0.92)),
+    rgba(225, 29, 72, 0.16);
+  border-color: rgba(225, 29, 72, 0.22);
+  color: #881337;
+}
+
+.job-action-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+.job-action-btn:focus-visible {
+  outline: 3px solid rgba(94, 231, 255, 0.42);
+  outline-offset: 3px;
+}
+
+.delete-btn:focus-visible {
+  outline-color: rgba(225, 29, 72, 0.28);
+}
+
+.jobs-item-title {
+  margin: 0 0 14px;
+  color: #122033;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.jobs__item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.jobs__item__location {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(244, 250, 255, 0.5)),
+    linear-gradient(135deg, rgba(94, 231, 255, 0.2), rgba(95, 90, 245, 0.1));
+  border: 1px solid rgba(94, 231, 255, 0.2);
+  color: #3158d4;
+  font-weight: 600;
+}
+
+.jobs-item-city {
+  margin: 0;
+  color: inherit;
+  font-size: 0.95rem;
+}
+
+.fa-location-dot {
+  padding-right: 0;
+}
+
+.job-item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+}
+
+.job-item-detail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.details-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(18, 32, 51, 0.06); */
+  color: #20c6dc !important;
+  flex-shrink: 0;
+}
+
+.job-item-descr-prg {
+  margin: 0;
+  color: #5f6f86;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.jobs-item-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(94, 231, 255, 0.16);
+}
+
+.jobs-item-buttons .button {
+  flex: 1 1 180px;
+  width: auto;
+  margin: 0;
+}
+
+[data-theme="dark"] .job-action-btn {
+  border-color: rgba(166, 213, 255, 0.18);
+  background:
+    linear-gradient(180deg, rgba(25, 42, 66, 0.84), rgba(10, 21, 35, 0.66)),
+    rgba(12, 24, 39, 0.72);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .edit-btn {
+  color: var(--app-accent-bright);
+}
+
+[data-theme="dark"] .delete-btn {
+  color: #ff9aa8;
+}
+
+[data-theme="dark"] .job-action-btn:hover {
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+[data-theme="dark"] .delete-btn:hover {
+  background:
+    linear-gradient(180deg, rgba(74, 18, 34, 0.88), rgba(45, 10, 22, 0.72)),
+    rgba(225, 29, 72, 0.18);
+  border-color: rgba(255, 154, 168, 0.26);
+  color: #ffdbe1;
+}
+
+[data-theme="dark"] .jobs-item-title {
+  color: var(--app-text);
+}
+
+[data-theme="dark"] .jobs__item__location {
+  background:
+    linear-gradient(180deg, rgba(25, 42, 66, 0.72), rgba(10, 21, 35, 0.56)),
+    linear-gradient(135deg, rgba(94, 231, 255, 0.14), rgba(141, 139, 255, 0.12));
+  border-color: rgba(166, 213, 255, 0.16);
+  color: var(--app-accent-bright);
+}
+
+[data-theme="dark"] .details-icon {
+  color: var(--app-accent) !important;
+}
+
+[data-theme="dark"] .job-item-descr-prg {
+  color: var(--app-muted);
+}
+
+[data-theme="dark"] .jobs-item-buttons {
+  border-top-color: rgba(166, 213, 255, 0.14);
+}
+
+@media screen and (max-width: 1620px) {
+  .jobs__item {
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .jobs-item-title {
+    font-size: 1.28rem;
+  }
+
+  .jobs-item-buttons {
+    flex-direction: column;
+  }
+
+  .jobs-item-buttons .button {
+    width: 100%;
+  }
+}

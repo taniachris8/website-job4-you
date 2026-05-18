@@ -1,0 +1,463 @@
+.job-page-container {
+  --job-text: #07182a;
+  --job-muted: #51647c;
+  --job-accent: #20c6dc;
+  --job-accent-strong: #5f5af5;
+  --job-accent-soft: rgba(94, 231, 255, 0.18);
+  --job-border: rgba(7, 24, 42, 0.1);
+  --job-surface: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 44px 24px 56px;
+}
+
+.job-page-shell {
+  width: min(100%, 1220px);
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.job-page-loader {
+  width: min(100%, 760px);
+  align-self: center;
+}
+
+.job-page-error {
+  width: min(100%, 760px);
+  align-self: center;
+}
+
+.job-page-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 360px);
+  gap: 24px;
+  align-items: start;
+}
+
+.job-page-hero-main,
+.job-page-summary-card,
+.job-page-section,
+.job-page-empty-state,
+.error-message {
+  border: 1px solid var(--job-border);
+  background: var(--job-surface);
+  box-shadow: 0 18px 38px rgba(26, 40, 122, 0.1);
+}
+
+.job-page-hero-main {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 34px 32px;
+  border-radius: 32px;
+  margin-bottom: 20px;
+}
+
+.job-page-eyebrow {
+  margin: 0;
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--job-accent-soft);
+  color: var(--job-accent);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.job-page-title {
+  margin: 0;
+  color: var(--job-text);
+  font-size: clamp(2.2rem, 4.2vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.job-page-meta-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.job-page-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid rgba(94, 231, 255, 0.16);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(247, 251, 255, 0.72)),
+    linear-gradient(135deg, rgba(94, 231, 255, 0.14), rgba(95, 90, 245, 0.08));
+  color: var(--job-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.job-page-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 26px 24px;
+  border-radius: 28px;
+  position: sticky;
+  top: 104px;
+}
+
+.job-page-summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.job-page-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(94, 231, 255, 0.16);
+}
+
+.job-page-detail:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.detail-title {
+  color: var(--job-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.job-page-detail p {
+  margin: 0;
+  color: var(--job-text);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.job-page-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.job-page-btns .button.primary {
+  width: 100%;
+  margin-left: 0;
+}
+
+.wishlist-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(22, 35, 76, 0.92), rgba(30, 33, 101, 0.86)),
+    rgba(28, 34, 84, 0.9);
+  color: #f7fbff;
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  box-shadow:
+    0 16px 30px rgba(12, 18, 58, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.wishlist-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(94, 231, 255, 0.28);
+  background:
+    linear-gradient(180deg, rgba(30, 47, 99, 0.96), rgba(43, 39, 123, 0.9)),
+    rgba(35, 42, 105, 0.94);
+  color: #ffffff;
+  box-shadow:
+    0 20px 36px rgba(12, 18, 58, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.wishlist-btn:active {
+  transform: translateY(0);
+  box-shadow:
+    0 10px 20px rgba(12, 18, 58, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.wishlist-btn:focus-visible {
+  outline: 3px solid rgba(94, 231, 255, 0.42);
+  outline-offset: 3px;
+}
+
+.wishlist-btn.saved {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.04)),
+    linear-gradient(135deg, #5ee7ff 0%, #20c6dc 48%, #5f5af5 100%);
+  color: #061526;
+  border-color: rgba(255, 255, 255, 0.34);
+  box-shadow:
+    0 20px 34px rgba(32, 198, 220, 0.22),
+    0 10px 26px rgba(80, 76, 233, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.54);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.wishlist-btn.saved:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.08)),
+    linear-gradient(135deg, #8cf2ff 0%, #34d8eb 46%, #756fff 100%);
+  color: #03111f;
+  border-color: rgba(255, 255, 255, 0.46);
+}
+
+.fa-heart {
+  padding-left: 0;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.details-icon {
+  color: var(--job-accent-strong);
+  font-size: 0.95rem;
+}
+
+.job-page-content-wrapper {
+  /* display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px; */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.job-page-section {
+  padding: 28px 28px 24px;
+  border-radius: 28px;
+}
+
+.description-title {
+  margin: 0 0 18px;
+  color: var(--job-text);
+  font-size: 1.28rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.job-page-section ul {
+  margin: 0;
+  padding-right: 20px;
+  color: var(--job-muted);
+}
+
+.job-page-section li {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.85;
+}
+
+.job-page-empty-state,
+.error-message {
+  width: min(100%, 760px);
+  padding: 28px 24px;
+  border-radius: 24px;
+  color: var(--job-muted);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.error-message {
+  border-color: rgba(185, 28, 28, 0.14);
+  background: rgba(185, 28, 28, 0.06);
+  color: #b42318;
+}
+
+[data-theme="dark"] .job-page-container {
+  --job-text: var(--app-text);
+  --job-muted: var(--app-muted);
+  --job-accent: var(--app-accent-bright);
+  --job-accent-strong: var(--app-accent-strong);
+  --job-accent-soft: rgba(94, 231, 255, 0.14);
+  --job-border: rgba(166, 213, 255, 0.14);
+  --job-surface:
+    radial-gradient(circle at 8% 0%, rgba(94, 231, 255, 0.11), transparent 32%),
+    radial-gradient(circle at 92% 100%, rgba(141, 139, 255, 0.11), transparent 34%),
+    linear-gradient(180deg, rgba(18, 32, 51, 0.86), rgba(8, 15, 28, 0.76));
+}
+
+[data-theme="dark"] .job-page-hero-main,
+[data-theme="dark"] .job-page-summary-card,
+[data-theme="dark"] .job-page-section,
+[data-theme="dark"] .job-page-empty-state,
+[data-theme="dark"] .job-page-container > .error-message {
+  border-color: var(--job-border);
+  background: var(--job-surface);
+  box-shadow:
+    0 22px 44px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(118%);
+  -webkit-backdrop-filter: blur(16px) saturate(118%);
+}
+
+[data-theme="dark"] .job-page-eyebrow {
+  border: 1px solid rgba(166, 213, 255, 0.14);
+  background: rgba(94, 231, 255, 0.12);
+  color: var(--job-accent);
+}
+
+[data-theme="dark"] .job-page-meta-chip {
+  border-color: rgba(166, 213, 255, 0.16);
+  background:
+    linear-gradient(180deg, rgba(25, 42, 66, 0.72), rgba(10, 21, 35, 0.56)),
+    linear-gradient(135deg, rgba(94, 231, 255, 0.14), rgba(141, 139, 255, 0.12));
+  color: var(--job-text);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .job-page-detail {
+  border-bottom-color: rgba(166, 213, 255, 0.14);
+}
+
+[data-theme="dark"] .detail-title {
+  color: rgba(226, 236, 250, 0.68);
+}
+
+[data-theme="dark"] .job-page-section ul {
+  color: var(--job-muted);
+}
+
+[data-theme="dark"] .details-icon {
+  color: var(--job-accent) !important;
+}
+
+[data-theme="dark"] .wishlist-btn {
+  border-color: rgba(166, 213, 255, 0.18);
+  background:
+    linear-gradient(180deg, rgba(25, 42, 66, 0.84), rgba(10, 21, 35, 0.66)),
+    rgba(12, 24, 39, 0.72);
+  color: var(--job-text);
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .wishlist-btn:hover {
+  border-color: rgba(94, 231, 255, 0.28);
+  background:
+    linear-gradient(180deg, rgba(35, 55, 82, 0.9), rgba(12, 23, 39, 0.74)),
+    linear-gradient(135deg, rgba(94, 231, 255, 0.12), rgba(141, 139, 255, 0.12));
+  color: #f8fcff;
+  box-shadow:
+    0 20px 38px rgba(0, 0, 0, 0.34),
+    0 8px 24px rgba(53, 216, 236, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .wishlist-btn.saved,
+[data-theme="dark"] .wishlist-btn.saved:hover {
+  border-color: rgba(226, 236, 250, 0.3);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04)),
+    linear-gradient(135deg, var(--app-accent-bright) 0%, var(--app-accent) 46%, var(--app-accent-strong) 100%);
+  color: var(--app-on-primary);
+  box-shadow:
+    0 18px 34px rgba(53, 216, 236, 0.2),
+    0 10px 26px rgba(141, 139, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36);
+}
+
+[data-theme="dark"] .job-page-empty-state {
+  color: var(--job-muted);
+}
+
+[data-theme="dark"] .job-page-error,
+[data-theme="dark"] .job-page-container .error-message {
+  border-color: rgba(255, 138, 138, 0.18);
+  background: rgba(80, 16, 28, 0.32);
+  color: #ffdbe1;
+}
+
+@media (max-width: 1040px) {
+  .job-page-container {
+    padding: 36px 18px 48px;
+  }
+
+  .job-page-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .job-page-summary-card {
+    position: static;
+  }
+
+  .job-page-content-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .job-page-container {
+    padding: 28px 14px 40px;
+  }
+
+  .job-page-hero-main,
+  .job-page-summary-card,
+  .job-page-section {
+    padding: 22px 18px;
+    border-radius: 24px;
+  }
+
+  .job-page-meta-grid {
+    gap: 10px;
+  }
+
+  .job-page-meta-chip {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .job-page-container {
+    padding: 24px 12px 32px;
+  }
+
+  .job-page-hero-main,
+  .job-page-summary-card,
+  .job-page-section,
+  .job-page-empty-state,
+  .error-message {
+    border-radius: 20px;
+  }
+
+  .job-page-title {
+    font-size: clamp(1.9rem, 8vw, 2.5rem);
+  }
+
+  .description-title {
+    font-size: 1.15rem;
+  }
+
+  .job-page-section li {
+    font-size: 0.96rem;
+  }
+}
