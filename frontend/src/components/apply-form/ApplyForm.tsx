@@ -235,13 +235,20 @@ export function ApplyForm({
 
           <Form.Group className="apply-form-upload" controlId="formCv">
             <Form.Label>קורות חיים</Form.Label>
-            <Form.Control
-              ref={fileInputRef}
-              type="file"
-              className="apply-form-file-input"
-              onChange={handleFileChange}
-              accept=".doc,.docx,.pdf"
-            />
+            <div className="apply-form-file-control">
+              <Form.Control
+                ref={fileInputRef}
+                type="file"
+                className="apply-form-file-input"
+                onChange={handleFileChange}
+                accept=".doc,.docx,.pdf"
+                aria-label="העלה קורות חיים"
+              />
+              <span className="apply-form-file-button">העלה קורות חיים</span>
+              <span className="apply-form-file-name">
+                {cvFile?.name ?? "לא נבחר קובץ"}
+              </span>
+            </div>
           </Form.Group>
 
           <Form.Group className="apply-form-field" controlId="applyFormMessage">

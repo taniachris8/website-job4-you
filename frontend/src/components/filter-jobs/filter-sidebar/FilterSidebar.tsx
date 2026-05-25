@@ -36,7 +36,7 @@ export function FilterSidebar() {
     <>
       <div className="sidebar-container">
         <button onClick={handleClearAllFilters} className="clear-filters-btn">
-          Clear all filters
+          נקה את כל המסננים
         </button>
         <div className="filters-wrapper">
           <div className="filter">
@@ -76,7 +76,7 @@ export function FilterSidebar() {
         </div>
         <div className="recommended-articles-wrapper">
           <h2 className="recommended-art">מאמרים מומלצים</h2>
-          { smallTips.map((tip, index) => (
+          {smallTips.map((tip, index) => (
             <SmallTip
               key={index}
               path={tip.path}
@@ -84,7 +84,7 @@ export function FilterSidebar() {
               title={tip.title}
               date={tip.date}
             />
-          )) }
+          ))}
         </div>
       </div>
     </>

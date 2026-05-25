@@ -87,10 +87,10 @@ export function AddNewJob({
       dialogClassName="add-new-job-modal">
       <Modal.Header closeButton className="add-new-job-header">
         <div className="add-new-job-header-content">
-          <p className="add-new-job-badge">Admin panel</p>
-          <Modal.Title>Add new job</Modal.Title>
+          <p className="add-new-job-badge">פאנל ניהול</p>
+          <Modal.Title>הוספת משרה חדשה</Modal.Title>
           <p className="add-new-job-intro">
-            Fill in the role details to publish a new job posting.
+            מלא את פרטי המשרה כדי לפרסם מודעת דרושים חדשה.
           </p>
         </div>
       </Modal.Header>
@@ -99,18 +99,20 @@ export function AddNewJob({
         <Form onSubmit={handleSubmit} className="add-new-job-form">
           <section className="add-new-job-section">
             <div className="add-new-job-section-heading">
-              <h2 className="add-new-job-section-title">Basic information</h2>
+              <h2 className="add-new-job-section-title">מידע בסיסי</h2>
               <p className="add-new-job-section-text">
-                Define the role title and the main classification details.
+                הגדר את שם המשרה ואת פרטי הסיווג הראשיים.
               </p>
             </div>
 
             <div className="add-new-job-grid">
-              <Form.Group className="add-new-job-field add-new-job-field-full" controlId="jobTitle">
-                <Form.Label>Job Title:</Form.Label>
+              <Form.Group
+                className="add-new-job-field add-new-job-field-full"
+                controlId="jobTitle">
+                <Form.Label>כותרת המשרה:</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Job title"
+                  placeholder="כותרת המשרה"
                   value={jobTitle}
                   onChange={(e) => setJobTitle(e.target.value)}
                   autoFocus
@@ -118,11 +120,11 @@ export function AddNewJob({
               </Form.Group>
 
               <Form.Group className="add-new-job-field" controlId="domain">
-                <Form.Label>Domain:</Form.Label>
+                <Form.Label>תחום:</Form.Label>
                 <Form.Select
                   value={domain}
                   onChange={(e) => setDomain(e.target.value)}>
-                  <option value="">Select Domain</option>
+                  <option value="">בחר תחום</option>
                   {domainOptions.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
@@ -132,11 +134,11 @@ export function AddNewJob({
               </Form.Group>
 
               <Form.Group className="add-new-job-field" controlId="profession">
-                <Form.Label>Profession:</Form.Label>
+                <Form.Label>מקצוע:</Form.Label>
                 <Form.Select
                   value={profession}
                   onChange={(e) => setProfession(e.target.value)}>
-                  <option value="">Select Profession</option>
+                  <option value="">בחר מקצוע</option>
                   {professionOptions.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
@@ -149,17 +151,19 @@ export function AddNewJob({
 
           <section className="add-new-job-section">
             <div className="add-new-job-section-heading">
-              <h2 className="add-new-job-section-title">Location and employment</h2>
+              <h2 className="add-new-job-section-title">מיקום ותפקיד</h2>
               <p className="add-new-job-section-text">
-                Add the area, scope, and internal role reference.
+                הוסף את האזור, הספק, והתייחסות פנימית.
               </p>
             </div>
 
             <div className="add-new-job-grid">
               <Form.Group className="add-new-job-field" controlId="area">
-                <Form.Label>Area:</Form.Label>
-                <Form.Select value={area} onChange={(e) => setArea(e.target.value)}>
-                  <option value="">Select Area</option>
+                <Form.Label>אזור:</Form.Label>
+                <Form.Select
+                  value={area}
+                  onChange={(e) => setArea(e.target.value)}>
+                  <option value="">בחר אזור</option>
                   {areaOptions.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
@@ -169,9 +173,11 @@ export function AddNewJob({
               </Form.Group>
 
               <Form.Group className="add-new-job-field" controlId="scope">
-                <Form.Label>Scope:</Form.Label>
-                <Form.Select value={scope} onChange={(e) => setScope(e.target.value)}>
-                  <option value="">Select Scope</option>
+                <Form.Label>היקף משרה:</Form.Label>
+                <Form.Select
+                  value={scope}
+                  onChange={(e) => setScope(e.target.value)}>
+                  <option value="">בחר היקף משרה</option>
                   {scopeOptions.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
@@ -180,11 +186,13 @@ export function AddNewJob({
                 </Form.Select>
               </Form.Group>
 
-              <Form.Group className="add-new-job-field add-new-job-field-full" controlId="jobNumber">
-                <Form.Label>Job Number:</Form.Label>
+              <Form.Group
+                className="add-new-job-field add-new-job-field-full"
+                controlId="jobNumber">
+                <Form.Label>מספר משרה:</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Job number"
+                  placeholder="מספר משרה"
                   value={jobNumber}
                   onChange={(e) => setJobNumber(e.target.value)}
                 />
@@ -194,30 +202,34 @@ export function AddNewJob({
 
           <section className="add-new-job-section">
             <div className="add-new-job-section-heading">
-              <h2 className="add-new-job-section-title">Job content</h2>
+              <h2 className="add-new-job-section-title">תוכן משרה</h2>
               <p className="add-new-job-section-text">
-                Keep the description and requirements organized for easier review.
+                שמר את התיאור והדרישות מסודרים עבור סקירה קלילה.
               </p>
             </div>
 
             <div className="add-new-job-stack">
-              <Form.Group className="add-new-job-field" controlId="jobDescription">
-                <Form.Label>Job description:</Form.Label>
+              <Form.Group
+                className="add-new-job-field"
+                controlId="jobDescription">
+                <Form.Label>תיאור משרה:</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={5}
-                  placeholder="Enter each description on a new line"
+                  placeholder="הזן כל תיאור בשורה חדשה"
                   value={jobDescription}
                   onChange={(e) => setJobDescription(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group className="add-new-job-field" controlId="jobRequirements">
-                <Form.Label>Job requirements:</Form.Label>
+              <Form.Group
+                className="add-new-job-field"
+                controlId="jobRequirements">
+                <Form.Label>דרישות משרה:</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={5}
-                  placeholder="Enter each requirement on a new line"
+                  placeholder="הזן כל דרישה בשורה חדשה"
                   value={jobRequirements}
                   onChange={(e) => setJobRequirements(e.target.value)}
                 />
@@ -239,10 +251,10 @@ export function AddNewJob({
               type="button"
               onClick={onHide}
               disabled={isSubmitting}>
-              Cancel
+              ביטול
             </Button>
             <Button variant="primary" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Posting..." : "Post Job"}
+              {isSubmitting ? "מפרסם..." : "פרסם משרה"}
             </Button>
           </div>
         </Form>

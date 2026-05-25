@@ -205,7 +205,7 @@ router.post("/login", async (req, res, next) => {
     });
 
     if (!user) {
-      throw new AppError(401, "UNAUTHORIZED", "Invalid credentials");
+      throw new AppError(401, "UNAUTHORIZED", "User not found");
     }
 
     let valid = false;
@@ -223,7 +223,7 @@ router.post("/login", async (req, res, next) => {
     }
 
     if (!valid) {
-      throw new AppError(401, "UNAUTHORIZED", "Invalid credentials");
+      throw new AppError(401, "UNAUTHORIZED", "Incorrect password");
     }
 
     const accessToken = signAccessToken({ sub: user.id, role: user.role });

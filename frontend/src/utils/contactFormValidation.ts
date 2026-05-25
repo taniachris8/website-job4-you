@@ -30,7 +30,7 @@ export const validateContactField = (field: ContactFormField, value: string) => 
   if (field === "privacyConsent") {
     return value === "true"
       ? ""
-      : "You must accept the privacy policy before submitting.";
+      : "יש לאשר את מדיניות הפרטיות לפני השליחה.";
   }
 
   const trimmedValue = trimContactValue(value);
@@ -38,21 +38,21 @@ export const validateContactField = (field: ContactFormField, value: string) => 
   switch (field) {
     case "userName":
       if (!trimmedValue) {
-        return "Name is required.";
+        return "יש להזין שם.";
       }
       if (trimmedValue.length < 2) {
-        return "Name must be at least 2 characters.";
+        return "השם חייב לכלול לפחות 2 תווים.";
       }
       if (!namePattern.test(trimmedValue)) {
-        return "Name can only include letters, spaces, and hyphens.";
+        return "השם יכול לכלול אותיות, רווחים ומקפים בלבד.";
       }
       return "";
     case "userEmail":
       if (!trimmedValue) {
-        return "Email is required.";
+        return "יש להזין כתובת דוא\"ל.";
       }
       if (!emailPattern.test(trimmedValue)) {
-        return "Please enter a valid email address.";
+        return "יש להזין כתובת דוא\"ל תקינה.";
       }
       return "";
     case "userPhone":
@@ -60,12 +60,12 @@ export const validateContactField = (field: ContactFormField, value: string) => 
         return "";
       }
       if (!phonePattern.test(trimmedValue) || !hasValidDigitCount(trimmedValue)) {
-        return "Please enter a valid phone number or leave this field empty.";
+        return "יש להזין מספר טלפון תקין או להשאיר את השדה ריק.";
       }
       return "";
     case "message":
       if (!trimmedValue) {
-        return "Message is required.";
+        return "יש להזין הודעה.";
       }
       return "";
     default:

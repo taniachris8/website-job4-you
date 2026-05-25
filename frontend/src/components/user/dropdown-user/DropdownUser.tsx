@@ -35,7 +35,7 @@ export function DropdownUser({
         {user ? (
           <>
             <div className="dropdown-user-summary">
-              <span className="dropdown-user-label">Account</span>
+              <span className="dropdown-user-label">פרופיל</span>
               <span className="dropdown-user-name">
                 {user.name} {user.familyName}
                 {user.role === "admin" ? " (Admin)" : ""}
@@ -48,7 +48,7 @@ export function DropdownUser({
                   as={Link}
                   className="dropdown-menu-link"
                   to="/users-settings">
-                  Settings
+                  הגדרות
                 </Dropdown.Item>
               )}
 
@@ -56,7 +56,7 @@ export function DropdownUser({
                 as={Link}
                 className="dropdown-menu-link"
                 to="/users-savedJobs">
-                Saved Jobs
+                משרות שמורות
               </Dropdown.Item>
 
               {user.role !== "admin" && (
@@ -64,19 +64,19 @@ export function DropdownUser({
                   as={Link}
                   className="dropdown-menu-link"
                   to="/users-CV">
-                  My CVs
+                  קורות החיים שלי
                 </Dropdown.Item>
               )}
             </div>
 
             <div className="dropdown-user-actions">
               <Button variant="logout" onClick={handleLogout}>
-                Logout
+                התנתקות
               </Button>
             </div>
           </>
         ) : (
-          <div className="dropdown-user-empty">No user logged in</div>
+          <div className="dropdown-user-empty">לא בוצעה התחברות</div>
         )}
       </Dropdown.Menu>
     </Dropdown>

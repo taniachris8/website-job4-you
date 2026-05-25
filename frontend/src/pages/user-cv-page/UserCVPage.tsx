@@ -23,7 +23,9 @@ export function UserCVPage() {
           <div className="user-cv-main">
             <div className="user-cv-hero-card">
               <p className="user-cv-eyebrow">שירות אישי</p>
-              <h1 className="user-cv-title">כתיבת קורות חיים בהתאמה אישית בתשלום</h1>
+              <h1 className="user-cv-title">
+                כתיבת קורות חיים בהתאמה אישית בתשלום
+              </h1>
               <div className="user-cv-copy">
                 <p className="user-cv-prg">
                   אנו יכולים לסייע בכתיבת קורות חיים בעברית
@@ -50,7 +52,7 @@ export function UserCVPage() {
                   </Alert>
                 ) : null}
                 <Button variant="primary" onClick={handleShowModal}>
-                  Request a CV
+                  בקש קורות חיים
                 </Button>
               </div>
             </div>
@@ -85,7 +87,9 @@ export function UserCVPage() {
 
           <aside className="user-cv-side-panel">
             <p className="user-cv-side-eyebrow">למה זה עוזר?</p>
-            <h2 className="user-cv-side-title">מסמך מקצועי שמציג אתכם טוב יותר</h2>
+            <h2 className="user-cv-side-title">
+              מסמך מקצועי שמציג אתכם טוב יותר
+            </h2>
             <p className="user-cv-side-text">
               קורות חיים מדויקים ומחודדים עוזרים להציג את הניסיון שלכם בצורה
               ברורה, ממוקדת, ומרשימה יותר מול מעסיקים.

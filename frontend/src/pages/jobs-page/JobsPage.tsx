@@ -50,19 +50,27 @@ export function JobsPage() {
     await dispatch(fetchJobs()).unwrap();
   }, [dispatch]);
 
-  const handleDeleteJob = (_id: string | number) => {
+  const handleDeleteJob = async (_id?: string | number) => {
+    if (!_id) {
+      setJobActionError(
+        "\u05DC\u05D0 \u05D4\u05E6\u05DC\u05D7\u05E0\u05D5 \u05DC\u05DE\u05D7\u05D5\u05E7 \u05D0\u05EA \u05D4\u05DE\u05E9\u05E8\u05D4. \u05DE\u05D6\u05D4\u05D4 \u05D4\u05DE\u05E9\u05E8\u05D4 \u05D7\u05E1\u05E8.",
+      );
+      return;
+    }
+
     setJobActionError(null);
-    apiJobService
-      .deleteJob(_id)
-      .then(() => refreshJobs())
-      .catch((error) => {
-        console.error("Error deleting job:", error);
-        setJobActionError(
-          getApiErrorMessage(error, {
-            defaultMessage: "\u05DC\u05D0 \u05D4\u05E6\u05DC\u05D7\u05E0\u05D5 \u05DC\u05DE\u05D7\u05D5\u05E7 \u05D0\u05EA \u05D4\u05DE\u05E9\u05E8\u05D4. \u05E0\u05E1\u05D5 \u05E9\u05D5\u05D1.",
-          }),
-        );
-      });
+
+    try {
+      await apiJobService.deleteJob(_id);
+      await refreshJobs();
+    } catch (error) {
+      console.error("Error deleting job:", error);
+      setJobActionError(
+        getApiErrorMessage(error, {
+          defaultMessage: "\u05DC\u05D0 \u05D4\u05E6\u05DC\u05D7\u05E0\u05D5 \u05DC\u05DE\u05D7\u05D5\u05E7 \u05D0\u05EA \u05D4\u05DE\u05E9\u05E8\u05D4. \u05E0\u05E1\u05D5 \u05E9\u05D5\u05D1.",
+        }),
+      );
+    }
   };
 
   const handleEditJob = (_id: string | number, updatedJob: Partial<Job>) => {
@@ -140,7 +148,6 @@ export function JobsPage() {
             <header className="jobs-page-header">
               <div className="jobs-page-heading">
                 <h1 className="jobs-page-title">דרושים</h1>
-                {/* <p className="jobs-page-count">{filteredJobs.length}</p> */}
               </div>
               <div className="jobs-search-panel">
                 <FilterFreeSearch className="jobs-input" />
@@ -194,13 +201,12 @@ export function JobsPage() {
                             domain={job.domain}
                             profession={job.profession}
                             scope={job.scope}
-                            id={jobId}
+                            id={job.id}
+                            _id={job._id}
                             jobNumber={job.jobNumber}
                             jobDescription={job.jobDescription}
                             jobRequirements={job.jobRequirements}
-                            onDelete={() =>
-                              handleDeleteJob(String(jobId ?? job.id ?? ""))
-                            }
+                            onDelete={handleDeleteJob}
                             onEdit={(updatedJob) =>
                               handleEditJob(
                                 String(jobId ?? job.id ?? ""),

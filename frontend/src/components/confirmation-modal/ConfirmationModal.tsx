@@ -31,10 +31,10 @@ export function ConfirmationModal({
               disabled={isProcessing}
               onClick={() => setShowConfirmationModal(false)}
               variant="secondary">
-              Back
+              חזרה
             </Button>
             <Button disabled={isProcessing} onClick={onDelete} variant="delete">
-              {isProcessing ? "Deleting..." : "Delete"}
+              {isProcessing ? "מוחק..." : "מחק"}
             </Button>
           </div>
         </Modal.Footer>

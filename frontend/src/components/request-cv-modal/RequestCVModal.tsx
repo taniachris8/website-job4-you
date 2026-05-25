@@ -235,13 +235,20 @@ export function RequestCVModal({
 
           <Form.Group className="request-cv-upload" controlId="formCv">
             <Form.Label>קורות חיים ישנים (אם זמינים)</Form.Label>
-            <Form.Control
-              ref={fileInputRef}
-              type="file"
-              className="request-cv-file-input"
-              onChange={handleFileChange}
-              accept=".doc,.docx,.pdf"
-            />
+            <div className="request-cv-file-control">
+              <Form.Control
+                ref={fileInputRef}
+                type="file"
+                className="request-cv-file-input"
+                onChange={handleFileChange}
+                accept=".doc,.docx,.pdf"
+                aria-label="העלה קורות חיים"
+              />
+              <span className="request-cv-file-button">העלה קורות חיים</span>
+              <span className="request-cv-file-name">
+                {cvFile?.name ?? "לא נבחר קובץ"}
+              </span>
+            </div>
           </Form.Group>
 
           <Form.Group className="request-cv-field" controlId="requestCvMessage">

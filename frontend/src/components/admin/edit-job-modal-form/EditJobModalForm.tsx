@@ -39,10 +39,10 @@ export function EditJobModalForm({
       dialogClassName="edit-job-modal">
       <Modal.Header closeButton className="edit-job-header">
         <div className="edit-job-header-content">
-          <p className="edit-job-badge">Admin panel</p>
-          <Modal.Title>Edit Job</Modal.Title>
+          <p className="edit-job-badge">פאנל ניהול</p>
+          <Modal.Title>עריכת משרה</Modal.Title>
           <p className="edit-job-intro">
-            Update the role details and save the latest version.
+            עדכן את פרטי המשרה ושמור את הגרסה העדכנית ביותר.
           </p>
         </div>
       </Modal.Header>
@@ -51,15 +51,17 @@ export function EditJobModalForm({
         <Form onSubmit={handleEditSubmit} className="edit-job-form">
           <section className="edit-job-section">
             <div className="edit-job-section-heading">
-              <h2 className="edit-job-section-title">Basic information</h2>
+              <h2 className="edit-job-section-title">מידע בסיסי</h2>
               <p className="edit-job-section-text">
-                Review the role title and primary classification details.
+                בדוק את כותרת המשרה ואת פרטי הסיווג הראשיים.
               </p>
             </div>
 
             <div className="edit-job-grid">
-              <Form.Group className="edit-job-field edit-job-field-full" controlId="jobTitle">
-                <Form.Label>Job Title:</Form.Label>
+              <Form.Group
+                className="edit-job-field edit-job-field-full"
+                controlId="jobTitle">
+                <Form.Label>כותרת המשרה:</Form.Label>
                 <Form.Control
                   type="text"
                   name="jobTitle"
@@ -70,12 +72,12 @@ export function EditJobModalForm({
               </Form.Group>
 
               <Form.Group className="edit-job-field" controlId="domain">
-                <Form.Label>Domain:</Form.Label>
+                <Form.Label>תחום:</Form.Label>
                 <Form.Select
                   name="domain"
                   value={editedJob.domain}
                   onChange={handleEditChange}>
-                  <option value="">Select Domain</option>
+                  <option value="">בחר תחום</option>
                   {domainOptions.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
@@ -85,12 +87,12 @@ export function EditJobModalForm({
               </Form.Group>
 
               <Form.Group className="edit-job-field" controlId="profession">
-                <Form.Label>Profession:</Form.Label>
+                <Form.Label>מקצוע:</Form.Label>
                 <Form.Select
                   name="profession"
                   value={editedJob.profession}
                   onChange={handleEditChange}>
-                  <option value="">Select Profession</option>
+                  <option value="">בחר מקצוע</option>
                   {professionOptions.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
@@ -103,20 +105,22 @@ export function EditJobModalForm({
 
           <section className="edit-job-section">
             <div className="edit-job-section-heading">
-              <h2 className="edit-job-section-title">Location and employment</h2>
+              <h2 className="edit-job-section-title">
+                מיקום ותפקיד
+              </h2>
               <p className="edit-job-section-text">
-                Adjust the area, role scope, and internal reference number.
+                התאם את האזור, הספק, והתייחסות פנימית.
               </p>
             </div>
 
             <div className="edit-job-grid">
               <Form.Group className="edit-job-field" controlId="area">
-                <Form.Label>Area:</Form.Label>
+                <Form.Label>אזור:</Form.Label>
                 <Form.Select
                   name="area"
                   value={editedJob.area}
                   onChange={handleEditChange}>
-                  <option value="">Select Area</option>
+                  <option value="">בחר אזור</option>
                   {areaOptions.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
@@ -126,12 +130,12 @@ export function EditJobModalForm({
               </Form.Group>
 
               <Form.Group className="edit-job-field" controlId="scope">
-                <Form.Label>Scope:</Form.Label>
+                <Form.Label>היקף משרה:</Form.Label>
                 <Form.Select
                   name="scope"
                   value={editedJob.scope}
                   onChange={handleEditChange}>
-                  <option value="">Select Scope</option>
+                  <option value="">בחר היקף משרה</option>
                   {scopeOptions.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
@@ -140,8 +144,10 @@ export function EditJobModalForm({
                 </Form.Select>
               </Form.Group>
 
-              <Form.Group className="edit-job-field edit-job-field-full" controlId="jobNumber">
-                <Form.Label>Job Number:</Form.Label>
+              <Form.Group
+                className="edit-job-field edit-job-field-full"
+                controlId="jobNumber">
+                <Form.Label>מספר משרה:</Form.Label>
                 <Form.Control
                   type="text"
                   name="jobNumber"
@@ -154,15 +160,15 @@ export function EditJobModalForm({
 
           <section className="edit-job-section">
             <div className="edit-job-section-heading">
-              <h2 className="edit-job-section-title">Job content</h2>
+              <h2 className="edit-job-section-title">תוכן משרה</h2>
               <p className="edit-job-section-text">
-                Update the role description and requirements in a clean format.
+                עדכן את תיאור התפקיד והדרישות בתבנית נקייה.
               </p>
             </div>
 
             <div className="edit-job-stack">
               <Form.Group className="edit-job-field" controlId="jobDescription">
-                <Form.Label>Job description:</Form.Label>
+                <Form.Label>תיאור משרה:</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={4}
@@ -172,8 +178,10 @@ export function EditJobModalForm({
                 />
               </Form.Group>
 
-              <Form.Group className="edit-job-field" controlId="jobRequirements">
-                <Form.Label>Job requirements:</Form.Label>
+              <Form.Group
+                className="edit-job-field"
+                controlId="jobRequirements">
+                <Form.Label>דרישות משרה:</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={4}
@@ -187,10 +195,10 @@ export function EditJobModalForm({
 
           <div className="edit-job-actions">
             <Button variant="secondary" type="button" onClick={onHide}>
-              Cancel
+              ביטול
             </Button>
             <Button variant="primary" type="submit">
-              Save Changes
+              שמור שינויים
             </Button>
           </div>
         </Form>

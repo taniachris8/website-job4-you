@@ -68,39 +68,39 @@ export function SignUpPage() {
     switch (field) {
       case "name":
         if (!trimmedValue) {
-          return "First name is required.";
+          return "יש להזין שם פרטי.";
         }
         if (!namePattern.test(trimmedValue)) {
-          return "First name can contain letters, spaces, and hyphens only.";
+          return "שם פרטי יכול לכלול אותיות, רווחים ומקפים בלבד.";
         }
         return "";
       case "familyName":
         if (!trimmedValue) {
-          return "Last name is required.";
+          return "יש להזין שם משפחה.";
         }
         if (!namePattern.test(trimmedValue)) {
-          return "Last name can contain letters, spaces, and hyphens only.";
+          return "שם משפחה יכול לכלול אותיות, רווחים ומקפים בלבד.";
         }
         return "";
       case "email":
         if (!trimmedValue) {
-          return "Email is required.";
+          return "יש להזין כתובת דוא\"ל.";
         }
         if (!emailPattern.test(trimmedValue)) {
-          return "Please enter a valid email address.";
+          return "יש להזין כתובת דוא\"ל תקינה.";
         }
         return "";
       case "password":
         if (!value) {
-          return "Password is required.";
+          return "יש להזין סיסמה.";
         }
         return "";
       case "confirmedPassword":
         if (!value) {
-          return "Please confirm your password.";
+          return "יש לאשר את הסיסמה.";
         }
         if (value !== nextFormData.password) {
-          return "Passwords do not match.";
+          return "הסיסמאות אינן תואמות.";
         }
         return "";
       default:
@@ -252,7 +252,7 @@ export function SignUpPage() {
                     You have successfully created an account. Please
                     <Link className="login-redirect-link" to="/login">
                       log in
-                    </Link>{" "}
+                    </Link>
                     to start.
                   </>
                 }

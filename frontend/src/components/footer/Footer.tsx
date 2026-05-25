@@ -11,13 +11,19 @@ export function Footer() {
     <footer className="footer-container">
       <div className="footer-shell">
         <div className="footer-columns">
-          <section className="footer-brand-column" aria-label="Job4You company summary">
+          <section
+            className="footer-brand-column"
+            aria-label="Job4You company summary">
             <div className="footer-logo-wrapper">
-              <img src="logo-job1.webp" alt="Job4You logo" className="footer-logo" />
+              <img
+                src="logo-job1.webp"
+                alt="Job4You logo"
+                className="footer-logo"
+              />
             </div>
             <p className="footer-description">
-              Job4You helps candidates and employers connect through a clear,
-              practical, and professional recruitment experience.
+              Job4You מסייעת למחפשי עבודה ולמעסיקים להתחבר באמצעות חוויית גיוס
+              ברורה, מקצועית ויעילה.
             </p>
             <nav
               className="social-media-container"
@@ -120,7 +126,9 @@ export function Footer() {
             <h3 className="footer-title">פרטי התקשרות</h3>
             <div className="contact-list">
               <p className="contact">
-                <i className="fa-solid fa-phone icon-footer" aria-hidden="true"></i>
+                <i
+                  className="fa-solid fa-phone icon-footer"
+                  aria-hidden="true"></i>
                 <span className="contact-item">+972-039080124</span>
               </p>
               <p className="contact">
@@ -132,7 +140,9 @@ export function Footer() {
                 </a>
               </p>
               <p className="contact">
-                <i className="fa-solid fa-clock icon-footer" aria-hidden="true"></i>
+                <i
+                  className="fa-solid fa-clock icon-footer"
+                  aria-hidden="true"></i>
                 <span className="contact-item">8-18</span>
               </p>
             </div>

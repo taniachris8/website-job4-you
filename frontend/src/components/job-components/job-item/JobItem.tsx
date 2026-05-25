@@ -12,7 +12,7 @@ import { useAppSelector } from "../../../store/hooks";
 import "./JobItem.css";
 
 interface JobItemProps extends Partial<Job> {
-  onDelete?: (id?: string | number) => void;
+  onDelete?: (id?: string | number) => void | Promise<void>;
   onEdit?: (updatedJob: Partial<Job>) => void;
 }
 
@@ -33,6 +33,7 @@ export function JobItem({
   const [showApplyForm, setShowApplyForm] = useState(false);
   const [showApplySuccess, setShowApplySuccess] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [editedJob, setEditedJob] = useState<Partial<Job>>({
     jobTitle,
     area,
@@ -65,10 +66,21 @@ export function JobItem({
     setShowConfirmationModal(true);
   };
 
-  const handleDelete = () => {
-    console.log("deleted");
-    onDelete?.(id ?? _id);
-    setShowConfirmationModal(false);
+  const handleDelete = async () => {
+    const jobId = id ?? _id;
+
+    if (!jobId) {
+      setShowConfirmationModal(false);
+      return;
+    }
+
+    try {
+      setIsDeleting(true);
+      await onDelete?.(jobId);
+      setShowConfirmationModal(false);
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   const handleEditChange = (
@@ -182,11 +194,11 @@ export function JobItem({
       )}
       {showConfirmationModal && (
         <ConfirmationModal
-          message=" Are you sure that you want to delete this post? Click 'Delete' to
-            confirm or 'Back' to cancel."
+          message="האם אתה בטוח שברצונך למחוק את המשרה הזו? לחץ על 'מחק' כדי לאשר או על 'חזרה' כדי לבטל."
           showConfirmationModal={showConfirmationModal}
           onDelete={handleDelete}
           setShowConfirmationModal={setShowConfirmationModal}
+          isProcessing={isDeleting}
         />
       )}
     </>

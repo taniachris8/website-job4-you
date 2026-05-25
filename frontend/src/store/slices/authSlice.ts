@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import Cookies from "js-cookie";
 import { ApiService } from "../../services/ApiService";
 import { API_URL } from "../../consts/general";
@@ -25,6 +26,13 @@ interface AuthState {
 
 interface LoginThunkResult {
   user: User;
+}
+
+interface AuthApiErrorResponse {
+  error?: {
+    message?: string;
+  };
+  message?: string;
 }
 
 const getStoredUser = (): User | null => {
@@ -88,6 +96,40 @@ const clearPersistedAuth = () => {
   Cookies.remove(TOKEN_TYPE_COOKIE);
 };
 
+const getLoginErrorMessage = (error: unknown) => {
+  if (axios.isAxiosError<AuthApiErrorResponse>(error)) {
+    const apiMessage =
+      error.response?.data?.error?.message ?? error.response?.data?.message ?? "";
+    const normalizedMessage = apiMessage.toLowerCase();
+    const status = error.response?.status;
+
+    if (
+      normalizedMessage.includes("incorrect password") ||
+      normalizedMessage.includes("invalid credentials")
+    ) {
+      return "סיסמה שגויה";
+    }
+
+    if (
+      normalizedMessage.includes("user not found") ||
+      normalizedMessage.includes("email not found")
+    ) {
+      return "המשתמש לא נמצא";
+    }
+
+    if (status === 400 || status === 401) {
+      return "סיסמה שגויה";
+    }
+  }
+
+  return getApiErrorMessage(error, {
+    defaultMessage: "משהו השתבש. נסה שוב מאוחר יותר.",
+    networkMessage: "משהו השתבש. נסה שוב מאוחר יותר.",
+    serverMessage: "משהו השתבש. נסה שוב מאוחר יותר.",
+    unauthorizedMessage: "סיסמה שגויה",
+  });
+};
+
 export const loginUser = createAsyncThunk<
   LoginThunkResult,
   LoginPayload,
@@ -105,12 +147,7 @@ export const loginUser = createAsyncThunk<
     return { user: normalizedUser };
   } catch (error) {
     console.error("Login failed:", error);
-    return rejectWithValue(
-      getApiErrorMessage(error, {
-        defaultMessage: "\u05E4\u05E8\u05D8\u05D9 \u05D4\u05D4\u05EA\u05D7\u05D1\u05E8\u05D5\u05EA \u05E9\u05D2\u05D5\u05D9\u05D9\u05DD. \u05D1\u05D3\u05E7\u05D5 \u05D0\u05EA \u05D4\u05D0\u05D9\u05DE\u05D9\u05D9\u05DC \u05D5\u05D4\u05E1\u05D9\u05E1\u05DE\u05D4.",
-        unauthorizedMessage: "\u05E4\u05E8\u05D8\u05D9 \u05D4\u05D4\u05EA\u05D7\u05D1\u05E8\u05D5\u05EA \u05E9\u05D2\u05D5\u05D9\u05D9\u05DD. \u05D1\u05D3\u05E7\u05D5 \u05D0\u05EA \u05D4\u05D0\u05D9\u05DE\u05D9\u05D9\u05DC \u05D5\u05D4\u05E1\u05D9\u05E1\u05DE\u05D4.",
-      }),
-    );
+    return rejectWithValue(getLoginErrorMessage(error));
   }
 });
 

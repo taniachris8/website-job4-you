@@ -15,15 +15,15 @@ export const validateLoginField = (
   switch (field) {
     case "email":
       if (!value.trim()) {
-        return "Email is required.";
+        return "יש להזין כתובת דוא\"ל.";
       }
       if (!emailPattern.test(value.trim())) {
-        return "Please enter a valid email address.";
+        return "יש להזין כתובת דוא\"ל תקינה.";
       }
       return "";
     case "password":
       if (!value) {
-        return "Password is required.";
+        return "יש להזין סיסמה.";
       }
       return "";
     default:

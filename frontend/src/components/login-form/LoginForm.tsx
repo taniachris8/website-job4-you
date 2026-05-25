@@ -144,7 +144,9 @@ export function LoginForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      {authError ? <ErrorMessage message={authError} compact /> : null}
+      {authError ? (
+        <ErrorMessage title={authError} message="" compact />
+      ) : null}
 
       <Button
         variant="primary"

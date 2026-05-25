@@ -88,6 +88,15 @@ export function UserSettingsPage() {
     setFieldErrors((currentErrors) => ({ ...currentErrors, [field]: "" }));
   };
 
+  const handleCancelClick = (field: EditableField) => {
+    setUpdatedUser((currentUser) => ({
+      ...currentUser,
+      [field]: user?.[field] ?? "",
+    }));
+    setFieldErrors((currentErrors) => ({ ...currentErrors, [field]: "" }));
+    setIsEditing((currentState) => ({ ...currentState, [field]: false }));
+  };
+
   const handleSaveClick = async (field: EditableField) => {
     const validationError = validateField(field, updatedUser[field]);
 
@@ -226,11 +235,11 @@ export function UserSettingsPage() {
         <div className="settings-page-shell">
           <div className="settings-main-column">
             <header className="settings-page-header">
-              <p className="settings-eyebrow">Account settings</p>
-              <h1 className="settings-title">Settings</h1>
+              <p className="settings-eyebrow">הגדרות פרופיל</p>
+              <h1 className="settings-title">הגדרות</h1>
               <p className="settings-subtitle">
-                Keep your personal details up to date so your account stays
-                accurate, accessible, and ready for future activity.
+                שמור על הפרטים האישיים שלך מעודכנים כדי שהפרופיל שלך יישאר
+                מדויק, נגיש ומוכן לפעילות עתידית.
               </p>
             </header>
 
@@ -252,27 +261,35 @@ export function UserSettingsPage() {
 
             <section className="settings-card" aria-label="Profile settings">
               <div className="settings-card-header">
-                <h2 className="settings-card-title">Profile information</h2>
+                <h2 className="settings-card-title">פרטי פרופיל</h2>
                 <p className="settings-card-description">
-                  Update the details connected to your account.
+                  עדכן את פרטי הפרופיל שלך.
                 </p>
               </div>
 
               <div className="settings-list">
                 <div className="settings-row">
                   <div className="settings-row-copy">
-                    <span className="settings-row-label">Name</span>
+                    <span className="settings-row-label">שם</span>
                     <div className="settings-row-value">
                       {isEditing.name ? renderFieldInput("name") : user?.name}
                     </div>
                   </div>
                   <div className="settings-row-action">
                     {isEditing.name ? (
-                      <Button
-                        variant="save"
-                        onClick={() => handleSaveClick("name")}>
-                        Save
-                      </Button>
+                      <>
+                        <Button
+                          variant="save"
+                          onClick={() => handleSaveClick("name")}>
+                          שמור
+                        </Button>
+                        <Button
+                          variant="secondary"
+                          className="settings-cancel-button"
+                          onClick={() => handleCancelClick("name")}>
+                          ביטול
+                        </Button>
+                      </>
                     ) : (
                       <button
                         type="button"
@@ -287,7 +304,7 @@ export function UserSettingsPage() {
 
                 <div className="settings-row">
                   <div className="settings-row-copy">
-                    <span className="settings-row-label">Family Name</span>
+                    <span className="settings-row-label">שם משפחה</span>
                     <div className="settings-row-value">
                       {isEditing.familyName
                         ? renderFieldInput("familyName")
@@ -296,11 +313,19 @@ export function UserSettingsPage() {
                   </div>
                   <div className="settings-row-action">
                     {isEditing.familyName ? (
-                      <Button
-                        variant="save"
-                        onClick={() => handleSaveClick("familyName")}>
-                        Save
-                      </Button>
+                      <>
+                        <Button
+                          variant="save"
+                          onClick={() => handleSaveClick("familyName")}>
+                          שמור
+                        </Button>
+                        <Button
+                          variant="secondary"
+                          className="settings-cancel-button"
+                          onClick={() => handleCancelClick("familyName")}>
+                          ביטול
+                        </Button>
+                      </>
                     ) : (
                       <button
                         type="button"
@@ -315,7 +340,7 @@ export function UserSettingsPage() {
 
                 <div className="settings-row">
                   <div className="settings-row-copy">
-                    <span className="settings-row-label">Email</span>
+                    <span className="settings-row-label">אימייל</span>
                     <div className="settings-row-value">
                       {isEditing.email
                         ? renderFieldInput("email", "email")
@@ -324,11 +349,19 @@ export function UserSettingsPage() {
                   </div>
                   <div className="settings-row-action">
                     {isEditing.email ? (
-                      <Button
-                        variant="save"
-                        onClick={() => handleSaveClick("email")}>
-                        Save
-                      </Button>
+                      <>
+                        <Button
+                          variant="save"
+                          onClick={() => handleSaveClick("email")}>
+                          שמור
+                        </Button>
+                        <Button
+                          variant="secondary"
+                          className="settings-cancel-button"
+                          onClick={() => handleCancelClick("email")}>
+                          ביטול
+                        </Button>
+                      </>
                     ) : (
                       <button
                         type="button"
@@ -346,34 +379,33 @@ export function UserSettingsPage() {
 
           <aside className="settings-side-column">
             <div className="settings-side-card reset-password-wrapper">
-              <p className="settings-side-eyebrow">Security</p>
-              <h2 className="settings-side-title">Password reset</h2>
+              <p className="settings-side-eyebrow">אבטחה</p>
+              <h2 className="settings-side-title">איפוס סיסמה</h2>
               <p className="settings-side-text">
-                If you want to change your password, we will send you an email
-                to reset it. To proceed click the button below.
+                אם ברצונך לשנות את הסיסמה שלך, נשלח אליך אימייל לאיפוס הסיסמה.
+                כדי להמשיך, לחץ על הכפתור למטה.
               </p>
               <Button variant="secondary" onClick={handlePasswordRecovery}>
-                Reset
+                איפוס
               </Button>
             </div>
 
             <div className="settings-side-card delete-account-wrapper">
               <p className="settings-side-eyebrow settings-side-eyebrow-danger">
-                Danger zone
+                פעולות מסוכנות
               </p>
-              <h2 className="settings-side-title">Delete account</h2>
+              <h2 className="settings-side-title">מחיקת פרופיל</h2>
               <p className="settings-side-text">
-                If you want to delete your account, click the button below.
+                אם ברצונך למחוק את הפרופיל שלך, לחץ על הכפתור למטה.
               </p>
               <Button variant="delete" onClick={handleShowDeleteModal}>
-                Delete account
+                מחק פרופיל
               </Button>
             </div>
           </aside>
 
           <ConfirmationModal
-            message=" You are about to delete your account. If you wish to proceed please
-          click Delete button below."
+            message="אתה עומד למחוק את הפרופיל שלך. אם ברצונך להמשיך, לחץ על כפתור המחיקה למטה."
             onDelete={handleDeleteAccount}
             showConfirmationModal={showDeleteConfirmModal}
             setShowConfirmationModal={setShowDeleteConfirmModal}

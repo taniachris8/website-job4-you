@@ -172,6 +172,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 10px;
 }
 
 .settings-icon-button {
@@ -215,6 +216,20 @@
 .settings-row-action .button.save {
   width: 120px;
   margin-left: 0;
+}
+
+.settings-row-action .settings-cancel-button {
+  width: 96px;
+  margin-left: 0;
+}
+
+.settings-row:has(.settings-input) {
+  align-items: start;
+}
+
+.settings-row:has(.settings-input) .settings-row-action {
+  align-self: start;
+  padding-top: 28px;
 }
 
 .settings-field-wrapper {
@@ -510,6 +525,24 @@
   .settings-row-action .button.save {
     width: 100%;
   }
+
+  .settings-row:has(.settings-input) {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .settings-row:has(.settings-input) .settings-row-action {
+    justify-content: flex-end;
+    padding-top: 27px;
+  }
+
+  .settings-row:has(.settings-input) .settings-row-action .button.save {
+    width: 84px;
+  }
+
+  .settings-row:has(.settings-input) .settings-row-action .settings-cancel-button {
+    width: 84px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -540,5 +573,19 @@
   .settings-row {
     padding: 16px 14px;
     border-radius: 18px;
+  }
+
+  .settings-row:has(.settings-input) {
+    gap: 10px;
+  }
+
+  .settings-row:has(.settings-input) .settings-row-action .button.save {
+    width: 76px;
+    padding-inline: 0.8rem;
+  }
+
+  .settings-row:has(.settings-input) .settings-row-action .settings-cancel-button {
+    width: 76px;
+    padding-inline: 0.8rem;
   }
 }

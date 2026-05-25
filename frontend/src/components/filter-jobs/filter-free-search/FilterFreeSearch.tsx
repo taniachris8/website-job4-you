@@ -39,7 +39,7 @@ export function FilterFreeSearch({ className = "" }: { className?: string }) {
       variant="search"
       className="filter-search-button"
       onClick={handleSearch}>
-      Search
+      חיפוש
     </Button>
   );
 

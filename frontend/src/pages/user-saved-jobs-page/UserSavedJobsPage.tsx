@@ -63,16 +63,18 @@ export function UserSavedJobsPage() {
         <div className="user-saved-jobs-wrapper">
           <header className="saved-jobs-header">
             <div className="saved-jobs-header-copy">
-              <p className="saved-jobs-eyebrow">Personal area</p>
-              <h1 className="saved-jobs-title">Saved jobs</h1>
+              <p className="saved-jobs-eyebrow">אזור אישי</p>
+              <h1 className="saved-jobs-title">משרות שמורות</h1>
               <p className="saved-jobs-subtitle">
-                Keep track of the opportunities that caught your attention and
-                return to them whenever you are ready to apply.
+                שמור על משרות שמעניינות אותך וחזור אליהן בכל זמן כשתהיה מוכן
+                להגיש מועמדות.
               </p>
             </div>
             <div className="saved-jobs-summary">
-              <span className="saved-jobs-summary-number">{savedJobs.length}</span>
-              <span className="saved-jobs-summary-label">saved roles</span>
+              <span className="saved-jobs-summary-number">
+                {savedJobs.length}
+              </span>
+              <span className="saved-jobs-summary-label">משרות שמורות</span>
             </div>
           </header>
 
@@ -83,7 +85,7 @@ export function UserSavedJobsPage() {
                 label="Loading saved jobs..."
                 variant="compact"
               />
-              <p>Loading saved jobs...</p>
+              <p>טוען משרות שמורות...</p>
             </div>
           ) : error ? (
             <ErrorMessage
@@ -113,13 +115,13 @@ export function UserSavedJobsPage() {
                   <div className="no-saved-jobs-icon">
                     <i className="fa-regular fa-bookmark"></i>
                   </div>
-                  <h2 className="no-saved-jobs-title">There are no saved jobs.</h2>
+                  <h2 className="no-saved-jobs-title">אין משרות שמורות.</h2>
                   <p className="no-saved-jobs-text">
-                    Browse the latest roles and save the ones you want to revisit
-                    later.
+                    עיין במשרות החדשות ושמור את אלו שתרצה לחזור אליהן מאוחר
+                    יותר.
                   </p>
                   <Button variant="jobs" onClick={handleRedirectToJobs}>
-                    Discover job offers
+                    גלה משרות חדשות
                     <i className="fa-solid fa-arrow-left discover-jobs-arrow"></i>
                   </Button>
                 </div>
