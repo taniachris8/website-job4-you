@@ -2,11 +2,13 @@ import { Router } from "express";
 import { z } from "zod";
 import bcrypt from "bcrypt";
 import jwt, { type Secret, type SignOptions } from "jsonwebtoken";
-import { randomBytes, randomUUID } from "crypto";
+import rateLimit from "express-rate-limit";
+import { createHash, randomBytes, randomUUID } from "crypto";
 import { prisma } from "../lib/prisma";
 import { AppError } from "../lib/errors";
 import { validate } from "../lib/validate";
 import { requireAuth } from "../middleware/auth";
+import { sendPasswordResetMail } from "../services/mailService";
 
 const router = Router();
 
@@ -22,11 +24,24 @@ const loginSchema = z.object({
   password: z.string().min(1)
 });
 
-const getAccessSecret = () =>
-  process.env.JWT_ACCESS_SECRET || "dev-access-secret";
+const forgotPasswordSchema = z.object({
+  email: z.string().email()
+});
 
-const getRefreshSecret = () =>
-  process.env.JWT_REFRESH_SECRET || "dev-refresh-secret";
+const resetPasswordSchema = z
+  .object({
+    token: z.string().min(1),
+    password: z.string().min(8),
+    confirmPassword: z.string().min(8)
+  })
+  .refine((payload) => payload.password === payload.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords do not match"
+  });
+
+const getAccessSecret = () => process.env.JWT_ACCESS_SECRET || "dev-access-secret";
+
+const getRefreshSecret = () => process.env.JWT_REFRESH_SECRET || "dev-refresh-secret";
 
 const getAccessTtl = () => process.env.ACCESS_TOKEN_TTL || "15m";
 
@@ -35,6 +50,18 @@ const getRefreshTtlDays = () => {
   const parsed = Number(raw);
   return Number.isFinite(parsed) && parsed > 0 ? parsed : 30;
 };
+
+const getPasswordResetTtlMinutes = () => {
+  const raw = process.env.PASSWORD_RESET_TOKEN_TTL_MINUTES || "60";
+  const parsed = Number(raw);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 60;
+};
+
+const getAppBaseUrl = () =>
+  (process.env.APP_BASE_URL || process.env.FRONTEND_ORIGIN || "http://localhost:5173").replace(
+    /\/+$/,
+    ""
+  );
 
 const getCookieSecure = () => process.env.COOKIE_SECURE === "true";
 
@@ -48,6 +75,9 @@ const hashPasswordIfNeeded = async (password: string) => {
   if (password.length >= 30) return password;
   return bcrypt.hash(password, 10);
 };
+
+const hashResetToken = (token: string) =>
+  createHash("sha256").update(token).digest("hex");
 
 const toUserResponse = (user: {
   id: string;
@@ -67,7 +97,9 @@ const toUserResponse = (user: {
 
 const signAccessToken = (payload: { sub: string; role: "ADMIN" | "USER" }) => {
   const secret: Secret = getAccessSecret();
-  const options: SignOptions = { expiresIn: getAccessTtl() as SignOptions["expiresIn"] };
+  const options: SignOptions = {
+    expiresIn: getAccessTtl() as SignOptions["expiresIn"]
+  };
   return jwt.sign(payload, secret, options);
 };
 
@@ -88,37 +120,41 @@ const generateUniqueUserId = async () => {
     const existing = await prisma.user.findUnique({ where: { id } });
     if (!existing) return id;
   }
+
   throw new AppError(500, "INTERNAL", "Failed to generate unique user id");
 };
 
 const setRefreshCookie = (res: any, token: string) => {
-  res.cookie("refreshToken", token, {
+  const cookieOptions = {
     httpOnly: true,
     secure: getCookieSecure(),
     sameSite: getCookieSameSite(),
-    path: "/auth/refresh",
     maxAge: getRefreshTtlDays() * 24 * 60 * 60 * 1000
+  };
+
+  res.cookie("refreshToken", token, {
+    ...cookieOptions,
+    path: "/auth/refresh"
   });
   res.cookie("refreshToken", token, {
-    httpOnly: true,
-    secure: getCookieSecure(),
-    sameSite: getCookieSameSite(),
-    path: "/auth/logout",
-    maxAge: getRefreshTtlDays() * 24 * 60 * 60 * 1000
+    ...cookieOptions,
+    path: "/auth/logout"
   });
 };
 
 const clearRefreshCookie = (res: any) => {
-  res.clearCookie("refreshToken", {
+  const cookieOptions = {
     httpOnly: true,
     secure: getCookieSecure(),
-    sameSite: getCookieSameSite(),
+    sameSite: getCookieSameSite()
+  };
+
+  res.clearCookie("refreshToken", {
+    ...cookieOptions,
     path: "/auth/refresh"
   });
   res.clearCookie("refreshToken", {
-    httpOnly: true,
-    secure: getCookieSecure(),
-    sameSite: getCookieSameSite(),
+    ...cookieOptions,
     path: "/auth/logout"
   });
 };
@@ -140,6 +176,19 @@ const createRefreshToken = async (userId: string) => {
 
   return token;
 };
+
+const forgotPasswordLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    error: {
+      code: "TOO_MANY_REQUESTS",
+      message: "Too many password reset requests. Try again later."
+    }
+  }
+});
 
 const issueAuthResponse = async (req: any, res: any, userId: string) => {
   const user = await prisma.user.findUnique({
@@ -205,7 +254,7 @@ router.post("/login", async (req, res, next) => {
     });
 
     if (!user) {
-      throw new AppError(401, "UNAUTHORIZED", "User not found");
+      throw new AppError(401, "UNAUTHORIZED", "Invalid credentials");
     }
 
     let valid = false;
@@ -223,7 +272,7 @@ router.post("/login", async (req, res, next) => {
     }
 
     if (!valid) {
-      throw new AppError(401, "UNAUTHORIZED", "Incorrect password");
+      throw new AppError(401, "UNAUTHORIZED", "Invalid credentials");
     }
 
     const accessToken = signAccessToken({ sub: user.id, role: user.role });
@@ -245,6 +294,102 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.post("/forgot-password", forgotPasswordLimiter, async (req, res, next) => {
+  try {
+    const payload = validate(forgotPasswordSchema, req.body);
+    const user = await prisma.user.findUnique({
+      where: { email: payload.email }
+    });
+
+    if (!user) {
+      res.status(204).send();
+      return;
+    }
+
+    const rawToken = randomBytes(32).toString("hex");
+    const tokenHash = hashResetToken(rawToken);
+    const expiresAt = new Date(Date.now() + getPasswordResetTtlMinutes() * 60 * 1000);
+    const resetUrl = `${getAppBaseUrl()}/reset-password?token=${encodeURIComponent(rawToken)}`;
+
+    await prisma.$transaction([
+      prisma.passwordResetToken.updateMany({
+        where: {
+          userId: user.id,
+          usedAt: null
+        },
+        data: {
+          usedAt: new Date()
+        }
+      }),
+      prisma.passwordResetToken.create({
+        data: {
+          userId: user.id,
+          tokenHash,
+          expiresAt
+        }
+      })
+    ]);
+
+    await sendPasswordResetMail({
+      to: user.email,
+      resetUrl
+    });
+
+    res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/reset-password", async (req, res, next) => {
+  try {
+    const payload = validate(resetPasswordSchema, req.body);
+    const tokenHash = hashResetToken(payload.token);
+    const resetToken = await prisma.passwordResetToken.findUnique({
+      where: { tokenHash }
+    });
+
+    if (!resetToken || resetToken.usedAt || resetToken.expiresAt < new Date()) {
+      throw new AppError(400, "BAD_REQUEST", "Reset link is invalid or has expired");
+    }
+
+    const password = await hashPasswordIfNeeded(payload.password);
+
+    await prisma.$transaction([
+      prisma.user.update({
+        where: { id: resetToken.userId },
+        data: { password }
+      }),
+      prisma.passwordResetToken.update({
+        where: { id: resetToken.id },
+        data: { usedAt: new Date() }
+      }),
+      prisma.passwordResetToken.updateMany({
+        where: {
+          userId: resetToken.userId,
+          usedAt: null,
+          id: { not: resetToken.id }
+        },
+        data: { usedAt: new Date() }
+      }),
+      prisma.refreshToken.updateMany({
+        where: {
+          userId: resetToken.userId,
+          revokedAt: null
+        },
+        data: {
+          revokedAt: new Date()
+        }
+      })
+    ]);
+
+    clearRefreshCookie(res);
+    res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/refresh", async (req, res, next) => {
   try {
     const token = req.cookies?.refreshToken;
@@ -253,7 +398,6 @@ router.post("/refresh", async (req, res, next) => {
     }
 
     const payload = jwt.verify(token, getRefreshSecret()) as { sub: string; jti: string };
-
     const stored = await prisma.refreshToken.findUnique({
       where: { id: payload.jti }
     });
@@ -279,6 +423,7 @@ router.post("/refresh", async (req, res, next) => {
     if (!refreshedUser) {
       throw new AppError(404, "NOT_FOUND", "User not found");
     }
+
     const accessToken = signAccessToken({ sub: payload.sub, role: refreshedUser.role });
     res.json({ accessToken });
   } catch (err) {

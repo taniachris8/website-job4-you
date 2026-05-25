@@ -16,6 +16,7 @@ import { Article4Page } from "./pages/articles-pages/Article4Page";
 import { SignUpPage } from "./pages/signup-page/SignUpPage";
 import { LoginPage } from "./pages/login-page/LoginPage";
 import { PasswordRecoveryPage } from "./pages/password-recovery-page/PasswordRecoveryPage";
+import { ResetPasswordPage } from "./pages/reset-password-page/ResetPasswordPage";
 import { EmployeesRightsPage } from "./pages/employees-rights-page/EmployeesRightsPage";
 import { TipsPage } from "./pages/tips-page/TipsPage";
 import { UserCVPage } from "./pages/user-cv-page/UserCVPage";
@@ -106,6 +107,10 @@ export const router = createBrowserRouter([
       {
         path: "/password-recovery",
         element: <PasswordRecoveryPage />,
+      },
+      {
+        path: "/reset-password",
+        element: <ResetPasswordPage />,
       },
     ],
   },

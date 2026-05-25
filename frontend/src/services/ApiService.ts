@@ -8,6 +8,12 @@ interface AuthResponse {
   refreshToken?: string;
 }
 
+interface ResetPasswordPayload {
+  token: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export class ApiService {
   baseURL: string;
 
@@ -38,6 +44,16 @@ export class ApiService {
 
   getMe = (): Promise<AxiosResponse<User>> => {
     return api.get(`${this.baseURL}/auth/me`);
+  };
+
+  forgotPassword = (email: string): Promise<AxiosResponse<void>> => {
+    return api.post(`${this.baseURL}/auth/forgot-password`, { email });
+  };
+
+  resetPassword = (
+    payload: ResetPasswordPayload,
+  ): Promise<AxiosResponse<void>> => {
+    return api.post(`${this.baseURL}/auth/reset-password`, payload);
   };
 
   getAllUsers = (): Promise<AxiosResponse<User[]>> => {

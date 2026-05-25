@@ -10,6 +10,7 @@ interface ApiErrorResponse {
 
 interface ApiErrorMessages {
   defaultMessage?: string;
+  badRequestMessage?: string;
   networkMessage?: string;
   serverMessage?: string;
   notFoundMessage?: string;
@@ -38,6 +39,15 @@ export function getApiErrorMessage(
     }
 
     const status = error.response.status;
+
+    if (status === 400) {
+      return (
+        messages.badRequestMessage ??
+        error.response.data?.error?.message ??
+        messages.defaultMessage ??
+        apiErrorMessages.default
+      );
+    }
 
     if (status === 401 || status === 403) {
       return messages.unauthorizedMessage ?? apiErrorMessages.unauthorized;
