@@ -15,11 +15,10 @@ const parseMailPort = () => {
 const getMailConfig = () => {
   const host = process.env.MAIL_HOST?.trim();
   const from = process.env.MAIL_FROM?.trim();
-  const to = process.env.MAIL_TO?.trim();
   const user = process.env.MAIL_USER?.trim() || "";
   const pass = process.env.MAIL_PASS?.trim() || "";
 
-  if (!host || !from || !to) {
+  if (!host || !from) {
     throw new AppError(500, "INTERNAL", "Mail transport is not configured");
   }
 
@@ -27,10 +26,19 @@ const getMailConfig = () => {
     host,
     port: parseMailPort(),
     from,
-    to,
     user,
     pass
   };
+};
+
+const getFormMailRecipient = () => {
+  const to = process.env.MAIL_TO?.trim();
+
+  if (!to) {
+    throw new AppError(500, "INTERNAL", "Mail transport is not configured");
+  }
+
+  return to;
 };
 
 const createTransporter = () => {
@@ -69,7 +77,7 @@ export const sendFormMail = async ({
 
   console.log("Sending form email", {
     subject,
-    to: config.to,
+    to: getFormMailRecipient(),
     replyTo,
     attachmentCount: attachments.length,
     attachments: attachmentNames
@@ -78,7 +86,7 @@ export const sendFormMail = async ({
   try {
     const info = await transporter.sendMail({
       from: config.from,
-      to: config.to,
+      to: getFormMailRecipient(),
       subject,
       text,
       replyTo,
@@ -96,6 +104,48 @@ export const sendFormMail = async ({
     });
   } catch (error) {
     console.error("Failed to send form mail", error);
+    throw new AppError(500, "INTERNAL", "Failed to send email");
+  }
+};
+
+export const sendPasswordResetMail = async ({
+  to,
+  resetUrl
+}: {
+  to: string;
+  resetUrl: string;
+}) => {
+  const transporter = createTransporter();
+  const config = getMailConfig();
+  const subject = "Reset your Job4You password";
+  const text = [
+    "We received a request to reset your Job4You password.",
+    "",
+    "Open the link below to choose a new password:",
+    resetUrl,
+    "",
+    "If you did not request this change, you can ignore this email."
+  ].join("\n");
+
+  console.log("Sending password reset email", { to });
+
+  try {
+    const info = await transporter.sendMail({
+      from: config.from,
+      to,
+      subject,
+      text
+    });
+
+    console.log("Password reset email sent", {
+      to,
+      messageId: info.messageId,
+      accepted: info.accepted,
+      rejected: info.rejected,
+      response: info.response
+    });
+  } catch (error) {
+    console.error("Failed to send password reset mail", error);
     throw new AppError(500, "INTERNAL", "Failed to send email");
   }
 };

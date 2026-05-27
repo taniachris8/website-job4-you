@@ -15,16 +15,17 @@ enum Role {
 }
 
 model User {
-  id         String          @id
-  name       String
-  familyName String
-  email      String          @unique
-  password   String
-  role       Role            @default(USER)
-  savedJobs  UserSavedJob[]
-  refreshTokens RefreshToken[]
-  createdAt  DateTime        @default(now())
-  updatedAt  DateTime        @updatedAt
+  id                  String               @id
+  name                String
+  familyName          String
+  email               String               @unique
+  password            String
+  role                Role                 @default(USER)
+  savedJobs           UserSavedJob[]
+  refreshTokens       RefreshToken[]
+  passwordResetTokens PasswordResetToken[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
 }
 
 model Job {
@@ -58,6 +59,19 @@ model RefreshToken {
   tokenHash String
   revokedAt DateTime?
   expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
   createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
