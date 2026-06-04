@@ -30,15 +30,7 @@ export function Footer() {
               aria-label="Social media links">
               <a
                 className="social-link"
-                href="https://www.linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit our LinkedIn page">
-                <i className="fa-brands fa-linkedin" aria-hidden="true"></i>
-              </a>
-              <a
-                className="social-link"
-                href="https://www.facebook.com"
+                href="https://www.facebook.com/people/%D7%92%D7%95%D7%91-%D7%A4%D7%95%D7%A8-%D7%99%D7%95-%D7%94%D7%A9%D7%9E%D7%94/100063669032525/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit our Facebook page">
@@ -46,7 +38,7 @@ export function Footer() {
               </a>
               <a
                 className="social-link"
-                href="https://www.whatsapp.com"
+                href="https://wa.me/972039080124"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat with us on WhatsApp">
@@ -54,7 +46,7 @@ export function Footer() {
               </a>
               <a
                 className="social-link"
-                href="https://www.instagram.com"
+                href="https://www.instagram.com/_job_4you?igsh=MWt0cTlicGx2dXY4MQ%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit our Instagram page">

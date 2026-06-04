@@ -150,6 +150,20 @@
     0 12px 24px rgba(26, 40, 122, 0.1) !important;
 }
 
+.add-new-job-field .form-control.is-invalid,
+.add-new-job-field .form-select.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.add-new-job-field .invalid-feedback {
+  display: block;
+  margin-top: 6px;
+  color: #b42318;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: right;
+}
+
 .add-new-job-actions {
   display: flex;
   justify-content: flex-end;
@@ -287,6 +301,15 @@
   box-shadow:
     0 0 0 4px rgba(94, 231, 255, 0.16),
     0 16px 34px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .add-new-job-field .form-control.is-invalid,
+[data-theme="dark"] .add-new-job-field .form-select.is-invalid {
+  border-color: rgba(255, 138, 138, 0.78) !important;
+}
+
+[data-theme="dark"] .add-new-job-field .invalid-feedback {
+  color: #ffb4b4;
 }
 
 [data-theme="dark"] .add-new-job-error {

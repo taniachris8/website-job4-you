@@ -23,13 +23,13 @@ export function PasswordRecoveryPage() {
     const trimmedEmail = email.trim();
 
     if (!trimmedEmail) {
-      setError("Please enter the email address associated with your account.");
+      setError("יש להזין את כתובת האימייל המשויכת לחשבון שלך.");
       setIsSubmitted(false);
       return;
     }
 
     if (!isValidEmail(trimmedEmail)) {
-      setError("Please enter a valid email address.");
+      setError("יש להזין כתובת אימייל תקינה.");
       setIsSubmitted(false);
       return;
     }
@@ -44,7 +44,7 @@ export function PasswordRecoveryPage() {
     } catch (requestError) {
       setError(
         getApiErrorMessage(requestError, {
-          defaultMessage: "We could not start the recovery process. Please try again."
+          defaultMessage: "לא הצלחנו להתחיל את תהליך שחזור הסיסמה. אנא נסו שוב."
         }),
       );
       setIsSubmitted(false);
@@ -58,29 +58,29 @@ export function PasswordRecoveryPage() {
       <section className="reset-password-container">
         <div className="password-recovery-shell">
           <div className="recovery-password-wrapper">
-            <p className="reset-password-eyebrow">Password recovery</p>
-            <h1 className="reset-password-title">Reset your password</h1>
+            <p className="reset-password-eyebrow">שחזור סיסמה</p>
+            <h1 className="reset-password-title">איפוס הסיסמה שלך</h1>
             <p className="reset-password-subtitle">
-              Enter the email address associated with your account and we will
-              help you continue the recovery process.
+              הזינו את כתובת האימייל המשויכת לחשבון שלכם ונעזור לכם להמשיך
+              בתהליך השחזור.
             </p>
             {isSubmitted ? (
               <Alert variant="success" className="password-recovery-alert">
-                If an account exists for this email address, we sent password
-                reset instructions.
+                אם קיים חשבון עבור כתובת האימייל הזו, שלחנו הנחיות לאיפוס
+                הסיסמה.
               </Alert>
             ) : null}
 
             <div className="reset-password-input-wrapper">
               <div className="reset-password-field">
                 <label className="reset-password-label" htmlFor="recovery-email">
-                  Email address
+                  כתובת אימייל
                 </label>
                 <InputGroup className="reset-password-group">
                   <Form.Control
                     id="recovery-email"
                     type="email"
-                    placeholder="Enter your email address"
+                    placeholder="הזינו את כתובת האימייל שלכם"
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
@@ -101,41 +101,41 @@ export function PasswordRecoveryPage() {
                 variant="reset"
                 onClick={handleResetPassword}
                 disabled={isLoading}>
-                Reset
+                איפוס סיסמה
               </Button>
             </div>
 
             <Link to="/login" className="back-to-login-link">
-              Back to Login
+              חזרה להתחברות
             </Link>
           </div>
 
           <aside className="password-recovery-side-panel">
-            <p className="password-recovery-side-eyebrow">Need quick access?</p>
+            <p className="password-recovery-side-eyebrow">צריכים גישה מהירה?</p>
             <h2 className="password-recovery-side-title">
-              We will help you get back into your account safely
+              נעזור לכם לחזור לחשבון שלכם בצורה בטוחה
             </h2>
             <p className="password-recovery-side-subtitle">
-              Use the same email address you signed up with so the recovery flow
-              can continue smoothly and securely.
+              השתמשו באותה כתובת אימייל שאיתה נרשמתם, כדי שתהליך השחזור ימשיך
+              בצורה חלקה ומאובטחת.
             </p>
             <div className="password-recovery-points">
               <div className="password-recovery-point">
                 <i className="fa-solid fa-check recovery-check-icon"></i>
                 <p className="password-recovery-point-text">
-                  Quick and simple recovery process
+                  תהליך שחזור מהיר ופשוט
                 </p>
               </div>
               <div className="password-recovery-point">
                 <i className="fa-solid fa-check recovery-check-icon"></i>
                 <p className="password-recovery-point-text">
-                  Secure access back to your account
+                  חזרה מאובטחת לחשבון שלכם
                 </p>
               </div>
               <div className="password-recovery-point">
                 <i className="fa-solid fa-check recovery-check-icon"></i>
                 <p className="password-recovery-point-text">
-                  A cleaner path back to your saved jobs and activity
+                  חזרה נוחה למשרות ששמרתם ולפעילות שלכם באתר
                 </p>
               </div>
             </div>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Job } from "../../../types";
 
 import Form from "react-bootstrap/Form";
@@ -11,6 +12,66 @@ import { scopeOptions } from "../../../consts/options/ScopeOptions";
 import { Button } from "../../button/Button";
 
 import "./EditJobModalForm.css";
+
+type JobFormField =
+  | "jobTitle"
+  | "domain"
+  | "profession"
+  | "area"
+  | "scope"
+  | "jobNumber"
+  | "jobDescription"
+  | "jobRequirements";
+
+type JobFormValues = Record<JobFormField, string>;
+type JobFormErrors = Partial<Record<JobFormField, string>>;
+
+const requiredMessages: Record<JobFormField, string> = {
+  jobTitle: "נא להזין כותרת משרה",
+  domain: "יש לבחור תחום",
+  profession: "יש לבחור מקצוע",
+  area: "יש לבחור אזור",
+  scope: "יש לבחור היקף משרה",
+  jobNumber: "נא להזין מספר משרה",
+  jobDescription: "נא להזין תיאור משרה",
+  jobRequirements: "נא להזין דרישות משרה",
+};
+
+const toFieldValue = (value: unknown) => String(value ?? "");
+
+const validateJobField = (field: JobFormField, value: string) => {
+  const trimmedValue = value.trim();
+
+  if (!trimmedValue) {
+    return requiredMessages[field];
+  }
+
+  const optionMap: Partial<Record<JobFormField, string[]>> = {
+    domain: domainOptions,
+    profession: professionOptions,
+    area: areaOptions,
+    scope: scopeOptions,
+  };
+  const allowedOptions = optionMap[field];
+
+  if (allowedOptions && !allowedOptions.includes(trimmedValue)) {
+    return "הערך שהוזן אינו תקין";
+  }
+
+  return "";
+};
+
+const validateJobForm = (values: JobFormValues) =>
+  (Object.keys(values) as JobFormField[]).reduce<JobFormErrors>(
+    (errors, field) => {
+      const error = validateJobField(field, values[field]);
+      if (error) {
+        errors[field] = error;
+      }
+      return errors;
+    },
+    {},
+  );
 
 interface EditJobModalFormProps {
   showEditForm?: boolean;
@@ -31,6 +92,60 @@ export function EditJobModalForm({
   editedJob,
   handleEditSubmit,
 }: EditJobModalFormProps) {
+  const [formErrors, setFormErrors] = useState<JobFormErrors>({});
+  const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
+
+  const getFormValues = (): JobFormValues => ({
+    jobTitle: toFieldValue(editedJob.jobTitle),
+    domain: toFieldValue(editedJob.domain),
+    profession: toFieldValue(editedJob.profession),
+    area: toFieldValue(editedJob.area),
+    scope: toFieldValue(editedJob.scope),
+    jobNumber: toFieldValue(editedJob.jobNumber),
+    jobDescription: toFieldValue(editedJob.jobDescription),
+    jobRequirements: toFieldValue(editedJob.jobRequirements),
+  });
+
+  const handleValidatedChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    handleEditChange(e);
+
+    if (hasAttemptedSubmit) {
+      const field = e.target.name as JobFormField;
+      const fieldError = validateJobField(field, e.target.value);
+
+      setFormErrors((currentErrors) => {
+        const nextErrors = { ...currentErrors };
+
+        if (fieldError) {
+          nextErrors[field] = fieldError;
+        } else {
+          delete nextErrors[field];
+        }
+
+        return nextErrors;
+      });
+    }
+  };
+
+  const handleValidatedSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    setHasAttemptedSubmit(true);
+
+    const validationErrors = validateJobForm(getFormValues());
+
+    if (Object.keys(validationErrors).length > 0) {
+      setFormErrors(validationErrors);
+      return;
+    }
+
+    setFormErrors({});
+    handleEditSubmit(e);
+  };
+
   return (
     <Modal
       show={showEditForm}
@@ -48,7 +163,7 @@ export function EditJobModalForm({
       </Modal.Header>
 
       <Modal.Body className="edit-job-body">
-        <Form onSubmit={handleEditSubmit} className="edit-job-form">
+        <Form noValidate onSubmit={handleValidatedSubmit} className="edit-job-form">
           <section className="edit-job-section">
             <div className="edit-job-section-heading">
               <h2 className="edit-job-section-title">מידע בסיסי</h2>
@@ -65,18 +180,23 @@ export function EditJobModalForm({
                 <Form.Control
                   type="text"
                   name="jobTitle"
-                  value={editedJob.jobTitle}
-                  onChange={handleEditChange}
+                  value={toFieldValue(editedJob.jobTitle)}
+                  onChange={handleValidatedChange}
+                  isInvalid={hasAttemptedSubmit && Boolean(formErrors.jobTitle)}
                   autoFocus
                 />
+                <Form.Control.Feedback type="invalid">
+                  {formErrors.jobTitle}
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="edit-job-field" controlId="domain">
                 <Form.Label>תחום:</Form.Label>
                 <Form.Select
                   name="domain"
-                  value={editedJob.domain}
-                  onChange={handleEditChange}>
+                  value={toFieldValue(editedJob.domain)}
+                  onChange={handleValidatedChange}
+                  isInvalid={hasAttemptedSubmit && Boolean(formErrors.domain)}>
                   <option value="">בחר תחום</option>
                   {domainOptions.map((option, index) => (
                     <option key={index} value={option}>
@@ -84,14 +204,20 @@ export function EditJobModalForm({
                     </option>
                   ))}
                 </Form.Select>
+                <Form.Control.Feedback type="invalid">
+                  {formErrors.domain}
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="edit-job-field" controlId="profession">
                 <Form.Label>מקצוע:</Form.Label>
                 <Form.Select
                   name="profession"
-                  value={editedJob.profession}
-                  onChange={handleEditChange}>
+                  value={toFieldValue(editedJob.profession)}
+                  onChange={handleValidatedChange}
+                  isInvalid={
+                    hasAttemptedSubmit && Boolean(formErrors.profession)
+                  }>
                   <option value="">בחר מקצוע</option>
                   {professionOptions.map((option, index) => (
                     <option key={index} value={option}>
@@ -99,6 +225,9 @@ export function EditJobModalForm({
                     </option>
                   ))}
                 </Form.Select>
+                <Form.Control.Feedback type="invalid">
+                  {formErrors.profession}
+                </Form.Control.Feedback>
               </Form.Group>
             </div>
           </section>
@@ -118,8 +247,9 @@ export function EditJobModalForm({
                 <Form.Label>אזור:</Form.Label>
                 <Form.Select
                   name="area"
-                  value={editedJob.area}
-                  onChange={handleEditChange}>
+                  value={toFieldValue(editedJob.area)}
+                  onChange={handleValidatedChange}
+                  isInvalid={hasAttemptedSubmit && Boolean(formErrors.area)}>
                   <option value="">בחר אזור</option>
                   {areaOptions.map((option, index) => (
                     <option key={index} value={option}>
@@ -127,14 +257,18 @@ export function EditJobModalForm({
                     </option>
                   ))}
                 </Form.Select>
+                <Form.Control.Feedback type="invalid">
+                  {formErrors.area}
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="edit-job-field" controlId="scope">
                 <Form.Label>היקף משרה:</Form.Label>
                 <Form.Select
                   name="scope"
-                  value={editedJob.scope}
-                  onChange={handleEditChange}>
+                  value={toFieldValue(editedJob.scope)}
+                  onChange={handleValidatedChange}
+                  isInvalid={hasAttemptedSubmit && Boolean(formErrors.scope)}>
                   <option value="">בחר היקף משרה</option>
                   {scopeOptions.map((option, index) => (
                     <option key={index} value={option}>
@@ -142,6 +276,9 @@ export function EditJobModalForm({
                     </option>
                   ))}
                 </Form.Select>
+                <Form.Control.Feedback type="invalid">
+                  {formErrors.scope}
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group
@@ -151,9 +288,13 @@ export function EditJobModalForm({
                 <Form.Control
                   type="text"
                   name="jobNumber"
-                  value={editedJob.jobNumber}
-                  onChange={handleEditChange}
+                  value={toFieldValue(editedJob.jobNumber)}
+                  onChange={handleValidatedChange}
+                  isInvalid={hasAttemptedSubmit && Boolean(formErrors.jobNumber)}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {formErrors.jobNumber}
+                </Form.Control.Feedback>
               </Form.Group>
             </div>
           </section>
@@ -173,9 +314,15 @@ export function EditJobModalForm({
                   as="textarea"
                   rows={4}
                   name="jobDescription"
-                  value={editedJob.jobDescription}
-                  onChange={handleEditChange}
+                  value={toFieldValue(editedJob.jobDescription)}
+                  onChange={handleValidatedChange}
+                  isInvalid={
+                    hasAttemptedSubmit && Boolean(formErrors.jobDescription)
+                  }
                 />
+                <Form.Control.Feedback type="invalid">
+                  {formErrors.jobDescription}
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group
@@ -186,9 +333,15 @@ export function EditJobModalForm({
                   as="textarea"
                   rows={4}
                   name="jobRequirements"
-                  value={editedJob.jobRequirements}
-                  onChange={handleEditChange}
+                  value={toFieldValue(editedJob.jobRequirements)}
+                  onChange={handleValidatedChange}
+                  isInvalid={
+                    hasAttemptedSubmit && Boolean(formErrors.jobRequirements)
+                  }
                 />
+                <Form.Control.Feedback type="invalid">
+                  {formErrors.jobRequirements}
+                </Form.Control.Feedback>
               </Form.Group>
             </div>
           </section>

@@ -96,6 +96,8 @@ const clearPersistedAuth = () => {
   Cookies.remove(TOKEN_TYPE_COOKIE);
 };
 
+const invalidCredentialsMessage = "כתובת האימייל או הסיסמה שגויים";
+
 const getLoginErrorMessage = (error: unknown) => {
   if (axios.isAxiosError<AuthApiErrorResponse>(error)) {
     const apiMessage =
@@ -107,18 +109,18 @@ const getLoginErrorMessage = (error: unknown) => {
       normalizedMessage.includes("incorrect password") ||
       normalizedMessage.includes("invalid credentials")
     ) {
-      return "סיסמה שגויה";
+      return invalidCredentialsMessage;
     }
 
     if (
       normalizedMessage.includes("user not found") ||
       normalizedMessage.includes("email not found")
     ) {
-      return "המשתמש לא נמצא";
+      return invalidCredentialsMessage;
     }
 
     if (status === 400 || status === 401) {
-      return "סיסמה שגויה";
+      return invalidCredentialsMessage;
     }
   }
 
@@ -126,7 +128,7 @@ const getLoginErrorMessage = (error: unknown) => {
     defaultMessage: "משהו השתבש. נסה שוב מאוחר יותר.",
     networkMessage: "משהו השתבש. נסה שוב מאוחר יותר.",
     serverMessage: "משהו השתבש. נסה שוב מאוחר יותר.",
-    unauthorizedMessage: "סיסמה שגויה",
+    unauthorizedMessage: invalidCredentialsMessage,
   });
 };
 

@@ -174,7 +174,7 @@ export function UserSettingsPage() {
         navigate("/login", {
           replace: true,
           state: {
-            message: "Your account has been deleted successfully.",
+            message: "הפרופיל נמחק בהצלחה.",
           },
         });
       } else {

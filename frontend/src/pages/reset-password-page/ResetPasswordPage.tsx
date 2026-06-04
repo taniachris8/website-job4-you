@@ -33,15 +33,15 @@ export function ResetPasswordPage() {
 
   const validateForm = () => {
     if (!token) {
-      return "This reset link is missing a token. Request a new password reset email.";
+      return "קישור האיפוס חסר אסימון אימות. בקשו אימייל חדש לאיפוס הסיסמה.";
     }
 
     if (password.length < 8) {
-      return "Your new password must be at least 8 characters long.";
+      return "הסיסמה החדשה חייבת לכלול לפחות 8 תווים.";
     }
 
     if (password !== confirmPassword) {
-      return "Passwords do not match.";
+      return "הסיסמאות אינן תואמות.";
     }
 
     return "";
@@ -75,14 +75,14 @@ export function ResetPasswordPage() {
       navigate("/login", {
         replace: true,
         state: {
-          message: "Your password has been reset. You can now sign in."
+          message: "הסיסמה שלך אופסה בהצלחה. ניתן להתחבר כעת."
         }
       });
     } catch (requestError) {
       setError(
         getApiErrorMessage(requestError, {
-          badRequestMessage: "Reset link is invalid or has expired. Request a new email and try again.",
-          defaultMessage: "We could not reset your password. Please try again."
+          badRequestMessage: "קישור האיפוס אינו תקין או שפג תוקפו. בקשו אימייל חדש ונסו שוב.",
+          defaultMessage: "לא הצלחנו לאפס את הסיסמה שלך. אנא נסו שוב."
         }),
       );
       setIsCompleted(false);
@@ -95,27 +95,27 @@ export function ResetPasswordPage() {
     <section className="reset-password-container">
       <div className="password-recovery-shell">
         <div className="recovery-password-wrapper">
-          <p className="reset-password-eyebrow">Choose a new password</p>
-          <h1 className="reset-password-title">Create your new password</h1>
+          <p className="reset-password-eyebrow">בחירת סיסמה חדשה</p>
+          <h1 className="reset-password-title">יצירת סיסמה חדשה</h1>
           <p className="reset-password-subtitle">
-            Enter a new password for your account. Once saved, your previous
-            sessions will no longer be valid.
+            הזינו סיסמה חדשה לחשבון שלכם. לאחר השמירה, ההתחברויות הקודמות
+            שלכם לא יהיו תקפות יותר.
           </p>
           {isCompleted ? (
             <Alert variant="success" className="password-recovery-alert">
-              Your password has been updated. Redirecting you to login.
+              הסיסמה עודכנה בהצלחה. מעבירים אתכם להתחברות.
             </Alert>
           ) : null}
           <Form noValidate onSubmit={handleSubmit} className="reset-password-input-wrapper">
             <div className="reset-password-field">
               <label className="reset-password-label" htmlFor="reset-password">
-                New password
+                סיסמה חדשה
               </label>
               <InputGroup className="reset-password-group">
                 <Form.Control
                   id="reset-password"
                   type="password"
-                  placeholder="Enter a new password"
+                  placeholder="הזינו סיסמה חדשה"
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
@@ -130,13 +130,13 @@ export function ResetPasswordPage() {
               <label
                 className="reset-password-label"
                 htmlFor="reset-password-confirm">
-                Confirm password
+                אימות סיסמה
               </label>
               <InputGroup className="reset-password-group">
                 <Form.Control
                   id="reset-password-confirm"
                   type="password"
-                  placeholder="Repeat your new password"
+                  placeholder="הזינו שוב את הסיסמה החדשה"
                   value={confirmPassword}
                   onChange={(e) => {
                     setConfirmPassword(e.target.value);
@@ -160,41 +160,41 @@ export function ResetPasswordPage() {
             ) : null}
 
             <Button variant="reset" type="submit" disabled={isLoading}>
-              Save new password
+              שמירת הסיסמה החדשה
             </Button>
           </Form>
 
           <Link to="/password-recovery" className="back-to-login-link">
-            Request a new reset link
+            בקשת קישור איפוס חדש
           </Link>
         </div>
 
         <aside className="password-recovery-side-panel">
-          <p className="password-recovery-side-eyebrow">Security update</p>
+          <p className="password-recovery-side-eyebrow">עדכון אבטחה</p>
           <h2 className="password-recovery-side-title">
-            Finish recovery with a fresh password
+            מסיימים את השחזור עם סיסמה חדשה
           </h2>
           <p className="password-recovery-side-subtitle">
-            Use a password you do not reuse elsewhere. After the reset, sign in
-            again with the new password.
+            השתמשו בסיסמה שאינכם משתמשים בה באתרים אחרים. לאחר האיפוס, התחברו
+            שוב עם הסיסמה החדשה.
           </p>
           <div className="password-recovery-points">
             <div className="password-recovery-point">
               <i className="fa-solid fa-check recovery-check-icon"></i>
               <p className="password-recovery-point-text">
-                Reset links expire automatically for safety
+                קישורי איפוס פגים אוטומטית מטעמי אבטחה
               </p>
             </div>
             <div className="password-recovery-point">
               <i className="fa-solid fa-check recovery-check-icon"></i>
               <p className="password-recovery-point-text">
-                Old active sessions are revoked after the password change
+                התחברויות פעילות קודמות מבוטלות לאחר שינוי הסיסמה
               </p>
             </div>
             <div className="password-recovery-point">
               <i className="fa-solid fa-check recovery-check-icon"></i>
               <p className="password-recovery-point-text">
-                If the link no longer works, request a new one
+                אם הקישור כבר לא עובד, ניתן לבקש קישור חדש
               </p>
             </div>
           </div>

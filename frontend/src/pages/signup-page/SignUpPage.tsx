@@ -48,6 +48,7 @@ export function SignUpPage() {
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const apiUserService = new ApiService(API_URL);
@@ -166,6 +167,10 @@ export function SignUpPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) {
+      return;
+    }
+
     setHasAttemptedSubmit(true);
 
     const trimmedFormData: SignUpFormData = {
@@ -191,6 +196,7 @@ export function SignUpPage() {
     };
 
     try {
+      setIsSubmitting(true);
       await apiUserService.registerUser(user);
       setFormData(initialFormData);
       setErrors({});
@@ -203,7 +209,7 @@ export function SignUpPage() {
       const errorCode = apiError.response?.data?.error?.code;
       const errorMessage = apiError.response?.data?.error?.message;
 
-      if (errorCode === "CONFLICT" && errorMessage === "Email already exists") {
+      if (errorCode === "CONFLICT" && errorMessage === "האימייל כבר קיים") {
         setSubmitError(
           "\u05DB\u05D1\u05E8 \u05E7\u05D9\u05D9\u05DD \u05D7\u05E9\u05D1\u05D5\u05DF \u05E2\u05DD \u05DB\u05EA\u05D5\u05D1\u05EA \u05D4\u05D0\u05D9\u05DE\u05D9\u05D9\u05DC \u05D4\u05D6\u05D5. \u05D4\u05EA\u05D7\u05D1\u05E8\u05D5 \u05D0\u05D5 \u05D4\u05E9\u05EA\u05DE\u05E9\u05D5 \u05D1\u05DB\u05EA\u05D5\u05D1\u05EA \u05D0\u05D7\u05E8\u05EA.",
         );
@@ -215,6 +221,8 @@ export function SignUpPage() {
           defaultMessage: "\u05DC\u05D0 \u05D4\u05E6\u05DC\u05D7\u05E0\u05D5 \u05DC\u05D9\u05E6\u05D5\u05E8 \u05D0\u05EA \u05D4\u05D7\u05E9\u05D1\u05D5\u05DF. \u05E0\u05E1\u05D5 \u05E9\u05D5\u05D1.",
         }),
       );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -249,16 +257,19 @@ export function SignUpPage() {
                 variant="success"
                 alertText={
                   <>
-                    You have successfully created an account. Please
+                    הפרופיל נוצר בהצלחה. אנא{" "}
                     <Link className="login-redirect-link" to="/login">
-                      log in
-                    </Link>
-                    to start.
+                      התחבר
+                    </Link>{" "}
+                    כדי להתחיל.
                   </>
                 }
                 showAlert={showAlert}
               />
-              <Form noValidate onSubmit={handleSubmit} className="signup-form-fields">
+              <Form
+                noValidate
+                onSubmit={handleSubmit}
+                className="signup-form-fields">
                 <div className="signup-form-grid">
                   <Form.Group className="mb-3" controlId="signUpFirstName">
                     <Form.Label>השם שלך*</Form.Label>
@@ -279,7 +290,9 @@ export function SignUpPage() {
                       type="text"
                       value={formData.familyName}
                       onChange={handleFieldChange("familyName")}
-                      isInvalid={hasAttemptedSubmit && Boolean(errors.familyName)}
+                      isInvalid={
+                        hasAttemptedSubmit && Boolean(errors.familyName)
+                      }
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.familyName}
@@ -314,7 +327,9 @@ export function SignUpPage() {
                     </Form.Control.Feedback>
                   </Form.Group>
 
-                  <Form.Group className="mb-3" controlId="signUpConfirmPassword">
+                  <Form.Group
+                    className="mb-3"
+                    controlId="signUpConfirmPassword">
                     <Form.Label>אשר את הסיסמה*</Form.Label>
                     <Form.Control
                       type="password"
@@ -334,8 +349,8 @@ export function SignUpPage() {
                 {submitError ? (
                   <ErrorMessage message={submitError} compact />
                 ) : null}
-                <Button type="submit" variant="primary">
-                  להירשם
+                <Button type="submit" variant="primary" disabled={isSubmitting}>
+                  {isSubmitting ? "יוצר פרופיל..." : "להירשם"}
                 </Button>
               </Form>
             </div>
@@ -344,7 +359,9 @@ export function SignUpPage() {
           <aside className="signup-support-column">
             <div className="signup-side-panel">
               <p className="signup-side-eyebrow">כבר רשומים?</p>
-              <h2 className="signup-side-title">אפשר להמשיך ישר לחשבון הקיים</h2>
+              <h2 className="signup-side-title">
+                אפשר להמשיך ישר לחשבון הקיים
+              </h2>
               <p className="signup-side-subtitle">
                 אם כבר פתחתם חשבון, התחברו כדי לצפות במשרות ששמרתם, לעקוב אחרי
                 הפעילות שלכם ולהמשיך בדיוק מאיפה שעצרתם.

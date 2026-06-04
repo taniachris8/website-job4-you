@@ -70,7 +70,7 @@ export function LatestJobs() {
               jobs.map((job) => (
                 <article className="item-wrapper" key={job.id}>
                   <JobItem
-                    jobTitle={job.jobTitle}
+                    jobTitle={job.jobTitle.length < 19 ? job.jobTitle : `${job.jobTitle.substring(0, 19)}...`}
                     area={job.area}
                     domain={job.domain}
                     profession={job.profession}

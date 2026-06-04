@@ -149,6 +149,20 @@
     0 12px 24px rgba(15, 23, 42, 0.06) !important;
 }
 
+.edit-job-field .form-control.is-invalid,
+.edit-job-field .form-select.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.edit-job-field .invalid-feedback {
+  display: block;
+  margin-top: 6px;
+  color: #b42318;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: right;
+}
+
 .edit-job-actions {
   display: flex;
   justify-content: flex-end;
@@ -282,6 +296,15 @@
   box-shadow:
     0 0 0 4px rgba(94, 231, 255, 0.16),
     0 16px 34px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .edit-job-field .form-control.is-invalid,
+[data-theme="dark"] .edit-job-field .form-select.is-invalid {
+  border-color: rgba(255, 138, 138, 0.78) !important;
+}
+
+[data-theme="dark"] .edit-job-field .invalid-feedback {
+  color: #ffb4b4;
 }
 
 [data-theme="dark"] .edit-job-actions .button.secondary {

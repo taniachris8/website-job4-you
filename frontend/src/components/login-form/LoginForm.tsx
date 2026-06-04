@@ -89,6 +89,10 @@ export function LoginForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (authStatus === "loading") {
+      return;
+    }
+
     setHasAttemptedSubmit(true);
 
     const validationErrors = validateLoginForm({ email, password });
@@ -152,7 +156,7 @@ export function LoginForm({
         variant="primary"
         type="submit"
         disabled={authStatus === "loading"}>
-        להתחבר
+        {authStatus === "loading" ? "מתחבר..." : "להתחבר"}
       </Button>
       {showForgotPasswordLink && (
         <Link className="forgot-password-link" to="/password-recovery">

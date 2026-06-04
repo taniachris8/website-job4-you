@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-
 import { SocialMediaLinks } from "../social-media-links/SocialMediaLinks";
 import { Tip } from "../tips/tip/Tip";
 import { tips } from "../../consts/tips";
